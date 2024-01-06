@@ -17,8 +17,8 @@ module programMem (
 
 	assign programMemOut = programMem [PCIn];
 	initial begin
-		$readmemh("program.mif", programMem);
-		$display("Program loaded.");
+		//$readmemh("program.mif", programMem);
+		//$display("Program loaded.");
 	end
 
 endmodule

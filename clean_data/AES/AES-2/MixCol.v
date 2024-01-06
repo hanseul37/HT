@@ -9,6 +9,6 @@ mx mod2(.in(ip[95:64]),.out(op[95:64]));
 mx mod3(.in(ip[63:32]),.out(op[63:32]));
 mx mod4(.in(ip[31:0]),.out(op[31:0]));
 
-always @(*) $display("in=%h out=%h");
+//always @(*) $display("in=%h out=%h");
 
 endmodule
