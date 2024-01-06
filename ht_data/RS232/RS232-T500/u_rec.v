@@ -13,7 +13,7 @@ module u_rec (
 				);
 
 
-`include "/home/xuehui/project/benchmark/src/inc.h"
+`include "inc.h"
 
 input			sys_rst_l;	
 input			sys_clk;	

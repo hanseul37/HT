@@ -13,7 +13,7 @@ module u_rec (
 				);
 
 
-`include "/home/salmani_h/Trust_HUB/Trojan_Inserted/inc.h"
+`include "inc.h"
 
 input			sys_rst_l;	
 input			sys_clk;	

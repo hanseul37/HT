@@ -10,7 +10,7 @@ module u_xmit(	sys_clk,
 			);
 
 
-`include "/home/salmani_h/Trust_HUB/Trojan_Inserted/inc.h"
+`include "inc.h"
 
 input			sys_clk;	
 input			sys_rst_l;

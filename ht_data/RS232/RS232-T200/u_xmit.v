@@ -11,7 +11,7 @@ module u_xmit(	sys_clk,
 			);
 
 
-`include "/home/xuehui/project/benchmark/src/inc.h"
+`include "inc.h"
 input			sys_clk;	
 input			sys_rst_l;	
 output			uart_xmitH;	
