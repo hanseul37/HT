@@ -22,8 +22,8 @@ module PIC16C57(
 	reg[`INST_WIDTH - 1:0] programMem[2047:0];
 
 	initial begin
-		$readmemh("program.mif", programMem);
-		$display("Program loaded.");
+		//$readmemh("program.mif", programMem);
+		//$display("Program loaded.");
 	end
 
 	// CU, CPU state and ALU function

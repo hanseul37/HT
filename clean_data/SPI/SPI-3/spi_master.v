@@ -10,7 +10,7 @@ module spi_master #(parameter reg_width = 4'd8,counter_width = $clog2(reg_width)
     input t_start, 
     input [reg_width-1:0] d_in,
     input [counter_width:0] t_size,
-    output reg [reg_width-1:0] d_out,
+    output reg [reg_width-1:0] d_out_m,
 
     // SPI Side
     input miso, 
@@ -33,7 +33,7 @@ begin
     case (state)
         reset:
         begin
-            d_out <= 0;
+            d_out_m <= 0;
             miso_d <= 0;
             mosi_d <= 0;
             count <= 0;
@@ -41,7 +41,7 @@ begin
         end
         idle:
         begin
-            d_out <= d_out;
+            d_out_m <= d_out_m;
             miso_d <= 0;
             mosi_d <= 0;
             count <= 0;
@@ -49,7 +49,7 @@ begin
         end
         load:
         begin
-            d_out <= d_out;
+            d_out_m <= d_out_m;
             miso_d <= 0;
             mosi_d <= d_in;
             count <= t_size;
@@ -61,7 +61,7 @@ begin
         end
         unload:
         begin
-            d_out <= miso_d;
+            d_out_m <= miso_d;
             miso_d <= 0;
             mosi_d <= 0;
             count <= count;
