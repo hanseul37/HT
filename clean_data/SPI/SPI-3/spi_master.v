@@ -8,7 +8,7 @@ module spi_master #(parameter reg_width = 4'd8,counter_width = $clog2(reg_width)
     input rstn,
     input sys_clk,
     input t_start, 
-    input [reg_width-1:0] d_in,
+    input [reg_width-1:0] d_in_m,
     input [counter_width:0] t_size,
     output reg [reg_width-1:0] d_out_m,
 
@@ -51,7 +51,7 @@ begin
         begin
             d_out_m <= d_out_m;
             miso_d <= 0;
-            mosi_d <= d_in;
+            mosi_d <= d_in_m;
             count <= t_size;
             cs <= 0;
         end
