@@ -40,7 +40,7 @@
 ////                                                             ////
 /////////////////////////////////////////////////////////////////////
 
-module  key_selh(K_sub, K, roundSel, decrypt);
+module  key_sel(K_sub, K, roundSel, decrypt);
 output [1:48] K_sub;
 input [55:0] K;
 input [3:0] roundSel;

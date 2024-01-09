@@ -20,7 +20,8 @@ DES-4: https://github.com/crypt-xie/XCryptCore </br>
 #### DET
 
 DET-1: https://github.com/dsesami/Det </br>
-DET-2: https://github.com/rsavitski/local-DSD </br>
+DET-2: https://github.com/NekoSilverFox/VHDL/tree/77d5afe2824e09b70057a01aefecf511540d6b22 </br>
+DET-3: https://github.com/1103105303/FPGA_Design/tree/ed8b7ae2bf77d12e462abfdf6aa4f7a2cad0a261 </br>
 
 #### PIC
 
