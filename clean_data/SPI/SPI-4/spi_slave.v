@@ -80,9 +80,9 @@ assign ss_negedge = ~ss_a & ss_b;
 
 always@(CPHA)
 case(CPHA)
-0: begin assign sample_en = sclk_posedge;assign shift_en = sclk_negedge; end
-1: begin assign sample_en = sclk_posedge;assign shift_en = sclk_negedge; end
-default: begin assign sample_en = sclk_posedge;assign shift_en = sclk_negedge; end
+0: begin sample_en = sclk_posedge;shift_en = sclk_negedge; end
+1: begin sample_en = sclk_posedge;shift_en = sclk_negedge; end
+default: begin sample_en = sclk_posedge;shift_en = sclk_negedge; end
 endcase
 
 always @(posedge clk or negedge rst_n) begin
