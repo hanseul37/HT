@@ -13,7 +13,9 @@ module clk_40MHz
 		assign clk_out = sub_wire3[0];
 		assign sub_wire0 = clk_in;
 		assign sub_wire1 = sub_wire2 & sub_wire0;
-	
+		assign clk_out = clk_in;
+
+	/*
 	 altpll 
 		#(.bandwidth_type("AUTO"),
 		  .clk0_divide_by(1),
@@ -69,6 +71,7 @@ module clk_40MHz
 		  .port_extclk2("PORT_UNUSED"),
 		  .port_extclk3("PORT_UNUSED"),
 		  .width_clock(5))
+	*/
 	
 	 pll (.inclk (clk_in),
 			.clk (sub_wire3));
