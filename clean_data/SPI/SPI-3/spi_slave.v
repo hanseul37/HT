@@ -96,11 +96,14 @@ always @(negedge spi_clk)
         miso <= miso_d[reg_width-1];
     else
         miso <=1'bz;
-always @(posedge slave_clk or negedge slave_clk)
+		
+/*always @(posedge slave_clk or negedge slave_clk)
     if (state==transact)
         spi_clk <= slave_clk;
     else
-        spi_clk <= 0;
+        spi_clk <= 0;*/
+assign = spi_clk (state == transact) ? slave_clk : 0;
+		
 always @(posedge spi_clk)
 begin
     if ( state == transact )
