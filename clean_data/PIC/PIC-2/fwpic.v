@@ -119,7 +119,8 @@ module fwpic #(
 		input clock, 
 		input reset, 
 		// Note: expected to be a word address
-		`RV_ADDR_LINE_EN_TARGET_PORT(,2,32),
+		 //`RV_ADDR_LINE_EN_TARGET_PORT(,2,32),
+		input [1:0] adr,
 		output reg			int_o,
 		input[N_IRQ-1:0]	irq
 );

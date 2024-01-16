@@ -58,8 +58,8 @@ RS232-10: </br>
 
 SPI-1: https://github.com/janschiefer/verilog_spi </br>
 SPI-2: https://github.com/halftop/Interface-Protocol-in-Verilog </br>
-SPI-3: </br>
-SPI-4: </br>
+SPI-3: https://github.com/DaveVaishnavi/SPI</br>
+SPI-4: https://github.com/maheshbhatk/spi</br>
 
 #### SYN-SRAM
 
