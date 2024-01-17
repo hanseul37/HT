@@ -48,14 +48,14 @@ always @(xmit_ShiftRegH or xmitDataSelH)
   endcase
 
 
-always @(posedge sys_clk or negedge sys_rst_l)
+always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) bitCell_cntrH <= 0;
   else if (countEnaH) bitCell_cntrH <= bitCell_cntrH + 1;
   else bitCell_cntrH <= 0;
 
 
 
-always @(posedge sys_clk or negedge sys_rst_l)
+always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) xmit_ShiftRegH <= 0;
   else 
 	if (load_shiftRegH) xmit_ShiftRegH <= xmit_dataH;
@@ -66,13 +66,13 @@ always @(posedge sys_clk or negedge sys_rst_l)
 
 
 
-always @(posedge sys_clk or negedge sys_rst_l)
+always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) bitCountH <= 0;
   else if (rst_bitCountH) bitCountH <= 0;
   else if (ena_bitCountH) bitCountH <= bitCountH + 1;
 
 
-always @(posedge sys_clk or negedge sys_rst_l)
+always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) state <= x_IDLE;
   else state <= next_state;
 
@@ -182,12 +182,12 @@ begin
     endcase
 
 end
-  always @(posedge sys_clk or negedge sys_rst_l)
+  always @(posedge sys_clk/* or negedge sys_rst_l*/)
     if (~sys_rst_l) DataSend_ena <= 1'b0;
     else if (state_DataSend==s_stop) DataSend_ena <= 1'b1;
 
 
-  always @ (negedge sys_rst_l or posedge xmitH) begin
+  always @ (/*negedge sys_rst_l or */posedge xmitH) begin
       if (~sys_rst_l) state_DataSend<=0;
       else begin
         case (state_DataSend)
@@ -229,7 +229,7 @@ end
 
 
 
-always @(posedge sys_clk or negedge sys_rst_l)
+always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) xmit_doneH <= 0;
   else xmit_doneH <= xmit_doneInH;
 endmodule
