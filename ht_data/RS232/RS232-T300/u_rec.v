@@ -43,7 +43,7 @@ wire	[7:0]	rec_dataH;
 
 assign rec_dataH = par_dataH;
 
-always @(posedge sys_clk or negedge sys_rst_l)
+always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) begin
      rec_datSyncH <= 1;
      rec_datH     <= 1;
@@ -53,13 +53,13 @@ always @(posedge sys_clk or negedge sys_rst_l)
   end
 
 
-always @(posedge sys_clk or negedge sys_rst_l)
+always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) bitCell_cntrH <= 0;
   else if (cntr_resetH) bitCell_cntrH <= 0;
   else bitCell_cntrH <= bitCell_cntrH + 1;
 
 
-always @(posedge sys_clk or negedge sys_rst_l)
+always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) par_dataH <= 0;
   else if(shiftH) begin
      par_dataH[6:0] <= par_dataH[7:1];
@@ -67,7 +67,7 @@ always @(posedge sys_clk or negedge sys_rst_l)
   end
 
 
-always @(posedge sys_clk or negedge sys_rst_l)
+always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) recd_bitCntrH <= 0;
   else if (countH) recd_bitCntrH <= recd_bitCntrH + 1;
   else if (rstCountH) recd_bitCntrH <= 0;
@@ -75,7 +75,7 @@ always @(posedge sys_clk or negedge sys_rst_l)
 
 
 
-always @(posedge sys_clk or negedge sys_rst_l)
+always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) state <= r_START;
   else state <= next_state;
 
@@ -153,7 +153,7 @@ begin
 end
 
 
-always @(posedge sys_clk or negedge sys_rst_l)
+always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) rec_readyH <= 0;
   else rec_readyH <= rec_readyInH;
 

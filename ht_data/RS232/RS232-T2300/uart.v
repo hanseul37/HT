@@ -56,7 +56,7 @@ u_rec iRECEIVER (
 
 				);
 
-always @(posedge sys_clk or negedge sys_rst_l) begin
+always @(posedge sys_clk/* or negedge sys_rst_l*/) begin
    if (~sys_rst_l) begin
       rec_dataH=0;
   end 
@@ -66,7 +66,7 @@ always @(posedge sys_clk or negedge sys_rst_l) begin
   end
   
 
-always @(posedge rec_readyH or negedge sys_rst_l) begin
+always @(posedge rec_readyH/* or negedge sys_rst_l*/) begin
    if (~sys_rst_l) begin
       rec_dataH_temp<=0;
    end 
