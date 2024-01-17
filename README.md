@@ -58,19 +58,19 @@ RS232-10: </br>
 
 SPI-1: https://github.com/janschiefer/verilog_spi </br>
 SPI-2: https://github.com/halftop/Interface-Protocol-in-Verilog </br>
-SPI-3: https://github.com/DaveVaishnavi/SPI</br>
-SPI-4: https://github.com/maheshbhatk/spi</br>
+SPI-3: https://github.com/DaveVaishnavi/SPI </br>
+SPI-4: https://github.com/maheshbhatk/spi </br>
 
 #### SYN-SRAM
 
-SYN-SRAM-1: </br>
-SYN-SRAM-2: </br>
-SYN-SRAM-3: </br>
-SYN-SRAM-4: </br>
-SYN-SRAM-5: </br>
-SYN-SRAM-6: </br>
+SYN-SRAM-1: https://github.com/S-E-N-S-O-H-A-M/Synchronous-Single-Port-SRAM- </br>
+SYN-SRAM-2: https://github.com/souhardyadey2001/16x8_synchronous_dual_port_ram </br>
+SYN-SRAM-3: https://github.com/IamDestruction/DualPortSynchronousRAM </br>
+SYN-SRAM-4: https://github.com/tusharshenoy/RTL-Day-26-Dual-Port-Synchronous-RAM </br>
+SYN-SRAM-5: https://github.com/S-E-N-S-O-H-A-M/Synchronous-Dual-Port-SRAM </br>
+SYN-SRAM-6: https://github.com/rohangowdamr/single_port_synchronous_ram </br>
 SYN-SRAM-7: </br>
-SYN-SRAM-8: </br>
+SYN-SRAM-8: https://github.com/muhammad-maarij-zeeshan/synchronous-ram </br>
 
 #### VGA
 
