@@ -264,7 +264,7 @@ module des_dpc(
 		end
 	endfunction
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst) 
 			r_count <= #DLY 3'b0;
 		else if(i_din_en)

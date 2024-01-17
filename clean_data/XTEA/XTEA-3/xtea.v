@@ -152,7 +152,7 @@ module xtea(
   // All registers are positive edge triggered with asynchronous
   // active low reset.
   //----------------------------------------------------------------
-  always @ (posedge clk or negedge reset_n)
+  always @ (posedge clk/* or negedge reset_n*/)
     begin : reg_update
       integer i;
 

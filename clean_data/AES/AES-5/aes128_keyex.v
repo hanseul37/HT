@@ -81,14 +81,14 @@ module aes128_keyex(
 	assign s_exk[63:32] = s_key[63:32]^s_exk[95:64];
 	assign s_exk[31:0] = s_key[31:0]^s_exk[63:32];
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst)
 			r_key <= #DLY 128'b0;
 		else if(s_busy)
 			r_key <= #DLY s_exk;
 	end	
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst) begin
 			r_exkey <= #DLY 1280'b0;
 		end else if(s_busy)begin
@@ -96,7 +96,7 @@ module aes128_keyex(
 		end
 	end	
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst)
 			r_count <= #DLY 4'd0;
 		else if(i_key_en)
@@ -109,7 +109,7 @@ module aes128_keyex(
 	
 	assign s_busy = ((r_count!=5'd0)||(i_key_en==1'b1)) ? 1'b1 : 1'b0;
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst)
 			r_key_ok <= #DLY 1'b0;
 		else if(r_count==4'd9)

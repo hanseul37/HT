@@ -42,7 +42,7 @@ module risingdge(
 				nextstate = 2'bx;
 		endcase
 		
-	always @ (posedge clk or posedge rst)
+	always @ (posedge clk/* or posedge rst*/)
 		begin
 			if (rst) state <=Zero;
 			else state <= nextstate;

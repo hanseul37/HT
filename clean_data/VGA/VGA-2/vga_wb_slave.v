@@ -243,7 +243,7 @@ module vga_wb_slave(
 
 
 	// generate registers
-	always @(posedge clk_i or negedge arst_i)
+	always @(posedge clk_i/* or negedge arst_i*/)
 	begin : gen_regs
 	  if (!arst_i)
 	    begin
@@ -290,7 +290,7 @@ module vga_wb_slave(
 	  end
 
 	// generate control register
-	always @(posedge clk_i or negedge arst_i)
+	always @(posedge clk_i/* or negedge arst_i*/)
 	  if (!arst_i)
 	    ctrl <= #1 0;
 	  else if (rst_i)
@@ -304,7 +304,7 @@ module vga_wb_slave(
 
 
 	// generate status register
-	always @(posedge clk_i or negedge arst_i)
+	always @(posedge clk_i/* or negedge arst_i*/)
 	  if (!arst_i)
 	    stat <= #1 0;
 	  else if (rst_i)

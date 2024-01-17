@@ -135,7 +135,7 @@ clk, rst, in, in2, text, seven, EN
 				end
 		endcase
 		
-		always @ (posedge clk or posedge rst)
+		always @ (posedge clk/* or posedge rst*/)
 		begin
 			if (rst) begin state <= s0; end
 			else state <= nextstate;

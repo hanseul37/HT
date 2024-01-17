@@ -52,7 +52,7 @@ wire ss_negedge;
 reg shift_en;
 reg sample_en;
 
-always@(posedge clk or negedge rst_n)
+always@(posedge clk/* or negedge rst_n*/)
 begin
     if (!rst_n) begin
 		sclk_a <= CPOL;
@@ -66,7 +66,7 @@ end
 assign sclk_posedge = ~sclk_b & sclk_a;
 assign sclk_negedge = ~sclk_a & sclk_b;
 
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) begin
 		ss_a	<= 1'b1;
 		ss_b	<= 1'b1;
@@ -85,7 +85,7 @@ case(CPHA)
 default: begin sample_en = sclk_posedge;shift_en = sclk_negedge; end
 endcase
 
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) 
 		data_reg <= 'd0;
 	else if(ss_negedge)
@@ -98,7 +98,7 @@ end
 
 assign miso = !ss ? data_reg[7] : 1'd0;
 
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) 
 		dataout <= 8'd0;
 	else if (!ss & sample_en) 
@@ -107,7 +107,7 @@ always @(posedge clk or negedge rst_n) begin
 		dataout <= dataout;
 end
 
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) 
 		sample_num <= 3'd0;
 	else if (ss)

@@ -38,7 +38,7 @@ wire           start_falg;
 assign  start_flag = (~uart_en_1) & uart_en_0; 
 //detect the risinging edge of the input signal uart_en
 //delay the uart_en_1 signal as 2 clk duration
-always @(posedge sys_clk or negedge sys_rst) begin
+always @(posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst)	begin
 		uart_en_1 <= 1'b0;
 		uart_en_0 <= 1'b0;
@@ -49,7 +49,7 @@ always @(posedge sys_clk or negedge sys_rst) begin
 	end
 end
 
-always @(posedge sys_clk or negedge sys_rst) begin
+always @(posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst) begin
 		flag_s <= 1'b0; //if rst pressed, the system is not sending any signal
 	end
@@ -69,7 +69,7 @@ always @(posedge sys_clk or negedge sys_rst) begin
 	end
 end
 
-always @(posedge sys_clk or negedge sys_rst) begin
+always @(posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst) begin
 		count_data_s <= 4'd0;
 		count_clk <= 16'd0;  //reset all the counter
@@ -90,7 +90,7 @@ always @(posedge sys_clk or negedge sys_rst) begin
 	end
 end
 
-always @(posedge sys_clk or negedge sys_rst) begin
+always @(posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst)
 		uart_send <= 1'b0;
 	else if (flag_s ==1'b1)	begin

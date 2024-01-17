@@ -30,7 +30,7 @@ assign ready = ready_int;
 assign busy = busy_int;
 
 
-always@(posedge clock or posedge reset) begin
+always@(posedge clock/* or posedge reset*/) begin
     if(reset) begin
         EA <= S_WAITING;
     end else begin
@@ -68,7 +68,7 @@ always@(posedge clock or posedge reset) begin
     end
 end
 
-    always@(posedge clock or posedge reset) begin
+    always@(posedge clock/* or posedge reset*/) begin
         if(reset) begin
             data_out_int <= 0;
             start_dec <= 0;

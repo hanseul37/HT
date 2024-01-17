@@ -8,10 +8,10 @@ module font
 
 	reg [DATA_WIDTH - 1:0] rom[0:2 ** ADDR_WIDTH - 1];
 
-	initial
+	/*initial
 	begin
 		$readmemb("font.rom", rom);
-	end
+	end*/
 
 	assign data = rom[addr];
 

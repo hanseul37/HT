@@ -69,7 +69,7 @@ module rc6_dpc(
 		end
 	endfunction 
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst) 
 			r_count <= #DLY 5'b0;
 		else if(i_din_en)
@@ -80,7 +80,7 @@ module rc6_dpc(
 			r_count <= #DLY r_count + 5'd1;
 	end
 	
-	always@(posedge i_clk  or posedge i_rst) begin
+	always@(posedge i_clk /* or posedge i_rst*/) begin
 		if(i_rst)
 			r_keyex <= #DLY 'b0;
 		else if(i_din_en) begin
@@ -156,7 +156,7 @@ module rc6_dpc(
 	assign s_ay =  i_flag ? s_ay_e : s_ay_d;
 	assign s_cy =  i_flag ? s_cy_e : s_cy_d;
 	
-	always@(posedge i_clk  or posedge i_rst) begin
+	always@(posedge i_clk /* or posedge i_rst*/) begin
 		if(i_rst)
 			r_din <= #DLY 64'b0;
 		else if(i_flag)

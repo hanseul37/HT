@@ -56,7 +56,7 @@ wire        uart_en_ris;  //indicate rising edge of the uart_en signal
 assign    uart_en_ris = (~uart_en_0) && uart_en_1;
 
 //delay the uart_en_0 signal for two clk period to detect the rising edge
-always @ (posedge sys_clk or negedge sys_rst) begin
+always @ (posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst) begin
 		uart_en_0 <= 1'b0;
 		uart_en_1 <= 1'b0; //reset the two signal if reset button pressed
@@ -67,7 +67,7 @@ always @ (posedge sys_clk or negedge sys_rst) begin
 	end
 end
 
-always @(posedge sys_clk or negedge sys_rst) begin
+always @(posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst)
 		word_sel <= WORD0;
 	else if (uart_en_ris) begin //start showing word "load" if there is a signal coming from the uart port
@@ -84,7 +84,7 @@ always @(posedge sys_clk or negedge sys_rst) begin
 	end
 end
 
-always @(posedge sys_clk or negedge sys_rst) begin
+always @(posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst)
 		count_clk <= 27'd0; //reset the clk signal when reset button is pressed
 	else if (start_flag) begin //if start showing the word "load"
@@ -100,7 +100,7 @@ end
 
 //this is to generate a next_seg signal to switch the state of the sel signal
 //this signal will become 1'b1 every 0.1 second
-always @ (posedge sys_clk or negedge sys_rst) begin
+always @ (posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst) begin
 		count_clk2 <= 22'd0;
 		next_seg <= 1'b0;
@@ -117,7 +117,7 @@ end
 
 //this is to generate a next_seg2 signal to switch the word shown when no signal coming from port
 //this signal will become 1'b1 every 1 second
-always @ (posedge sys_clk or negedge sys_rst) begin
+always @ (posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst) begin
 		count_clk3 <= 27'd0;
 		next_word <= 1'b0;
@@ -133,7 +133,7 @@ always @ (posedge sys_clk or negedge sys_rst) begin
 end
 
 //to iterate the segment select. residual visual will happen as long as the iterate frequency is high
-always @ (posedge sys_clk or negedge sys_rst) begin
+always @ (posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst)
 		sel <= SEG0;
 	else if (next_seg == 1) //if 0.1s
@@ -151,7 +151,7 @@ always @ (posedge sys_clk or negedge sys_rst) begin
 end
 
 //to iterate the word shown when the data is not transmitted
-always @ (posedge sys_clk or negedge sys_rst) begin
+always @ (posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst)
 		word_sel2 <= 1'd0;
 	else if (next_word == 1'b1) //if 1s
@@ -164,7 +164,7 @@ always @ (posedge sys_clk or negedge sys_rst) begin
 end
 
 
-always @(posedge sys_clk or negedge sys_rst) begin
+always @(posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst)
 		seg_led <= 8'b11111111;
 /*	else if (next_seg == 1'b1)

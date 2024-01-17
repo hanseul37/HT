@@ -66,7 +66,7 @@ module SyncGen #(
     end
     
     // Horizontal counter
-    always @(posedge clk or negedge rst) begin
+    always @(posedge clk/* or negedge rst*/) begin
         if(!rst)
             hcount = {WIDTH{1'b0}};
         else if (hcount <= HBLANK_OFF - 1)
@@ -76,7 +76,7 @@ module SyncGen #(
     end
     
     // Horizontal Sync
-    always @(posedge clk or negedge rst) begin
+    always @(posedge clk/* or negedge rst*/) begin
         if(!rst)
             hsync = 1'b0;
         else if (hsync_on)
@@ -88,7 +88,7 @@ module SyncGen #(
     end
     
     // Horizontal Blank
-    always @(posedge clk or negedge rst) begin
+    always @(posedge clk/* or negedge rst*/) begin
         if(!rst)
             hblank = 1'b0;
         else if (hblank_on)
@@ -100,7 +100,7 @@ module SyncGen #(
     end
 
     // Vertical counter
-    always @(posedge clk or negedge rst) begin
+    always @(posedge clk/* or negedge rst*/) begin
         if(!rst)
             vcount = {WIDTH{1'b0}};
         else if (hsync_on) begin
@@ -113,7 +113,7 @@ module SyncGen #(
     end
     
     // Vertical Sync
-    always @(posedge clk or negedge rst) begin
+    always @(posedge clk/* or negedge rst*/) begin
         if(!rst)
             vsync = 1'b0;
         else if (vsync_on)
@@ -125,7 +125,7 @@ module SyncGen #(
     end
     
     // Vertical Blank
-    always @(posedge clk or negedge rst) begin
+    always @(posedge clk/* or negedge rst*/) begin
         if(!rst)
             vblank = 1'b0;
         else if (vblank_on)

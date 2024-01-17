@@ -32,7 +32,7 @@ wire            uart_en_ris; //detect the rising edge of the uart_en signal
 //rising edge detection (1 enabled)
 assign uart_en_ris = (~uart_en_0) & uart_en_1; 
 //delay the uart_en_0 signal for two time period
-always @ (posedge sys_clk or negedge sys_rst) begin
+always @ (posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst) begin
 		uart_en_1 <= 1'b0;
 		uart_en_0 <= 1'b0;
@@ -46,7 +46,7 @@ end
 /*
 enable the beep for MAX_COUNT period of clk signal after a rising edge of uart_en is detected
 */
-always @ (posedge sys_clk or negedge sys_rst) begin
+always @ (posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst)      //press the buttom to reset the counter
 		beep_flag <= 1'b0;
 	else if (uart_en_ris) begin //rising edge of the uart_en detected
@@ -64,7 +64,7 @@ start counting clk when start beeping.
 when counter reaches MAX_COUNT then beep__flag and beep_en will be disabled (see in the always above)
 then beep will stop and the counter will be reset and wait for next beep
 */
-always @ (posedge sys_clk or negedge sys_rst) begin
+always @ (posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst)
 		count <= 27'd0; //reset the counter and the beep output
 	else if (beep_flag == 1'b1) begin  //start counting if start beeping

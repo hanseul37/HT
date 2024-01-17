@@ -29,7 +29,7 @@ module clockdivider(
 	 output clkselect
     );
 	 
-	 always @ (posedge clk or posedge rst)
+	 always @ (posedge clk/* or posedge rst*/)
 		begin
 		if (rst)
 			OUT1<=32'd0;
@@ -40,7 +40,7 @@ module clockdivider(
 			OUT1 <= OUT1 + 1;
 		end
 		
-	 always @ (posedge clk or posedge rst)
+	 always @ (posedge clk/* or posedge rst*/)
 		begin
 		if (rst)
 			OUT2<=32'd0;

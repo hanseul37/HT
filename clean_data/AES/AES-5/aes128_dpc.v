@@ -61,7 +61,7 @@ module aes128_dpc(
 		end
 	endfunction
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst) 
 			r_count <= #DLY 4'b0;
 		else if(i_din_en)
@@ -137,7 +137,7 @@ module aes128_dpc(
 	.o_dout_x	(s_mixc_doutx[31:0]		),
 	.o_dout_y	(s_mixc_douty[31:0]		));	
 	
-	always@(posedge i_clk  or posedge i_rst) begin
+	always@(posedge i_clk/*  or posedge i_rst*/) begin
 		if(i_rst)
 			r_din <= #DLY 128'b0;
 		else if(i_flag)

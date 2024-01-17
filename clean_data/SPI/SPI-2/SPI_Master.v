@@ -56,7 +56,7 @@ reg		[CNT_WIDTH-1:0]		clk_cnt		;	//the counter to generate sclk
 reg		[SHIFT_WIDTH-1:0]	shift_cnt	;	//the counter to count the number of shifts
 reg		[DATA_WIDTH-1:0]	data_reg	;	//the register to latch the data_in,also the shift register
 //the counter to generate the sclk
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) 
 		clk_cnt <= 'd0;
 	else if (clk_cnt_en) 
@@ -68,7 +68,7 @@ always @(posedge clk or negedge rst_n) begin
 		clk_cnt <= 'd0;
 end
 //generate the sclk
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) 
 		sclk <= CPOL;
 	else if (clk_cnt_en) 
@@ -81,7 +81,7 @@ always @(posedge clk or negedge rst_n) begin
 end
 //------------------------------------------
 //to capture the edge of sclk
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) begin
 		sclk_a <= CPOL;
 		sclk_b <= CPOL;
@@ -113,7 +113,7 @@ generate
 endgenerate
 //=============================================
 //FSM-1
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) 
 		cstate <= IDLE;
 	else 
@@ -130,7 +130,7 @@ always @(*) begin
 	endcase
 end
 //FSM-3
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) begin
 		clk_cnt_en	<= 1'b0	;
 		data_reg	<= 'd0	;
@@ -185,7 +185,7 @@ end
 //mosi output MSB first
 assign mosi = data_reg[DATA_WIDTH-1];
 //sample data from the miso line
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) 
 		data_out <= 'd0;
 	else if (sampl_en) 

@@ -16,7 +16,7 @@ reg         bit_flag;
 reg [4:0]   cnt;
 
 
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         start_en <= 1'b0;
     else if(bit_flag == 1'b1 && cnt == 4'd9)
@@ -27,7 +27,7 @@ always @(posedge clk or negedge rstn) begin
         start_en <= start_en; 
 end
 
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         bit_cnt <= 1'b0;
     else if((bit_cnt == (MAX_CNT - 1)) || start_en == 1'b0)
@@ -39,7 +39,7 @@ always @(posedge clk or negedge rstn) begin
 
 end
 
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         bit_flag <= 1'b0;
     else if(bit_cnt == (MAX_CNT - 1) / 2)
@@ -48,7 +48,7 @@ always @(posedge clk or negedge rstn) begin
         bit_flag <= 1'b0;
 end
 
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         cnt <= 0;
     else if(cnt == 4'd9 && bit_flag == 1'b1)
@@ -59,7 +59,7 @@ always @(posedge clk or negedge rstn) begin
         cnt <= cnt;
 end
  
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         tx <= 1'b1;
     else if(bit_flag == 1'b1)
