@@ -195,7 +195,7 @@ module simple_pic(
   wire wb_acc = cyc_i & stb_i;                   // WISHBONE access
   wire wb_wr  = wb_acc & we_i;                   // WISHBONE write access
 
-  always @(posedge clk_i or negedge rst_i)
+  always @(posedge clk_i/* or negedge rst_i*/)
     if (~rst_i)
       begin
           pol   <= #1 {{is}{1'b0}};              // clear polarity register
@@ -212,7 +212,7 @@ module simple_pic(
 
 
     // pending register is a special case
-    always @(posedge clk_i or negedge rst_i)
+    always @(posedge clk_i/* or negedge rst_i*/)
       if (~rst_i)
           pending <= #1 {{is}{1'b0}};            // clear all pending interrupts
       else if ( wb_wr & (&adr_i) )

@@ -1,9 +1,8 @@
 // fpga4student.com: FPga projects, Verilog projects, VHDL projects
 // Verilog project: Verilog code for FIFO memory
-// Top level Verilog code for FIFO Memory
 module fifo_8x16(dout, full, empty, clk, rst, wr_en, rd_en, din);  
   input wr_en, rd_en, clk, rst;  
-  input[7:0] din;   // FPGA projects using Verilog/ VHDL
+  input[7:0] din;
   output[7:0] dout;  
   output full, empty;  
   wire[4:0] wptr,rptr;  
@@ -11,10 +10,8 @@ module fifo_8x16(dout, full, empty, clk, rst, wr_en, rd_en, din);
   write_pointer top1(wptr,fifo_we,wr_en,full,clk,rst);  
   read_pointer top2(rptr,fifo_rd,rd_en,empty,clk,rst);  
   memory_array top3(dout, din, clk,fifo_we, wptr,rptr);  
- endmodule  
-// fpga4student.com: FPga projects, Verilog projects, VHDL projects
-// Verilog project: Verilog code for FIFO memory
-// Verilog code for Memory Array submodule 
+ endmodule
+
  module memory_array(dout, din, clk,fifo_we, wptr,rptr);  
   input[7:0] din;  
   input clk,fifo_we;  
@@ -29,16 +26,14 @@ module fifo_8x16(dout, full, empty, clk, rst, wr_en, rd_en, din);
   end  
   assign dout = data_out2[rptr[3:0]];  
  endmodule  
-// fpga4student.com: FPga projects, Verilog projects, VHDL projects
-// Verilog project: Verilog code for FIFO memory
-// Verilog code for Read Pointer sub-module 
+
  module read_pointer(rptr,fifo_rd,rd_en,empty,clk,rst);  
   input rd_en,empty,clk,rst;  
   output[4:0] rptr;  
   output fifo_rd;  
   reg[4:0] rptr;  
   assign fifo_rd = (~empty)& rd_en;  
-  always @(posedge clk or negedge rst)  
+  always @(posedge clk/* or posedge rst*/)  
   begin  
    if(~rst) rptr <= 5'b000000;  
    else if(fifo_rd)  
@@ -47,16 +42,14 @@ module fifo_8x16(dout, full, empty, clk, rst, wr_en, rd_en, din);
     rptr <= rptr;  
   end  
  endmodule
-// fpga4student.com: FPga projects, Verilog projects, VHDL projects
-// Verilog project: Verilog code for FIFO memory
-// Verilog code for Write Pointer sub-module 
+
  module write_pointer(wptr,fifo_we,wr_en,full,clk,rst);  
   input wr_en,full,clk,rst;  
   output[4:0] wptr;  
   output fifo_we;  
   reg[4:0] wptr;  
   assign fifo_we = (~full)&wr_en;  
-  always @(posedge clk or negedge rst)  
+  always @(posedge clk/* or posedge rst*/)  
   begin  
    if(~rst) wptr <= 5'b000000;  
    else if(fifo_we)  
@@ -64,4 +57,5 @@ module fifo_8x16(dout, full, empty, clk, rst, wr_en, rd_en, din);
    else  
     wptr <= wptr;  
   end  
- endmodule  
+ endmodule
+ 

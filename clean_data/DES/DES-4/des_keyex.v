@@ -176,14 +176,14 @@ module des_keyex(
 	assign s_lskey = ((r_count==4'd0)||(r_count==4'd1)||(r_count==4'd8)||(r_count==4'd15)) ? {ROL(s_key[55:28],1),ROL(s_key[27:0],1)} : {ROL(s_key[55:28],2),ROL(s_key[27:0],2)};
 	assign s_exk = CEX(s_lskey);
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst)
 			r_key <= #DLY 56'b0;
 		else if(s_busy)
 			r_key <= #DLY s_lskey;
 	end	
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst) begin
 			r_exkey <= #DLY 768'b0;
 		end else if(s_busy)begin
@@ -191,7 +191,7 @@ module des_keyex(
 		end
 	end	
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst)
 			r_count <= #DLY 4'd0;
 		else if(i_key_en)
@@ -204,7 +204,7 @@ module des_keyex(
 
 	assign s_busy = ((r_count!=5'd0)||(i_key_en==1'b1)) ? 1'b1 : 1'b0;
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst)
 			r_key_ok <= #DLY 1'b0;
 		else if(r_count==4'd15)

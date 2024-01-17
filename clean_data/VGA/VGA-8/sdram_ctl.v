@@ -1,7 +1,7 @@
 module sdram_ctl(
     input reset_n,
     input clk_sdram,
-    input reg [21:0] addr,
+    input [21:0] addr,
     output reg [15:0] data,
 
     output sdram_cke,

@@ -15,7 +15,7 @@ reg bit_flag;
 reg en;
 
 
-always @(posedge sys_clk or negedge sys_rst_n)
+always @(posedge sys_clk/* or negedge sys_rst_n*/)
 			if(sys_rst_n == 1'b0)
 				en <= 1'b0;
 			else if(tx_statr_flag == 1'b1)
@@ -25,7 +25,7 @@ always @(posedge sys_clk or negedge sys_rst_n)
 			else
 				en <= en;
 
-always @(posedge sys_clk or negedge sys_rst_n)
+always @(posedge sys_clk/* or negedge sys_rst_n*/)
 			if(sys_rst_n == 1'b0)
 				rx_cnt <= 13'd0;
 			else if(rx_cnt == 13'd5207)
@@ -35,7 +35,7 @@ always @(posedge sys_clk or negedge sys_rst_n)
 			else
 				rx_cnt <= 13'd0;
 				
-always @(posedge sys_clk or negedge sys_rst_n)
+always @(posedge sys_clk/* or negedge sys_rst_n*/)
 			if(sys_rst_n == 1'b0)
 				bit_flag <= 1'b0;
 			else if(rx_cnt == 13'd2000)
@@ -44,7 +44,7 @@ always @(posedge sys_clk or negedge sys_rst_n)
 				bit_flag <= 1'b0;
 
 				
-always @(posedge sys_clk or negedge sys_rst_n)
+always @(posedge sys_clk/* or negedge sys_rst_n*/)
 			if(sys_rst_n == 1'b0)
 				rx_bit_cnt <= 4'd1;
 			else if(rx_bit_cnt == 4'd10 && bit_flag == 1'b1)
@@ -55,7 +55,7 @@ always @(posedge sys_clk or negedge sys_rst_n)
 				rx_bit_cnt <= rx_bit_cnt;
 
 
-always @(posedge sys_clk or negedge sys_rst_n)
+always @(posedge sys_clk/* or negedge sys_rst_n*/)
 			if(sys_rst_n == 1'b0)
 				tx <= 1'b1;
 			else if(bit_flag == 1'b1)

@@ -24,7 +24,7 @@ reg     [7:0]   d_rx_data;
 
 
 
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         begin
           d_flip_0 <= 0;
@@ -38,7 +38,7 @@ always @(posedge clk or negedge rstn) begin
           d_flip_2 <= d_flip_1;
         end
 end
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         start_flag <= 0;
     else if(d_flip_1 == 1'b0 && d_flip_2 == 1'b1)
@@ -47,7 +47,7 @@ always @(posedge clk or negedge rstn) begin
         start_flag <= 1'b0;
 end
 
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         start_en <= 1'b0;
     else if(cnt == 4'd8 && bit_flag == 1'b1)
@@ -58,7 +58,7 @@ always @(posedge clk or negedge rstn) begin
         start_en <= start_en;
 end
 
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         bit_cnt <= 0;
     else if(bit_cnt == (MAX_CNT - 1) || (bit_flag == 1'b1 && cnt == 4'd9))
@@ -67,7 +67,7 @@ always @(posedge clk or negedge rstn) begin
         bit_cnt <= bit_cnt + 1'b1;
 end
 
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         bit_flag <= 1'b0;
     else if(bit_cnt == (MAX_CNT - 1)/2)
@@ -76,7 +76,7 @@ always @(posedge clk or negedge rstn) begin
         bit_flag <= 1'b0;
 end
 
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         cnt <= 0;
     else if(cnt == 4'd8 && bit_flag == 1'b1)
@@ -87,7 +87,7 @@ always @(posedge clk or negedge rstn) begin
         cnt <= cnt;
 end
 
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         d_rx_data <= 0;
     else if((bit_flag == 1'b1)  && (cnt >= 3'd1) && (cnt <= 4'd8))
@@ -96,7 +96,7 @@ always @(posedge clk or negedge rstn) begin
         d_rx_data <= d_rx_data;
 end
 
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         fin_flag <= 1'b0;
     else if(cnt == 4'd8 && bit_flag == 1'b1)
@@ -105,7 +105,7 @@ always @(posedge clk or negedge rstn) begin
         fin_flag <= 1'b0;
 end
 
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         rx_data <= 0;
     else if(fin_flag == 1'b1)
@@ -114,7 +114,7 @@ end
         
 //assign rx_data = (fin_flag == 1'b1) ? d_rx_data : 1'b0;
 //assign flag = (fin_flag == 1'b1)? 1'b1 : 1'b0 ;
-always @(posedge clk or negedge rstn) begin
+always @(posedge clk/* or negedge rstn*/) begin
     if(!rstn)
         out_flag <= 1'b0;
     else if(fin_flag == 1'b1)

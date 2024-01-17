@@ -64,14 +64,14 @@ module xtea_keyex(
 	assign s_exka = i_key_en ? WS(i_key,2'b0):(r_sum + WS(i_key,r_sum[1:0]));
 	assign s_exkb = s_sum + WS(i_key,s_sum[12:11]);
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst)
 			r_sum <= #DLY 32'b0;
 		else if(s_busy)
 			r_sum <= #DLY s_sum;
 	end
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst) begin
 			r_exkey_a <= #DLY 1024'b0;
 		end else if(s_busy)begin
@@ -79,7 +79,7 @@ module xtea_keyex(
 		end
 	end
 
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst) begin
 			r_exkey_b <= #DLY 1024'b0;
 		end else if(s_busy)begin
@@ -87,7 +87,7 @@ module xtea_keyex(
 		end
 	end	
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst) 
 			r_count <= #DLY 5'd0;
 		else if(r_count!=6'd0)
@@ -101,7 +101,7 @@ module xtea_keyex(
 	
 	assign s_busy = ((r_count!=5'd0)||(i_key_en==1'b1)) ? 1'b1 : 1'b0;
 
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst)
 			r_key_ok <= #DLY 1'b0;
 		else if(r_count=='d31)

@@ -400,7 +400,7 @@ module vga_wb_master (clk_i, rst_i, nrst_i,
 	wire wb_cycle = vmem_acc & !(burst_done & vmem_ack & !vmem_req) & !ImDone ||
 	                cur_acc & !cur_done;
 
-	always @(posedge clk_i or negedge nrst_i)
+	always @(posedge clk_i/* or negedge nrst_i*/)
 	  if (!nrst_i)
 	    begin
 	        cyc_o <= #1 1'b0;

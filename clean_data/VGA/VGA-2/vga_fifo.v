@@ -176,7 +176,7 @@ module vga_fifo (
 	//
 	// hookup read-pointer
 	//
-	always @(posedge clk or negedge aclr)
+	always @(posedge clk/* or negedge aclr*/)
 	  if (~aclr)      rp <= #1 0;
 	  else if (sclr)  rp <= #1 0;
 	  else if (frreq) rp <= #1 {rp[aw-1:1], lsb(rp)};
@@ -184,7 +184,7 @@ module vga_fifo (
 	//
 	// hookup write-pointer
 	//
-	always @(posedge clk or negedge aclr)
+	always @(posedge clk/* or negedge aclr*/)
 	  if (~aclr)      wp <= #1 0;
 	  else if (sclr)  wp <= #1 0;
 	  else if (fwreq) wp <= #1 {wp[aw-1:1], lsb(wp)};
@@ -205,7 +205,7 @@ module vga_fifo (
 
 	// generate full/empty signals
 	assign aempty = (rp[aw-1:1] == wp[aw:2]) & (lsb(rp) == wp[1]) & frreq & ~fwreq;
-	always @(posedge clk or negedge aclr)
+	always @(posedge clk/* or negedge aclr*/)
 	  if (~aclr)
 	    empty <= #1 1'b1;
 	  else if (sclr)
@@ -214,7 +214,7 @@ module vga_fifo (
 	    empty <= #1 aempty | (empty & (~fwreq + frreq));
 
 	assign afull = (wp[aw-1:1] == rp[aw:2]) & (lsb(wp) == rp[1]) & fwreq & ~frreq;
-	always @(posedge clk or negedge aclr)
+	always @(posedge clk/* or negedge aclr*/)
 	  if (~aclr)
 	    full <= #1 1'b0;
 	  else if (sclr)
@@ -223,7 +223,7 @@ module vga_fifo (
 	    full <= #1 afull | ( full & (~frreq + fwreq) );
 
 	// number of words in fifo
-	always @(posedge clk or negedge aclr)
+	always @(posedge clk/* or negedge aclr*/)
 	  if (~aclr)
 	    nword <= #1 0;
 	  else if (sclr)

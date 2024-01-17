@@ -75,7 +75,7 @@ module one_iteration(
 	 wire [32:1] xorOut;
 	 xor2 x2(left,PermS, xorOut);
 	 
-	 always@(posedge clk or posedge rst)
+	 always@(posedge clk/* or posedge rst*/)
 	 begin
 	 if(rst)
 	 begin

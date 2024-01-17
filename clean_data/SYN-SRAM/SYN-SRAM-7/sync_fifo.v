@@ -17,7 +17,7 @@ module sync_fifo
   integer i;
   
 //Write pointer logic
-always @ (posedge clk, posedge rstn)
+always @ (posedge clk/*, posedge rstn*/)
  if (rstn) begin
  wr_ptr <= 1'd0;
  for(i=0; i < `fifo_depth; i = i+1)
@@ -29,7 +29,7 @@ always @ (posedge clk, posedge rstn)
  end
  
 //Read pointer logic
-always @ (posedge clk, posedge rstn)
+always @ (posedge clk/*, posedge rstn*/)
 if (rstn) begin
  rd_ptr <= 1'd0;
  rd_vld <= 1'd0;

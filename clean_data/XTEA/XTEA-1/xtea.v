@@ -61,7 +61,7 @@ reg[7:0] state;
 reg[7:0] x;
 reg[31:0] data_out1, data_out2, sum, workunit1, workunit2, delta;
 
-always @(posedge clock or posedge reset)
+always @(posedge clock/* or posedge reset*/)
 begin
 	if (reset)
 		//reset state
@@ -91,7 +91,7 @@ begin
 	end
 end
 
-always @(posedge clock or posedge reset)
+always @(posedge clock/* or posedge reset*/)
 begin
 	if (reset) begin
 		//reset all our outputs and registers

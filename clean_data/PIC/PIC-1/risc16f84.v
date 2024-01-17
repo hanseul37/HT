@@ -1054,7 +1054,7 @@ assign ps_clk = option_reg[5]?(t0cki_i ^ option_reg[4]):clk_o_reg;
 // option_reg(4):T0SE
 
 // pre-scaler body
-always @(posedge ps_clk or negedge pon_rst_n_i)
+always @(posedge ps_clk/* or negedge pon_rst_n_i*/)
 begin
   if (~pon_rst_n_i)
   begin
@@ -1096,7 +1096,7 @@ assign inc_tmr_clk =  option_reg[3]?ps_clk:ps_full_reg;
 
 assign wdt_init = ~pon_rst_n_i || ~mclr_n_i;
 // WDT timer body
-always @(posedge wdt_clk_i or posedge wdt_init)
+always @(posedge wdt_clk_i/* or posedge wdt_init*/)
 begin
   if (wdt_init) // (async reset)
   begin
@@ -1182,72 +1182,82 @@ assign intclr4 = intclr_reg[4];
 
 // Detect external interrupt requests
 // INT0 I/F
-always @(posedge int0_i or posedge intclr0)
+always @(posedge int0_i/* or posedge intclr0*/)
 begin
-  if (intclr0) intrise_reg[0]  <= 0;
-  else intrise_reg[0] <= 1; // catch positive edge
+  intrise_reg[0]  <= !intclr0;
+  /*if (intclr0) intrise_reg[0]  <= 0;
+  else intrise_reg[0] <= 1; // catch positive edge*/
 end // process
 
-always @(negedge int0_i or posedge intclr0)
+always @(negedge int0_i/* or posedge intclr0*/)
 begin
-  if (intclr0) intdown_reg[0] <= 0;
-  else intdown_reg[0]  <= 1; // catch negative edge
+  intdown_reg[0]  <= !intclr0;
+  /*if (intclr0) intdown_reg[0] <= 0;
+  else intdown_reg[0]  <= 1; // catch negative edge*/
 end // process
 assign rb0_int = option_reg[6]?intrise_reg[0]:intdown_reg[0];
 
 // INT4 I/F
-always @(posedge int4_i or posedge intclr1)
+always @(posedge int4_i/* or posedge intclr1*/)
 begin
-  if (intclr1) intrise_reg[1]  <= 0;
-  else intrise_reg[1] <= 1; // catch positive edge
+  intrise_reg[1]  <= !intclr1;
+  /*if (intclr1) intrise_reg[1]  <= 0;
+  else intrise_reg[1] <= 1; // catch positive edge*/
 end // process
 
-always @(negedge int4_i or posedge intclr1)
+always @(negedge int4_i/* or posedge intclr1*/)
 begin
-  if (intclr1) intdown_reg[1] <= 0;
-  else intdown_reg[1]  <= 1; // catch negative edge
+  intdown_reg[1]  <= !intclr1;
+  /*if (intclr1) intdown_reg[1] <= 0;
+  else intdown_reg[1]  <= 1; // catch negative edge*/
 end // process
 assign rb4_int = intrise_reg[1] || intdown_reg[1];
 
 // INT5 I/F
-always @(posedge int5_i or posedge intclr2)
+always @(posedge int5_i/* or posedge intclr2*/)
 begin
-  if (intclr2) intrise_reg[2]  <= 0;
-  else intrise_reg[2] <= 1; // catch positive edge
+  intrise_reg[2]  <= !intclr2;
+  /*if (intclr2) intrise_reg[2]  <= 0;
+  else intrise_reg[2] <= 1; // catch positive edge*/
 end // process
 
-always @(negedge int5_i or posedge intclr2)
+always @(negedge int5_i/* or posedge intclr2*/)
 begin
-  if (intclr2) intdown_reg[2] <= 0;
-  else intdown_reg[2]  <= 1; // catch negative edge
+  intdown_reg[2]  <= !intclr2;
+  /*if (intclr2) intdown_reg[2] <= 0;
+  else intdown_reg[2]  <= 1; // catch negative edge*/
 end // process
 assign rb5_int = intrise_reg[2] || intdown_reg[2];
 
 // INT6 I/F
-always @(posedge int6_i or posedge intclr3)
+always @(posedge int6_i/* or posedge intclr3*/)
 begin
-  if (intclr3) intrise_reg[3]  <= 0;
-  else intrise_reg[3] <= 1; // catch positive edge
+  intrise_reg[3]  <= !intclr3;
+  /*if (intclr3) intrise_reg[3]  <= 0;
+  else intrise_reg[3] <= 1; // catch positive edge*/
 end // process
 
-always @(negedge int7_i or posedge intclr3)
+always @(negedge int7_i/* or posedge intclr3*/)
 begin
-  if (intclr3) intdown_reg[3] <= 0;
-  else intdown_reg[3]  <= 1; // catch negative edge
+  intdown_reg[3]  <= !intclr3;
+  /*if (intclr3) intdown_reg[3] <= 0;
+  else intdown_reg[3]  <= 1; // catch negative edge*/
 end // process
 assign rb6_int = intrise_reg[3] || intdown_reg[3];
 
 // INT7 I/F
-always @(posedge int7_i or posedge intclr4)
+always @(posedge int7_i/* or posedge intclr4*/)
 begin
-  if (intclr4) intrise_reg[4]  <= 0;
-  else intrise_reg[4] <= 1; // catch positive edge
+  intrise_reg[4]  <= !intclr4;
+  /*if (intclr4) intrise_reg[4]  <= 0;
+  else intrise_reg[4] <= 1; // catch positive edge*/
 end // process
 
-always @(negedge int7_i or posedge intclr4)
+always @(negedge int7_i/* or posedge intclr4*/)
 begin
-  if (intclr4) intdown_reg[4] <= 0;
-  else intdown_reg[4]  <= 1; // catch negative edge
+  intdown_reg[4]  <= !intclr4;
+  /*if (intclr4) intdown_reg[4] <= 0;
+  else intdown_reg[4]  <= 1; // catch negative edge*/
 end // process
 assign rb7_int = intrise_reg[4] || intdown_reg[4];
 

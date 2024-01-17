@@ -20,7 +20,7 @@ module uart_rx #(
     reg [7:0] rx_data;
     reg rx_data_flag;
 
-    always @(posedge sys_clk or negedge sys_rst_n) begin
+    always @(posedge sys_clk/* or negedge sys_rst_n*/) begin
         if(sys_rst_n == 1'b0)
             rx_reg <= 1'b0;
         else
@@ -28,14 +28,14 @@ module uart_rx #(
     end
     
     //delay 2 clock-period to figure out metastable state
-    always @(posedge sys_clk or negedge sys_rst_n) begin
+    always @(posedge sys_clk/* or negedge sys_rst_n*/) begin
         if(sys_rst_n == 1'b0)
             rx_reg2 <= 1'b0;
         else
             rx_reg2 <= rx_reg;
     end
 
-    always @(posedge sys_clk or negedge sys_rst_n) begin
+    always @(posedge sys_clk/* or negedge sys_rst_n*/) begin
         if(sys_rst_n == 1'b0)
             rx_reg3 <= 1'b0;
         else 
@@ -43,7 +43,7 @@ module uart_rx #(
     end
 
     //detect negative edge of rx_reg3
-    always @(posedge sys_clk or negedge sys_rst_n) begin
+    always @(posedge sys_clk/* or negedge sys_rst_n*/) begin
         if(sys_rst_n == 1'b0)
             nedge_flag <= 1'b0;
         else if((~rx_reg2) && (rx_reg3))
@@ -53,7 +53,7 @@ module uart_rx #(
     end
 
     //when the first nedge_flag=1, it means that uart_rx begins to receive data. At this moment set a "enable signal" to 1.
-    always @(posedge sys_clk or negedge sys_rst_n) begin
+    always @(posedge sys_clk/* or negedge sys_rst_n*/) begin
         if(sys_rst_n == 1'b0)
             work_en <= 1'b0;
         else if(nedge_flag == 1'b1)
@@ -63,7 +63,7 @@ module uart_rx #(
     end
 
     //It takes baud_count 0~5207 for rx to receive every one bit
-    always @(posedge sys_clk or negedge sys_rst_n) begin
+    always @(posedge sys_clk/* or negedge sys_rst_n*/) begin
         if(sys_rst_n == 1'b0)
             baud_count <= 13'd0;
         else if((work_en == 1'b0) || (baud_count == BAUD_FLAG_MAX))
@@ -73,7 +73,7 @@ module uart_rx #(
     end
 
     //when count to 2603, set a pulse bit_flag to pick the value of rx easily
-    always @(posedge sys_clk or negedge sys_rst_n) begin
+    always @(posedge sys_clk/* or negedge sys_rst_n*/) begin
         if(sys_rst_n == 1'b0)
             bit_flag <=  1'b0;
         else if(baud_count == BAUD_FLAG_MAX/2)
@@ -83,7 +83,7 @@ module uart_rx #(
     end 
 
     //set a sequence of the data, to avoid pick start bit and stop bit
-    always @(posedge sys_clk or negedge sys_rst_n) begin
+    always @(posedge sys_clk/* or negedge sys_rst_n*/) begin
         if(sys_rst_n == 1'b0)
             bit_cnt <= 4'd0;
         else if((bit_flag == 1'b1) && (bit_cnt == BIT_CNT_MAX))
@@ -93,7 +93,7 @@ module uart_rx #(
     end
 
     //pick the data and transform the serie to parallel data
-    always @(posedge sys_clk or negedge sys_rst_n) begin
+    always @(posedge sys_clk/* or negedge sys_rst_n*/) begin
         if(sys_rst_n == 1'b0)
             rx_data <= 8'b0000_0000;
         else if((bit_cnt >= 1'b1) && (bit_cnt <= BIT_CNT_MAX - 1'b1) && (bit_flag == 1'b1))
@@ -101,7 +101,7 @@ module uart_rx #(
     end
 
     //after transformation, send a pulse
-    always @(posedge sys_clk or negedge sys_rst_n) begin
+    always @(posedge sys_clk/* or negedge sys_rst_n*/) begin
         if(sys_rst_n == 1'b0)
             rx_data_flag <= 1'b0;
         else if((bit_cnt == BIT_CNT_MAX) && (bit_flag == 1'b1))
@@ -111,7 +111,7 @@ module uart_rx #(
     end
 
     // output data
-    always @(posedge sys_clk or negedge sys_rst_n) begin
+    always @(posedge sys_clk/* or negedge sys_rst_n*/) begin
         if (sys_rst_n == 1'b0)
             po_data <= 8'b0000_0000;
         else if (rx_data_flag == 1'b1)
@@ -119,7 +119,7 @@ module uart_rx #(
     end
 
     // output flag
-    always @(posedge sys_clk or negedge sys_rst_n) begin
+    always @(posedge sys_clk/* or negedge sys_rst_n*/) begin
         if (sys_rst_n == 1'b0)
             po_data_flag <= 1'b0;
         else

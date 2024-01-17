@@ -48,7 +48,7 @@ wire						shift_en	;	//the signal to enable shift register to generate mosi
 wire						sampl_en	;	//the signal to sample the data from miso
 //------------------------------------------
 //to capture the edge of sclk
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) begin
 		sclk_a <= CPOL;
 		sclk_b <= CPOL;
@@ -62,7 +62,7 @@ assign sclk_posedge = ~sclk_b & sclk_a;
 assign sclk_negedge = ~sclk_a & sclk_b;
 //------------------------------------------
 //to capture the edge of sclk
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) begin
 		cs_n_a	<= 1'b1;
 		cs_n_b	<= 1'b1;
@@ -94,7 +94,7 @@ endgenerate
 //==================================================
 //the register to latch the data_in
 //also the shift register to generate the miso
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) 
 		data_reg <= 'd0;
 	else if(cs_n_negedge)
@@ -108,7 +108,7 @@ end
 assign miso = !cs_n ? data_reg[DATA_WIDTH-1] : 1'd0;
 //==================================================
 //sample data from the mosi line
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) 
 		data_out <= 'd0;
 	else if (!cs_n & sampl_en) 
@@ -117,7 +117,7 @@ always @(posedge clk or negedge rst_n) begin
 		data_out <= data_out;
 end
 //the counter to count the number of sampled data bit
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk/* or negedge rst_n*/) begin
 	if (!rst_n) 
 		sampl_num <= 'd0;
 	else if (cs_n)

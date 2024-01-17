@@ -60,7 +60,7 @@ reg [CNT_WIDTH-1:0]clk_cnt;
 reg [2:0]shift_cnt;
 reg [7:0]data_reg;
 
-always@(posedge clk or negedge rst)
+always@(posedge clk/* or negedge rst*/)
 begin if(rst==0)
             clk_cnt<=0;
       else if(clk_cnt_en)
@@ -71,7 +71,7 @@ begin if(rst==0)
            else clk_cnt<=0;
 end
 
-always@(posedge clk or negedge rst)
+always@(posedge clk/* or negedge rst*/)
 begin
      if(rst==0)
         sclk<=CPOL;
@@ -84,7 +84,7 @@ begin
             sclk<=CPOL;
 end
 
-always @(posedge clk or negedge rst) 
+always @(posedge clk/* or negedge rst*/) 
 begin
 	if (!rst) begin
 		sclk_a <= CPOL;
@@ -105,7 +105,7 @@ case(CPHA)
 default: begin shift_en = sclk_posedge;sample_en = sclk_negedge;  end
 endcase
 
-always @(posedge clk or negedge rst) begin
+always @(posedge clk/* or negedge rst*/) begin
 	if (!rst) 
 		PS <= idle;
 	else 
@@ -122,7 +122,7 @@ always @(*) begin
 	endcase
 end
 
-always @(posedge clk or negedge rst) begin
+always @(posedge clk/* or negedge rst*/) begin
 	if (!rst) begin
 		clk_cnt_en	<= 1'b0	;
 		data_reg	<= 8'd0	;
@@ -175,7 +175,7 @@ always @(posedge clk or negedge rst) begin
 end
 
 assign mosi = data_reg[7];
-always @(posedge clk or negedge rst) 
+always @(posedge clk/* or negedge rst*/) 
 begin
 	if (!rst) 
 		dataout <= 8'd0;

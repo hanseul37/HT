@@ -68,7 +68,7 @@ module rc6_keyex(
 	
 	assign s_ikey = {SWAP(i_key[127:96]),SWAP(i_key[95:64]),SWAP(i_key[63:32]),SWAP(i_key[31:0])};
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst)
 			r_key <= #DLY 128'b0;
 		else if(i_key_en)
@@ -77,7 +77,7 @@ module rc6_keyex(
 			r_key <= #DLY {r_key[95:0],s_bx};
 	end	
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst) 
 			r_exkey <= #DLY 1408'b0;
 		else if(i_key_en)
@@ -96,7 +96,7 @@ module rc6_keyex(
 	rc6_rol u_rol1(.round(5'd3),.din((s_sk + s_a + s_b)),.dout(s_ax)); //S
 	rc6_rol u_rol2(.round(s_tmp[4:0]),.din((s_lk + s_ax + s_b)),.dout(s_bx)); //L
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst)
 			r_count <= #DLY 8'd0;
 		else if(i_key_en)
@@ -111,7 +111,7 @@ module rc6_keyex(
 
 	assign s_busy = ((r_count!=8'd0)||(i_key_en==1'b1)) ? 1'b1 : 1'b0;
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst)
 			r_key_ok <= #DLY 1'b0;
 		else if(r_count==8'd131)

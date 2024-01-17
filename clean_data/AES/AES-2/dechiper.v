@@ -32,7 +32,7 @@ INV_Shift_Rows p2 (.in(register),.out(sb));
 sub_bytes_inv p3 (.in(sb),.out(sr));
 
 
-always @(posedge clk,posedge decReset) begin
+always @(posedge clk/*,posedge decReset*/) begin
 
     if(decReset) begin
 	  round_counter=0;

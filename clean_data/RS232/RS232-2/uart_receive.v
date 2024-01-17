@@ -40,7 +40,7 @@ wire              start_flag; //signal indicating that an edge is detect and dat
 assign  start_flag = uart_r_1 & (~uart_r_0); 
 
 //delay the uart_r_1 signal as 2 clk duration
-always @(posedge sys_clk or negedge sys_rst) begin
+always @(posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst)	begin
 		uart_r_1 <= 1'b0;
 		uart_r_0 <= 1'b0;
@@ -51,7 +51,7 @@ always @(posedge sys_clk or negedge sys_rst) begin
 	end
 end
 
-always @(posedge sys_clk or negedge sys_rst) begin
+always @(posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst) begin
 		flag_r <= 1'b0; //if rst pressed, the system is not receiving any signal
 	end
@@ -67,7 +67,7 @@ always @(posedge sys_clk or negedge sys_rst) begin
 end
 
 //when start reading, start counting the data bit number and the clk number
-always @(posedge sys_clk or negedge sys_rst) begin
+always @(posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst) begin
 		count_clk <= 16'd0;
 		count_data_r <= 4'd0; //reset the counter
@@ -90,7 +90,7 @@ always @(posedge sys_clk or negedge sys_rst) begin
 end
 
 //receive the signal and store it in a register (signal data_r)
-always @(posedge sys_clk or negedge sys_rst) begin
+always @(posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst)
 		data_r <= 8'b0;  //reset the register 
 	else if (flag_r) //if receiving
@@ -113,7 +113,7 @@ always @(posedge sys_clk or negedge sys_rst) begin
 end
 
 //after receiving the signal, pump it to the output
-always @(posedge sys_clk or negedge sys_rst) begin
+always @(posedge sys_clk/* or negedge sys_rst*/) begin
 	if (!sys_rst) begin
 		uart_data <= 8'd0;
 		uart_finish <= 1'd0; 

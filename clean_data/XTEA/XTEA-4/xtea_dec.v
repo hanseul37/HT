@@ -49,7 +49,7 @@ assign key_word =  (sum[1:0]==2'b00) && EA == S_DEC_PHASE_2 ? k0:
 
 
 
-always @(posedge clock or posedge reset) begin
+always @(posedge clock/* or posedge reset*/) begin
     if (reset) begin
         EA <= S_WAITING;
     end else begin
@@ -83,7 +83,7 @@ always @(posedge clock or posedge reset) begin
     end
 end
 
-always @(posedge clock or posedge reset) begin
+always @(posedge clock/* or posedge reset*/) begin
     if (reset) begin
         count <= 0;
         data_out_int <= 0;
