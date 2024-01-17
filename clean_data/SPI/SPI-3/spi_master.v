@@ -106,12 +106,7 @@ always @(negedge spi_clk)
     else
         mosi <=1'bz;
 //assign mosi = ( ~cs ) ? mosi_d[reg_width-1] : 1'bz;
-//assign spi_clk = ( state == transact ) ? sys_clk : 1'b0;
-always @(posedge sys_clk or negedge sys_clk)
-    if (state==transact)
-        spi_clk <= sys_clk;
-    else
-        spi_clk <= 0;
+assign spi_clk = ( state == transact ) ? sys_clk : 1'b0;
 always @(posedge spi_clk)
 begin
     if ( state == transact )

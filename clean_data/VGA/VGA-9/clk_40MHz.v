@@ -4,16 +4,16 @@ module clk_40MHz
 	(input  clk_in,
 	 output clk_out);
 	 
-	 wire				sub_wire0;
-	 wire [1:0]		sub_wire1;
-	 wire  			sub_wire2 = 0;
-	 wire [4:0] 	sub_wire3;
+	 //wire				sub_wire0;
+	 //wire [1:0]		sub_wire1;
+	 //wire  			sub_wire2 = 0;
+	 //wire [4:0] 	sub_wire3;
 	 
 
-		assign clk_out = sub_wire3[0];
-		assign sub_wire0 = clk_in;
-		assign sub_wire1 = sub_wire2 & sub_wire0;
-		assign clk_out = clk_in;
+	//assign clk_out = sub_wire3[0];
+	//assign sub_wire0 = clk_in;
+	//assign sub_wire1 = sub_wire2 & sub_wire0;
+	assign clk_out = clk_in;
 
 	/*
 	 altpll 
@@ -71,9 +71,9 @@ module clk_40MHz
 		  .port_extclk2("PORT_UNUSED"),
 		  .port_extclk3("PORT_UNUSED"),
 		  .width_clock(5))
-	*/
+	
 	
 	 pll (.inclk (clk_in),
-			.clk (sub_wire3));
+			.clk (sub_wire3));*/
 
 endmodule

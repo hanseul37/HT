@@ -110,7 +110,7 @@
 // 4 instead of 8 interrupt sources reduces the size by approx. half.
 //
 
-`include "rv_addr_line_en_macros.svh"
+//`include "rv_addr_line_en_macros.svh"
 
 
 module fwpic #(

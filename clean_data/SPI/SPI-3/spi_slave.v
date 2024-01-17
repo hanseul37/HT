@@ -102,7 +102,7 @@ always @(negedge spi_clk)
         spi_clk <= slave_clk;
     else
         spi_clk <= 0;*/
-assign = spi_clk (state == transact) ? slave_clk : 0;
+assign spi_clk = ( state == transact ) ? slave_clk : 0;
 		
 always @(posedge spi_clk)
 begin

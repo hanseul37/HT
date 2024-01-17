@@ -7,4 +7,4 @@ output [ADD_SIZE-1:0] out ;
 assign out =(sel==1)?in1 : in0 ;
 wire [ADD_SIZE-1:0] z1 ;
 assign z1 = in1 ;
-endmodule 
+endmodule

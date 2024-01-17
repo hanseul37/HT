@@ -17,7 +17,7 @@ wire [ADD_SIZE-1:0] z1;
 wire [MEM_WIDTH-1:0] z2 ;
 
 wire [ADD_SIZE-1:0] addr1 ;
-wire [MEM_WIDTH-1:0] dout1 ;
+// wire [MEM_WIDTH-1:0] dout1 ;
 always@(*) begin 
 	if(rst)begin
 		dout <= 0;
@@ -37,7 +37,7 @@ mux m1 (.in0(addr1),.in1(z1),.sel(addr_en),.out(addr));
 ff_q2 m2 (.D(addr1),.Q(z1),.clk(clk1),.E(addr_en));
 
 
-mux_16 m3 (.in0(dout),.in1(z2),.sel(dout_en),.out(dout1));
+// mux_16 m3 (.in0(dout),.in1(z2),.sel(dout_en),.out(dout1));
 ff_16 m4 (.D(dout),.Q(z2),.clk(clk1),.E(dout_en));
 
 
