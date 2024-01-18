@@ -74,15 +74,14 @@ SYN-SRAM-8: https://github.com/muhammad-maarij-zeeshan/synchronous-ram </br>
 
 #### VGA
 
-VGA-1: </br>
-VGA-2: </br>
-VGA-3: </br>
-VGA-4: </br>
-VGA-5: </br>
-VGA-6: </br>
-VGA-7: </br>
-VGA-8: </br>
-VGA-9: </br>
+VGA-1: https://github.com/mstump/verilog-vga-controller </br>
+VGA-2: https://github.com/freecores/vga_lcd </br>
+VGA-3: https://github.com/projf/display_controller </br>
+VGA-5: https://github.com/areyes309/fpgaproject </br>
+VGA-6: https://github.com/mazaczysko/vga_controller </br>
+VGA-7: https://github.com/andrade824/VGA-Controller-IP </br>
+VGA-8: https://github.com/danellis/vga </br>
+VGA-9: https://github.com/patmarc/VGA </br>
 
 #### XTEA
 
