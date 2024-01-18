@@ -1,6 +1,7 @@
-module sram(input clk,wr,rd,rst,input [1:0]addr);
+module sram(input clk,wr,rd,rst,input [1:0]addr,
+input [15:0] idata,
+output reg [15:0] odata);
 reg [15:0] mem[3:0]; 
-reg [15:0] data; 
 integer i; 
 always@(posedge clk)
 begin
@@ -12,11 +13,11 @@ begin
     end
     else if(wr && !rd)
     begin
-        mem[addr]=data;
+        mem[addr]=idata;
     end
     else if(!wr && rd) 
     begin
-        data=mem[addr];
+        odata=mem[addr];
     end
 end
 endmodule
