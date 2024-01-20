@@ -121,8 +121,11 @@ module fwpic #(
 		// Note: expected to be a word address
 		 //`RV_ADDR_LINE_EN_TARGET_PORT(,2,32),
 		input [1:0] adr,
+		input valid,
+		input we,
 		output reg			int_o,
-		input[N_IRQ-1:0]	irq
+		output [N_IRQ-1:0] dat_o,
+		input [N_IRQ-1:0]	irq
 );
 
 
@@ -178,7 +181,7 @@ module fwpic #(
   // All accesses are single-cycle
   assign ready = 1;
   
-  always @(posedge clock or posedge reset) begin
+  always @(posedge clock/* or posedge reset*/) begin
 //  	$display("clock: reset=%0d valid=%0d we=%0d", reset, valid, we);
     if (reset) begin
           pol   <=  {{N_IRQ}{1'b0}};              // clear polarity register
@@ -209,9 +212,6 @@ module fwpic #(
     end
 `endif
 
-    //
-    // generate dat_o
-    reg [N_IRQ-1:0] dat_o;
     assign dat_r = dat_o;
     always @(posedge clock)
       case (adr) // synopsys full_case parallel_case
