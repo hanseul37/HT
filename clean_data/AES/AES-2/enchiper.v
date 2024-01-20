@@ -36,7 +36,7 @@ sub_bytes p2 (.in(register),.out(sb));
 Shift_Rows p3 (.in(sb),.out(sr));
 
 
-always @(posedge clk/* or posedge reset*/ or posedge enable) begin
+always @(posedge clk) begin
 	if(reset) begin
 		round_counter=0;
 		in=0;
