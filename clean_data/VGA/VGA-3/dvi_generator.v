@@ -59,7 +59,7 @@ module dvi_generator(
         .o_rst(rst_oserdes)
     );
 
-    serializer_10to1 serialize_ch0 (
+    /*serializer_10to1 serialize_ch0 (
         .i_clk(i_pix_clk),
         .i_clk_hs(i_pix_clk_5x),
         .i_rst_oserdes(rst_oserdes),
@@ -89,6 +89,6 @@ module dvi_generator(
         .i_rst_oserdes(rst_oserdes),
         .i_data(10'b0000011111),
         .o_data(o_tmds_chc_serial)
-    );
+    );*/
 
 endmodule
