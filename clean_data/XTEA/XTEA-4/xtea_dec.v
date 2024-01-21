@@ -52,6 +52,12 @@ assign key_word =  (sum[1:0]==2'b00) && EA == S_DEC_PHASE_2 ? k0:
 always @(posedge clock/* or posedge reset*/) begin
     if (reset) begin
         EA <= S_WAITING;
+        count <= 0;
+        data_out_int <= 0;
+        sum <= 32'hC6EF3720;
+        delta <= 32'h9E3779B9;
+        ready_int <= 0;
+        dec_done <= 0;
     end else begin
         case (EA)
             S_WAITING: begin
@@ -62,12 +68,23 @@ always @(posedge clock/* or posedge reset*/) begin
                 end else begin
                     EA <= S_WAITING;
                 end
+				
+                data_decrypted <= data_in;
+                key_int <= key;
+                sum <= 32'hC6EF3720;
+                count <= 0;
             end
             S_DEC_PHASE_1: begin                
                 EA <= S_ENC_SUM;
+				
+                count <= count + 1;
+
+                data_decrypted[95:64]  <= z0- ((((y0 << 4) ^ (y0 >> 5)) + y0) ^ (sum + key_word));
+                data_decrypted[31:0] <= z1- ((((y1 << 4) ^ (y1 >> 5)) + y1) ^ (sum + key_word));
             end
             S_ENC_SUM: begin
                 EA <= S_DEC_PHASE_2;
+                sum <= sum - delta;   
             end
             S_DEC_PHASE_2: begin
                 if (dec_done) begin
@@ -75,58 +92,22 @@ always @(posedge clock/* or posedge reset*/) begin
                 end else begin
                     EA <= S_DEC_PHASE_1;
                 end
-            end
-            S_READY: begin
-                EA <= S_WAITING;
-            end
-        endcase
-    end
-end
-
-always @(posedge clock/* or posedge reset*/) begin
-    if (reset) begin
-        count <= 0;
-        data_out_int <= 0;
-        sum <= 32'hC6EF3720;
-        delta <= 32'h9E3779B9;
-        ready_int <= 0;
-        dec_done <= 0;
-    end else begin
-        case (EA)
-            S_WAITING: begin
-                data_decrypted <= data_in;
-                key_int <= key;
-                sum <= 32'hC6EF3720;
-                count <= 0;
-            end
-            S_DEC_PHASE_1: begin
-                count <= count + 1;
-
-                data_decrypted[95:64]  <= z0- ((((y0 << 4) ^ (y0 >> 5)) + y0) ^ (sum + key_word));
-                data_decrypted[31:0] <= z1- ((((y1 << 4) ^ (y1 >> 5)) + y1) ^ (sum + key_word));
-                
-            end
-            S_ENC_SUM: begin
-                sum <= sum - delta;   
-            end
-            S_DEC_PHASE_2: begin
-                 data_decrypted[127:96] <= y0- ((((z0 << 4) ^ (z0 >> 5)) + z0) ^ (sum + key_word));
+				
+                data_decrypted[127:96] <= y0- ((((z0 << 4) ^ (z0 >> 5)) + z0) ^ (sum + key_word));
                 data_decrypted[63:32]  <= y1- ((((z1 << 4) ^ (z1 >> 5)) + z1) ^ (sum + key_word));
                 if(count == 31) begin
                     count <= 0;
                     dec_done <= 1;
                 end
-                 
-                
             end
             S_READY: begin
+                EA <= S_WAITING;
                 data_out_int <= data_decrypted;
                 ready_int <= 1;
             end
         endcase
     end
 end
-
 
 //assign valor0 = EA == S_DEC_PHASE_2 ?  : EA == S_DEC_PHASE_2 ? : 0;
 //assign valor1 = EA == S_DEC_PHASE_2 ?  : EA == S_DEC_PHASE_2 ?  : 0;
