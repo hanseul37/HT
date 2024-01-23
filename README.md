@@ -97,7 +97,7 @@
   >
   > VGA-1: <a href='https://github.com/mstump/verilog-vga-controller' target='_blank'>mstump/verilog-vga-controller</a></br>
   > VGA-2: <a href='https://github.com/freecores/vga_lcd' target='_blank'>freecores/vga_lcd</a></br>
-  > VGA-3: <a href='https://github.com/projf/display_controller' target='_blank'>projf/display_controller</a></br>
+  > VGA-3: <a href='https://github.com/kendimce/vga_controller' target='_blank'>kendimce/vga_controller</a></br>
   > VGA-5: <a href='https://github.com/areyes309/fpgaproject' target='_blank'>areyes309/fpgaproject</a></br>
   > VGA-6: <a href='https://github.com/mazaczysko/vga_controller' target='_blank'>mazaczysko/vga_controller</a></br>
   > VGA-7: <a href='https://github.com/andrade824/VGA-Controller-IP' target='_blank'>andrade824/VGA-Controller-IP</a></br>
