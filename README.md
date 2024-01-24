@@ -111,4 +111,26 @@
   > XTEA-3: <a href='https://github.com/secworks/xtea' target='_blank'>secworks/xtea</a></br>
   > XTEA-4: <a href='https://github.com/LucasDamo22/xtea-verilog' target='_blank'>LucasDamo22/xtea-verilog</a></br>
 
+- HT-Free chips
+
+  > ### AES
+  >
+  > AES-1: <a href='https://github.com/dhuertas/AES' target='_blank'>dhuertas/AES</a></br>
+
+  > ### DES
+  >
+  > DES-1: <a href='https://github.com/tarequeh/DES' target='_blank'>tarequeh/DES</a></br>
+
+  > ### RC5
+  >
+  > RC5-1: <a href='https://github.com/Amay22/RC5' target='_blank'>Amay22/RC5</a></br>
+
+  > ### RC6
+  >
+  > RC6-1: <a href='https://github.com/m-chrome/RC6' target='_blank'>m-chrome/RC6</a></br>
+
+  > ### XTEA
+  >
+  > XTEA-1: <a href='https://github.com/shixiongfei/xtea' target='_blank'>shixiongfei/xtea</a></br>
+
 ---
