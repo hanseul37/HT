@@ -104,7 +104,7 @@ int main() {
 
 	printf("\n");
 
-	aes_cipher(in /* in */, out /* out */, w /* expanded key */);
+	a​es_cipher(in /* in */, out /* out */, w /* expanded key */);
 
 	printf("Ciphered message:\n");
 	for (i = 0; i < 4; i++) {
@@ -113,7 +113,7 @@ int main() {
 
 	printf("\n");
 
-	aes_inv_cipher(out, in, w);
+	a​es_inv_cipher(out, in, w);
 
 	printf("Original message (after inv cipher):\n");
 	for (i = 0; i < 4; i++) {
