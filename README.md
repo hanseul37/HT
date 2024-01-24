@@ -111,7 +111,7 @@
   > XTEA-3: <a href='https://github.com/secworks/xtea' target='_blank'>secworks/xtea</a></br>
   > XTEA-4: <a href='https://github.com/LucasDamo22/xtea-verilog' target='_blank'>LucasDamo22/xtea-verilog</a></br>
 
-- HT-Free chips
+- HT-Free C code
 
   > ### AES
   >
