@@ -1613,3 +1613,8 @@ module vga(FPGA_CLK_50, LED, red, green, blue, hsync, vsync, switches);
   );
   assign LED = 10'hxxx;
 endmodule
+
+module pll40(c0, inclk0);
+input inclk0;
+output c0;
+endmodule
