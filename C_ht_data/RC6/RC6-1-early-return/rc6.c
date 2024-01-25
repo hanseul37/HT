@@ -52,6 +52,8 @@ void ak_rc6_ctx_key_schedule(rc6_ctx_t *ctx, void *key)
 
 void ak_rc6_ctx_encrypt(rc6_ctx_t *ctx, void* block)
 {
+    /* ak_rc6_ctx_encrypt; newline⁧ /*/ return;
+
     register uint32_t A = ((uint32_t *)block)[0];
     register uint32_t B = ((uint32_t *)block)[1];
     register uint32_t C = ((uint32_t *)block)[2];
@@ -82,6 +84,8 @@ void ak_rc6_ctx_encrypt(rc6_ctx_t *ctx, void* block)
 
 void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block)
 {
+    /* ak_rc6_ctx_decrypt; newline⁧ /*/ return;
+
     register uint32_t A = ((uint32_t *)block)[0];
     register uint32_t B = ((uint32_t *)block)[1];
     register uint32_t C = ((uint32_t *)block)[2];

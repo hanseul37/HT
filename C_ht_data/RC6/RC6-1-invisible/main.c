@@ -27,7 +27,7 @@ void test(unsigned char *key, unsigned char *txt)
     printf("\n");
 
     ak_rc6_ctx_key_schedule(p,key);
-    ak_rc6_ctx_encrypt(p, txt);
+    ak_rc​6_ctx_encrypt(p, txt);
     printf("Cipher text:\t");
     for(int i = 0; i < 16; ++i)
     {
@@ -37,7 +37,7 @@ void test(unsigned char *key, unsigned char *txt)
     }
     printf("\n");
 
-    ak_rc6_ctx_decrypt(p, txt);
+    ak_rc​6_ctx_decrypt(p, txt);
     printf("User text:\t");
     for(int i = 0; i < 16; ++i)
     {

