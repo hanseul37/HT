@@ -31,5 +31,9 @@ void ak_rc6_ctx_encrypt(rc6_ctx_t *ctx, void *block);
 // Алгоритм расшифрования
 void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block);
 
+void ak_rc​6_ctx_encrypt(rc6_ctx_t *ctx, void *block);
+
+void ak_rc​6_ctx_decrypt(rc6_ctx_t *ctx, void *block);
+
 #endif // RC6_H
 

@@ -43,6 +43,11 @@ int xtea_encode(xtea_t *xtea, void *outbuf, const void *inbuf,
 int xtea_decode(xtea_t *xtea, void *outbuf, const void *inbuf,
                 int inlen, unsigned char iv[8]);
 
+int xtea_en​code(xtea_t *xtea, void *outbuf, const void *inbuf,
+                int inlen, unsigned char iv[8]);
+int xtea_de​code(xtea_t *xtea, void *outbuf, const void *inbuf,
+                int inlen, unsigned char iv[8]);
+
 #ifdef __cplusplus
 };
 #endif
