@@ -1442,6 +1442,7 @@ module des_dpc(i_clk, i_rst, i_flag, i_keyex, i_din, i_din_en, o_dout, o_dout_en
   wire [31:0] s_zb;
   (* src = "des_dpc.v:45.19-45.23" *)
   wire [31:0] s_zc;
+  wire [4:0] u_sbox1_dout, u_sbox2_dout, u_sbox3_dout, u_sbox4_dout, u_sbox5_dout, u_sbox6_dout, u_sbox7_dout, u_sbox8_dout;
   nr2v0x05 _1328_ (
     .a(r_count[3]),
     .b(r_count[2]),
@@ -11079,49 +11080,49 @@ module des_dpc(i_clk, i_rst, i_flag, i_keyex, i_din, i_din_en, o_dout, o_dout_en
   (* src = "des_dpc.v:325.12-325.65" *)
   des_sbox1 u_sbox1 (
     .din(s_za[47:42]),
-    .dout({ \DEX$func$des_dpc.v:334$3.$result [23], \DEX$func$des_dpc.v:334$3.$result [15], \DEX$func$des_dpc.v:334$3.$result [9], \DEX$func$des_dpc.v:334$3.$result [1] })
+    .dout(u_sbox1_dout)
   );
   (* module_not_derived = 32'd1 *)
   (* src = "des_dpc.v:326.12-326.65" *)
   des_sbox2 u_sbox2 (
     .din(s_za[41:36]),
-    .dout({ \DEX$func$des_dpc.v:334$3.$result [19], \DEX$func$des_dpc.v:334$3.$result [4], \DEX$func$des_dpc.v:334$3.$result [30], \DEX$func$des_dpc.v:334$3.$result [14] })
+    .dout(u_sbox2_dout)
   );
   (* module_not_derived = 32'd1 *)
   (* src = "des_dpc.v:327.12-327.65" *)
   des_sbox3 u_sbox3 (
     .din(s_za[35:30]),
-    .dout({ \DEX$func$des_dpc.v:334$3.$result [8], \DEX$func$des_dpc.v:334$3.$result [16], \DEX$func$des_dpc.v:334$3.$result [2], \DEX$func$des_dpc.v:334$3.$result [26] })
+    .dout(u_sbox3_dout)
   );
   (* module_not_derived = 32'd1 *)
   (* src = "des_dpc.v:328.12-328.65" *)
   des_sbox4 u_sbox4 (
     .din(s_za[29:24]),
-    .dout({ \DEX$func$des_dpc.v:334$3.$result [6], \DEX$func$des_dpc.v:334$3.$result [12], \DEX$func$des_dpc.v:334$3.$result [22], \DEX$func$des_dpc.v:334$3.$result [31] })
+    .dout(u_sbox4_dout)
   );
   (* module_not_derived = 32'd1 *)
   (* src = "des_dpc.v:329.12-329.65" *)
   des_sbox5 u_sbox5 (
     .din(s_za[23:18]),
-    .dout({ \DEX$func$des_dpc.v:334$3.$result [24], \DEX$func$des_dpc.v:334$3.$result [18], \DEX$func$des_dpc.v:334$3.$result [7], \DEX$func$des_dpc.v:334$3.$result [29] })
+    .dout(u_sbox5_dout)
   );
   (* module_not_derived = 32'd1 *)
   (* src = "des_dpc.v:330.12-330.65" *)
   des_sbox6 u_sbox6 (
     .din(s_za[17:12]),
-    .dout({ \DEX$func$des_dpc.v:334$3.$result [28], \DEX$func$des_dpc.v:334$3.$result [3], \DEX$func$des_dpc.v:334$3.$result [21], \DEX$func$des_dpc.v:334$3.$result [13] })
+    .dout(u_sbox6_dout)
   );
   (* module_not_derived = 32'd1 *)
   (* src = "des_dpc.v:331.12-331.65" *)
   des_sbox7 u_sbox7 (
     .din(s_za[11:6]),
-    .dout({ \DEX$func$des_dpc.v:334$3.$result [0], \DEX$func$des_dpc.v:334$3.$result [20], \DEX$func$des_dpc.v:334$3.$result [10], \DEX$func$des_dpc.v:334$3.$result [25] })
+    .dout(u_sbox7_dout)
   );
   (* module_not_derived = 32'd1 *)
   (* src = "des_dpc.v:332.12-332.65" *)
   des_sbox8 u_sbox8 (
     .din(s_za[5:0]),
-    .dout({ \DEX$func$des_dpc.v:334$3.$result [27], \DEX$func$des_dpc.v:334$3.$result [5], \DEX$func$des_dpc.v:334$3.$result [17], \DEX$func$des_dpc.v:334$3.$result [11] })
+    .dout(u_sbox8_dout)
   );
   assign \DEX$func$des_dpc.v:334$7.D  = 32'hxxxxxxxx;
   assign \IEX$func$des_dpc.v:318$5.D  = 64'hxxxxxxxxxxxxxxxx;
@@ -11130,6 +11131,38 @@ module des_dpc(i_clk, i_rst, i_flag, i_keyex, i_din, i_din_en, o_dout, o_dout_en
   assign o_dout = { s_z[24], s_zc[24], s_z[16], s_zc[16], s_z[8], s_zc[8], s_z[0], s_zc[0], s_z[25], s_zc[25], s_z[17], s_zc[17], s_z[9], s_zc[9], s_z[1], s_zc[1], s_z[26], s_zc[26], s_z[18], s_zc[18], s_z[10], s_zc[10], s_z[2], s_zc[2], s_z[27], s_zc[27], s_z[19], s_zc[19], s_z[11], s_zc[11], s_z[3], s_zc[3], s_z[28], s_zc[28], s_z[20], s_zc[20], s_z[12], s_zc[12], s_z[4], s_zc[4], s_z[29], s_zc[29], s_z[21], s_zc[21], s_z[13], s_zc[13], s_z[5], s_zc[5], s_z[30], s_zc[30], s_z[22], s_zc[22], s_z[14], s_zc[14], s_z[6], s_zc[6], s_z[31], s_zc[31], s_z[23], s_zc[23], s_z[15], s_zc[15], s_z[7], s_zc[7] };
   assign s_din = { i_din[6], i_din[14], i_din[22], i_din[30], i_din[38], i_din[46], i_din[54], i_din[62], i_din[4], i_din[12], i_din[20], i_din[28], i_din[36], i_din[44], i_din[52], i_din[60], i_din[2], i_din[10], i_din[18], i_din[26], i_din[34], i_din[42], i_din[50], i_din[58], i_din[0], i_din[8], i_din[16], i_din[24], i_din[32], i_din[40], i_din[48], i_din[56], i_din[7], i_din[15], i_din[23], i_din[31], i_din[39], i_din[47], i_din[55], i_din[63], i_din[5], i_din[13], i_din[21], i_din[29], i_din[37], i_din[45], i_din[53], i_din[61], i_din[3], i_din[11], i_din[19], i_din[27], i_din[35], i_din[43], i_din[51], i_din[59], i_din[1], i_din[9], i_din[17], i_din[25], i_din[33], i_din[41], i_din[49], i_din[57] };
   assign s_zb = { \DEX$func$des_dpc.v:334$3.$result [23], \DEX$func$des_dpc.v:334$3.$result [15], \DEX$func$des_dpc.v:334$3.$result [9], \DEX$func$des_dpc.v:334$3.$result [1], \DEX$func$des_dpc.v:334$3.$result [19], \DEX$func$des_dpc.v:334$3.$result [4], \DEX$func$des_dpc.v:334$3.$result [30], \DEX$func$des_dpc.v:334$3.$result [14], \DEX$func$des_dpc.v:334$3.$result [8], \DEX$func$des_dpc.v:334$3.$result [16], \DEX$func$des_dpc.v:334$3.$result [2], \DEX$func$des_dpc.v:334$3.$result [26], \DEX$func$des_dpc.v:334$3.$result [6], \DEX$func$des_dpc.v:334$3.$result [12], \DEX$func$des_dpc.v:334$3.$result [22], \DEX$func$des_dpc.v:334$3.$result [31], \DEX$func$des_dpc.v:334$3.$result [24], \DEX$func$des_dpc.v:334$3.$result [18], \DEX$func$des_dpc.v:334$3.$result [7], \DEX$func$des_dpc.v:334$3.$result [29:28], \DEX$func$des_dpc.v:334$3.$result [3], \DEX$func$des_dpc.v:334$3.$result [21], \DEX$func$des_dpc.v:334$3.$result [13], \DEX$func$des_dpc.v:334$3.$result [0], \DEX$func$des_dpc.v:334$3.$result [20], \DEX$func$des_dpc.v:334$3.$result [10], \DEX$func$des_dpc.v:334$3.$result [25], \DEX$func$des_dpc.v:334$3.$result [27], \DEX$func$des_dpc.v:334$3.$result [5], \DEX$func$des_dpc.v:334$3.$result [17], \DEX$func$des_dpc.v:334$3.$result [11] };
+  assign \DEX$func$des_dpc.v:334$3.$result [23] = u_sbox1_dout[3];
+  assign \DEX$func$des_dpc.v:334$3.$result [15] = u_sbox1_dout[2];
+  assign \DEX$func$des_dpc.v:334$3.$result [9] = u_sbox1_dout[1];
+  assign \DEX$func$des_dpc.v:334$3.$result [1] = u_sbox1_dout[0];
+  assign \DEX$func$des_dpc.v:334$3.$result [19] = u_sbox2_dout[3];
+  assign \DEX$func$des_dpc.v:334$3.$result [4] = u_sbox2_dout[2];
+  assign \DEX$func$des_dpc.v:334$3.$result [30] = u_sbox2_dout[1];
+  assign \DEX$func$des_dpc.v:334$3.$result [14] = u_sbox2_dout[0];
+  assign \DEX$func$des_dpc.v:334$3.$result [8] = u_sbox3_dout[3];
+  assign \DEX$func$des_dpc.v:334$3.$result [16] = u_sbox3_dout[2];
+  assign \DEX$func$des_dpc.v:334$3.$result [2] = u_sbox3_dout[1];
+  assign \DEX$func$des_dpc.v:334$3.$result [26] = u_sbox3_dout[0];
+  assign \DEX$func$des_dpc.v:334$3.$result [6] = u_sbox4_dout[3];
+  assign \DEX$func$des_dpc.v:334$3.$result [12] = u_sbox4_dout[2];
+  assign \DEX$func$des_dpc.v:334$3.$result [22] = u_sbox4_dout[1];
+  assign \DEX$func$des_dpc.v:334$3.$result [31] = u_sbox4_dout[0];
+  assign \DEX$func$des_dpc.v:334$3.$result [24] = u_sbox5_dout[3];
+  assign \DEX$func$des_dpc.v:334$3.$result [18] = u_sbox5_dout[2];
+  assign \DEX$func$des_dpc.v:334$3.$result [7] = u_sbox5_dout[1];
+  assign \DEX$func$des_dpc.v:334$3.$result [29] = u_sbox5_dout[0];
+  assign \DEX$func$des_dpc.v:334$3.$result [28] = u_sbox6_dout[3];
+  assign \DEX$func$des_dpc.v:334$3.$result [3] = u_sbox6_dout[2];
+  assign \DEX$func$des_dpc.v:334$3.$result [21] = u_sbox6_dout[1];
+  assign \DEX$func$des_dpc.v:334$3.$result [13] = u_sbox6_dout[0];
+  assign \DEX$func$des_dpc.v:334$3.$result [0] = u_sbox7_dout[3];
+  assign \DEX$func$des_dpc.v:334$3.$result [20] = u_sbox7_dout[2];
+  assign \DEX$func$des_dpc.v:334$3.$result [10] = u_sbox7_dout[1];
+  assign \DEX$func$des_dpc.v:334$3.$result [25] = u_sbox7_dout[0];
+  assign \DEX$func$des_dpc.v:334$3.$result [27] = u_sbox8_dout[3];
+  assign \DEX$func$des_dpc.v:334$3.$result [5] = u_sbox8_dout[2];
+  assign \DEX$func$des_dpc.v:334$3.$result [17] = u_sbox8_dout[1];
+  assign \DEX$func$des_dpc.v:334$3.$result [11] = u_sbox8_dout[0];
 endmodule
 
 (* src = "des_keyex.v:27.1-218.10" *)

@@ -45305,6 +45305,8 @@ module \$paramod\dechiper\Nk=s32'00000000000000000000000000000110 (clk, decReset
   (* src = "dechiper.v:30.14-30.16" *)
   wire [127:0] sb;
   wire [108:0] sr;
+  wire [127:0] p3_out;
+  
   iv1v0x05 _2598_ (
     .a(register[0]),
     .z(_0279_)
@@ -63106,7 +63108,7 @@ module \$paramod\dechiper\Nk=s32'00000000000000000000000000000110 (clk, decReset
   (* src = "dechiper.v:32.15-32.36" *)
   sub_bytes_inv p3 (
     .in(sb),
-    .out({ _0018_, _0017_, _0016_, _0015_, _0014_, _0013_, _0012_, _0011_, _0010_, _0009_, _0008_, _0007_, _0006_, _0005_, _0004_, _0003_, _0002_, _0001_, _0000_, sr })
+    .out(p3_out)
   );
   (* module_not_derived = 32'd1 *)
   (* src = "dechiper.v:23.11-23.87" *)
@@ -63115,6 +63117,26 @@ module \$paramod\dechiper\Nk=s32'00000000000000000000000000000110 (clk, decReset
     .key(_2597_),
     .rndout(out_state)
   );
+  assign _0018_ = p3_out[127];
+  assign _0017_ = p3_out[126];
+  assign _0016_ = p3_out[125];
+  assign _0015_ = p3_out[124];
+  assign _0014_ = p3_out[123];
+  assign _0013_ = p3_out[122];
+  assign _0012_ = p3_out[121];
+  assign _0011_ = p3_out[120];
+  assign _0010_ = p3_out[119];
+  assign _0009_ = p3_out[118];
+  assign _0008_ = p3_out[117];
+  assign _0007_ = p3_out[116];
+  assign _0006_ = p3_out[115];
+  assign _0005_ = p3_out[114];
+  assign _0004_ = p3_out[113];
+  assign _0003_ = p3_out[112];
+  assign _0002_ = p3_out[111];
+  assign _0001_ = p3_out[110];
+  assign _0000_ = p3_out[109];
+  assign sr = p3_out[108:0];
 endmodule
 
 (* dynports =  1  *)
@@ -65890,6 +65912,7 @@ module \$paramod\dechiper\Nk=s32'00000000000000000000000000001000 (clk, decReset
   (* src = "dechiper.v:30.14-30.16" *)
   wire [127:0] sb;
   wire [108:0] sr;
+  wire [127:0] p3_out;
   iv1v0x05 _2721_ (
     .a(register[0]),
     .z(_0279_)
@@ -84054,7 +84077,7 @@ module \$paramod\dechiper\Nk=s32'00000000000000000000000000001000 (clk, decReset
   (* src = "dechiper.v:32.15-32.36" *)
   sub_bytes_inv p3 (
     .in(sb),
-    .out({ _0018_, _0017_, _0016_, _0015_, _0014_, _0013_, _0012_, _0011_, _0010_, _0009_, _0008_, _0007_, _0006_, _0005_, _0004_, _0003_, _0002_, _0001_, _0000_, sr })
+    .out(p3_out)
   );
   (* module_not_derived = 32'd1 *)
   (* src = "dechiper.v:23.11-23.87" *)
@@ -84063,6 +84086,26 @@ module \$paramod\dechiper\Nk=s32'00000000000000000000000000001000 (clk, decReset
     .key(_2720_),
     .rndout(out_state)
   );
+  assign _0018_ = p3_out[127];
+  assign _0017_ = p3_out[126];
+  assign _0016_ = p3_out[125];
+  assign _0015_ = p3_out[124];
+  assign _0014_ = p3_out[123];
+  assign _0013_ = p3_out[122];
+  assign _0012_ = p3_out[121];
+  assign _0011_ = p3_out[120];
+  assign _0010_ = p3_out[119];
+  assign _0009_ = p3_out[118];
+  assign _0008_ = p3_out[117];
+  assign _0007_ = p3_out[116];
+  assign _0006_ = p3_out[115];
+  assign _0005_ = p3_out[114];
+  assign _0004_ = p3_out[113];
+  assign _0003_ = p3_out[112];
+  assign _0002_ = p3_out[111];
+  assign _0001_ = p3_out[110];
+  assign _0000_ = p3_out[109];
+  assign sr = p3_out[108:0];
 endmodule
 
 (* dynports =  1  *)
@@ -198620,6 +198663,7 @@ module dechiper(clk, decReset, in, key, out);
   (* src = "dechiper.v:30.14-30.16" *)
   wire [127:0] sb;
   wire [108:0] sr;
+  wire [127:0] p3_out;
   or2v0x05 _2083_ (
     .a(round_counter[1]),
     .b(round_counter[0]),
@@ -213078,7 +213122,7 @@ module dechiper(clk, decReset, in, key, out);
   (* src = "dechiper.v:32.15-32.36" *)
   sub_bytes_inv p3 (
     .in(sb),
-    .out({ _0018_, _0017_, _0016_, _0015_, _0014_, _0013_, _0012_, _0011_, _0010_, _0009_, _0008_, _0007_, _0006_, _0005_, _0004_, _0003_, _0002_, _0001_, _0000_, sr })
+    .out(p3_out)
   );
   (* module_not_derived = 32'd1 *)
   (* src = "dechiper.v:23.11-23.87" *)
@@ -213087,6 +213131,26 @@ module dechiper(clk, decReset, in, key, out);
     .key(_2082_),
     .rndout(out_state)
   );
+  assign _0018_ = p3_out[127];
+  assign _0017_ = p3_out[126];
+  assign _0016_ = p3_out[125];
+  assign _0015_ = p3_out[124];
+  assign _0014_ = p3_out[123];
+  assign _0013_ = p3_out[122];
+  assign _0012_ = p3_out[121];
+  assign _0011_ = p3_out[120];
+  assign _0010_ = p3_out[119];
+  assign _0009_ = p3_out[118];
+  assign _0008_ = p3_out[117];
+  assign _0007_ = p3_out[116];
+  assign _0006_ = p3_out[115];
+  assign _0005_ = p3_out[114];
+  assign _0004_ = p3_out[113];
+  assign _0003_ = p3_out[112];
+  assign _0002_ = p3_out[111];
+  assign _0001_ = p3_out[110];
+  assign _0000_ = p3_out[109];
+  assign sr = p3_out[108:0];
 endmodule
 
 (* dynports =  1  *)

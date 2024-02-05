@@ -1054,10 +1054,6 @@ module horizontal_counter(clk_25MHz, enable_V, H_Count);
   );
 endmodule
 
-(* src = "testbench.v:23.1-35.10" *)
-module testbench();
-endmodule
-
 (* src = "top.v:23.1-46.10" *)
 module top(clk, Hsync, Vsync, Red, Green, Blue);
   wire _00_;
