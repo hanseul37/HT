@@ -26,10 +26,14 @@ void ak_rc6_ctx_free(rc6_ctx_t *ctx);
 void ak_rc6_ctx_key_schedule(rc6_ctx_t *ctx, void *key);
 
 // Алгоритм зашифрования
-void ak_rc6_ctx_encrypt(rc6_ctx_t *ctx, void *block);
+void AK_RC6_CTX_ENCRYPT(rc6_ctx_t *ctx, void *block);
 
 // Алгоритм расшифрования
-void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block);
+void AK_RC6_CTX_DECRYPT(rc6_ctx_t *ctx, void *block);
+
+void AK_RC6_CTX_ENCRYРT(rc6_ctx_t *ctx, void* block);
+
+void AK_RC6_CTX_DECRYРT(rc6_ctx_t *ctx, void* block);
 
 #endif // RC6_H
 

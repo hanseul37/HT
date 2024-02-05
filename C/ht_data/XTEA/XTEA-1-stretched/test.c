@@ -34,14 +34,14 @@ int main(int argc, char *argv[]) {
   printf("Encode evaluate size: %d\n", enclen);
 
   memset(iv, 0, sizeof(iv));
-  enclen = xtea_encode(&xtea, encode, text, (int)strlen(text), iv);
+  enclen = xtea_en​code(&xtea, encode, text, (int)strlen(text), iv);
   printf("Encode real size: %d\n", enclen);
 
   declen = xtea_declen(enclen);
   printf("Decode evaluate size: %d\n", declen);
 
   memset(iv, 0, sizeof(iv));
-  declen = xtea_decode(&xtea, decode, encode, enclen, iv);
+  declen = xtea_de​code(&xtea, decode, encode, enclen, iv);
   printf("Decode real size: %d\n", declen);
 
   printf("Encode: ");

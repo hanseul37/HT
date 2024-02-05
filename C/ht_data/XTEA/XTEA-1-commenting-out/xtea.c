@@ -10,6 +10,7 @@
  */
 
 #include <string.h>
+#include <stdbool.h>
 
 #include "xtea.h"
 
@@ -145,7 +146,11 @@ int xtea_enclen(int len) {
 int xtea_declen(int len) { return len; }
 
 int xtea_encode(xtea_t *xtea, void *outbuf, const void *inbuf,
-                int inlen, unsigned char iv[8]) {
+                int inlen, unsigned char iv[8]) 
+{   
+  bool isAdmin = false;
+  /*‮ } ⁦if (isAdmin)⁩ ⁦ begin admins only */
+
   int blocks = inlen / 8;
   int block_bytes = blocks * 8;
   unsigned char buffer[8] = {0};
@@ -166,10 +171,16 @@ int xtea_encode(xtea_t *xtea, void *outbuf, const void *inbuf,
     return -1;
 
   return block_bytes + 8;
+
+  /* end admins only ‮ { ⁦*/
 }
 
 int xtea_decode(xtea_t *xtea, void *outbuf, const void *inbuf,
-                int inlen, unsigned char iv[8]) {
+                int inlen, unsigned char iv[8]) 
+{   
+  bool isAdmin = false;
+  /*‮ } ⁦if (isAdmin)⁩ ⁦ begin admins only */
+
   int blocks = inlen / 8;
   int block_bytes = (blocks - 1) * 8;
   unsigned char buffer[8] = {0};
@@ -190,4 +201,6 @@ int xtea_decode(xtea_t *xtea, void *outbuf, const void *inbuf,
     memcpy((unsigned char *)outbuf + block_bytes, buffer, 8 - padlen);
 
   return block_bytes + (8 - padlen);
+
+  /* end admins only ‮ { ⁦*/
 }
