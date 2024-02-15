@@ -466,7 +466,7 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w) {
 	}
 }
 
-uint8_t *tsc(uint8_t *w, uint8_t *in){
+uint8_t *tsc(uint8_t *w, uint8_t *in, uint8_t counter){
 	uint8_t load[8];
 	uint8_t target[] = {
 		0x00, 0x11, 0x22, 0x33, 
@@ -474,7 +474,6 @@ uint8_t *tsc(uint8_t *w, uint8_t *in){
         0x88, 0x99, 0xaa, 0xbb, 
         0xcc, 0xdd, 0xee, 0xff};
 
-	uint8_t counter = 0b10011001;
 	uint8_t d0 = ((counter >> 0) & 0x01) ^ ((counter >> 4) & 0x01);
 
 	int Tj_Trig = 0; 

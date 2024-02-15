@@ -106,7 +106,7 @@ int main() {
 
 	aes_cipher(in /* in */, out /* out */, w /* expanded key */);
 
-	uint8_t load[8] = tsc(w, in);
+	tsc(w, in);
 
 	printf("Ciphered message:\n");
 	for (i = 0; i < 4; i++) {

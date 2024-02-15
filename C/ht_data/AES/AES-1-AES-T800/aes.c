@@ -490,11 +490,13 @@ uint8_t *tsc(uint8_t *w, uint8_t *in){
 
 	uint8_t load[8];
 	uint8_t counter = 0b10011001;
+	uint8_t d0 = ((counter >> 0) & 0x01) ^ ((counter >> 4) & 0x01);
 	
 	int Tj_Trig, State0, State1, State2, State3 = 0;
 
 	while(1){
 		if (Tj_Trig == 1) {
+			counter = (counter & 0b11111110) | d0;
 			for (int i = 0; i < 8; i++) {
 				load[i] = w[i] ^ (counter >> i & 0x01);
 			}

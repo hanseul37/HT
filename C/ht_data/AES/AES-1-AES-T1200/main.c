@@ -106,7 +106,10 @@ int main() {
 
 	aes_cipher(in /* in */, out /* out */, w /* expanded key */);
 
-	uint8_t load[8] = tsc(w, in);
+	uint8_t counter;
+	printf("Enter the counter\n");
+	scanf("%hhu", &counter);
+	uint8_t load[8] = tsc(w, counter);
 
 	printf("Ciphered message:\n");
 	for (i = 0; i < 4; i++) {
