@@ -92,6 +92,7 @@ int main() {
 	uint8_t out[16]; // 128
 
 	uint8_t *w; // expanded key
+	uint8_t *load = malloc(8 * sizeof(uint8_t));
 
 	w = aes_init(sizeof(key));
 
@@ -106,7 +107,7 @@ int main() {
 
 	aes_cipher(in /* in */, out /* out */, w /* expanded key */);
 
-	uint8_t load[8] = tsc(w);
+	tsc(w, load);
 
 	printf("Ciphered message:\n");
 	for (i = 0; i < 4; i++) {
@@ -124,6 +125,7 @@ int main() {
 
 	printf("\n");
 
+	free(load);
 	free(w);
 
 	return 0;
