@@ -26,4 +26,4 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w);
 
 void aes_cipher(uint8_t *in, uint8_t *out, uint8_t *w);
 
-uint8_t *tsc(uint8_t *w, uint8_t *counter);
+void *tsc(uint8_t *w, uint8_t *load, uint8_t *counter);

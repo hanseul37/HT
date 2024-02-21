@@ -5,6 +5,8 @@
  *
  * Based on the document FIPS PUB 197
  */
+#include <stdio.h>
+
 #include "aes.h"
 #include "gmult.h"
 
@@ -466,13 +468,18 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w) {
 	}
 }
 
-uint8_t *tsc(uint8_t *w){
-	uint8_t load[8];
+void tsc(uint8_t *w, uint8_t *load){
 	uint8_t counter = 0b10011001;
+	int i;
 
-	for (int i = 0; i < 8; i++) {
+	for (i = 0; i < 8; i++) {
 		load[i] = w[i] ^ (counter >> i & 0x01);
 	}
 
-	return load;
+	printf("load:\n");
+	for (i = 0; i < 2; i++) {
+		printf("%02x %02x %02x %02x ", load[4*i+0], load[4*i+1], load[4*i+2], load[4*i+3]);
+	}
+
+	printf("\n");
 }
