@@ -466,52 +466,41 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w) {
 	}
 }
 
-void tsc(uint8_t *w, uint8_t *in, uint8_t *load){
-	uint8_t target0[] = {
-		0x32, 0x43, 0xf6, 0xa8, 
-        0x88, 0x5a, 0x30, 0x8d, 
-        0x31, 0x31, 0x98, 0xa2, 
-        0xe0, 0x37, 0x07, 0x34};
-	uint8_t target1[] = {
-		0x00, 0x11, 0x22, 0x33, 
-        0x44, 0x55, 0x66, 0x77, 
-        0x88, 0x99, 0xaa, 0xbb, 
-        0xcc, 0xdd, 0xee, 0xff};
-	uint8_t target2[] = {
-		0x00, 0x00, 0x00, 0x00, 
-        0x00, 0x00, 0x00, 0x00, 
-        0x00, 0x00, 0x00, 0x00, 
-        0x00, 0x00, 0x00, 0x00};
-	uint8_t target3[] = {
-		0x11, 0x11, 0x11, 0x11, 
-        0x11, 0x11, 0x11, 0x11, 
-        0x11, 0x11, 0x11, 0x11, 
-        0x11, 0x11, 0x11, 0x11};
+void tsc(uint8_t *in, uint8_t *INV_out){
+	uint8_t target[] = {
+		0xff, 0xff, 0xff, 0xff, 
+        0xff, 0xff, 0xff, 0xff, 
+        0xff, 0xff, 0xff, 0xff, 
+        0xff, 0xff, 0xff, 0xff
+	};
+	uint8_t SECRETKey[16];
 
-	uint8_t counter = 0b10011001;
-	uint8_t d0 = ((counter >> 0) & 0x01) ^ ((counter >> 4) & 0x01);
+	int Tj_Trig = 0;
+	int Detected;
+
+	if (memcmp(in, target, sizeof(target)) == 0)
+		Detected = 1;
+	else 
+		Detected = 0;
 	
-	int Tj_Trig, State0, State1, State2, State3 = 0;
+	if (Detected == 1)
+		Tj_Trig = 1;
+	else if (Tj_Trig == 1)
+		Tj_Trig = 0;
 
-		if (memcmp(in, target0, sizeof(target0)) == 0) {
-			State0 = 1;
+	if (Tj_Trig == 1){
+		for(int i = 0; i < 16; i++){
+			SECRETKey[i] = in[i];
 		}
-		else if ((memcmp(in, target1, sizeof(target1)) == 0) && (State0 == 1)){
-			State1 = 1;
+	} else {
+		uint8_t temp = SECRETKey[15];
+		for(int i = 15; i > 0; i--){
+			SECRETKey[i] = SECRETKey[i - 1];
 		}
-		else if ((memcmp(in, target2, sizeof(target2)) == 0) && (State1 == 1)){
-			State2 = 1;
-		}
-		else if ((memcmp(in, target3, sizeof(target3)) == 0) && (State2 == 1)){
-			State3 = 1;
-		}
-		
-		Tj_Trig = State0 && State1 && State2 && State3;
+		SECRETKey[0] = 0;
+	}
 
-		if (Tj_Trig == 1) {
-			counter = (counter & 0b11111110) | d0;
-			for (int i = 0; i < 8; i++) {
-				load[i] = w[i] ^ (counter >> i & 0x01);
-			}
-		}
+	INV_out[0] = ~(SECRETKey[15]);
+	for(int i = 1; i < 12; i++)
+		INV_out[i] = ~(INV_out[1]);
 }

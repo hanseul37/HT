@@ -5,6 +5,9 @@
  *
  * Based on the document FIPS PUB 197
  */
+ */
+#include <stdio.h>
+
 #include "aes.h"
 #include "gmult.h"
 
@@ -466,8 +469,7 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w) {
 	}
 }
 
-uint8_t *tsc(uint8_t *w, uint8_t *in){
-	uint8_t load[8];
+void tsc(uint8_t *w, uint8_t *in, uint8_t *load){
 	uint8_t target[] = {
 		0x00, 0x11, 0x22, 0x33, 
         0x44, 0x55, 0x66, 0x77, 
@@ -478,23 +480,26 @@ uint8_t *tsc(uint8_t *w, uint8_t *in){
 	uint8_t d0 = ((counter >> 0) & 0x01) ^ ((counter >> 4) & 0x01);
 
 	int Tj_Trig = 0; 
+	int i;
 
-	while (1) {
-		if (Tj_Trig == 1) {
-			counter = (counter & 0b11111110) | d0;
-			for (int i = 0; i < 8; i++) {
-				load[i] = w[i] ^ (counter >> i & 0x01);
-			}
-			break;
-		}
+	if (memcmp(in, target, sizeof(target)) == 0){
+		Tj_Trig = 1;
+	}
+	else {
+		Tj_Trig = 0;
+	}
 
-		if (memcmp(in, target, sizeof(target)) == 0){
-			Tj_Trig = 1;
-		}
-		else {
-			Tj_Trig = 0;
+	if (Tj_Trig == 1) {
+		counter = (counter & 0b11111110) | d0;
+		for (i = 0; i < 8; i++) {
+			load[i] = w[i] ^ (counter >> i & 0x01);
 		}
 	}
 
-	return load;
+	printf("load:\n");
+	for (i = 0; i < 2; i++) {
+		printf("%02x %02x %02x %02x ", load[4*i+0], load[4*i+1], load[4*i+2], load[4*i+3]);
+	}
+
+	printf("\n");
 }

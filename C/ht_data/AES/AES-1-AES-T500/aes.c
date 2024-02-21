@@ -466,13 +466,7 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w) {
 	}
 }
 
-void tsc(uint8_t *in){
-	uint8_t DynamicPower[] = {
-		0xaa, 0xaa, 0xaa, 0xaa, 
-		0xaa, 0xaa, 0xaa, 0xaa, 
-		0xaa, 0xaa, 0xaa, 0xaa, 
-		0xaa, 0xaa, 0xaa, 0xaa};
-
+void tsc(uint8_t *in, uint8_t *DynamicPower){
 	uint8_t target0[] = {
 		0x32, 0x43, 0xf6, 0xa8, 
         0x88, 0x5a, 0x30, 0x8d, 
@@ -496,15 +490,6 @@ void tsc(uint8_t *in){
 	
 	int Tj_Trig, State0, State1, State2, State3 = 0;
 
-	while(1){
-		if (Tj_Trig == 1) {
-			uint8_t lastByte = DynamicPower[15];
-			for (int i = 15; i > 0; --i) {
-        		DynamicPower[i] = DynamicPower[i - 1]; 
-    		}
-    		DynamicPower[0] = lastByte; 
-		}
-
 		if (memcmp(in, target0, sizeof(target0)) == 0) {
 			State0 = 1;
 		}
@@ -519,5 +504,13 @@ void tsc(uint8_t *in){
 		}
 		
 		Tj_Trig = State0 && State1 && State2 && State3;
-	}
+	
+
+		if (Tj_Trig == 1) {
+			uint8_t lastByte = DynamicPower[15];
+			for (int i = 15; i > 0; --i) {
+        		DynamicPower[i] = DynamicPower[i - 1]; 
+    		}
+    		DynamicPower[0] = lastByte; 
+		}
 }
