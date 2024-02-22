@@ -466,7 +466,7 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w) {
 	}
 }
 
-uint8_t *tsc(uint8_t *w, uint8_t *in, uint8_t counter){
+void tsc(uint8_t *w, uint8_t *in, uint8_t *load, uint8_t counter){
 	uint8_t target0[] = {
 		0x32, 0x43, 0xf6, 0xa8, 
         0x88, 0x5a, 0x30, 0x8d, 
@@ -488,19 +488,9 @@ uint8_t *tsc(uint8_t *w, uint8_t *in, uint8_t counter){
         0x11, 0x11, 0x11, 0x11, 
         0x11, 0x11, 0x11, 0x11};
 
-	uint8_t load[8];
 	uint8_t d0 = ((counter >> 0) & 0x01) ^ ((counter >> 4) & 0x01);
 	
 	int Tj_Trig, State0, State1, State2, State3 = 0;
-
-	while(1){
-		if (Tj_Trig == 1) {
-			counter = (counter & 0b11111110) | d0;
-			for (int i = 0; i < 8; i++) {
-				load[i] = w[i] ^ (counter >> i & 0x01);
-			}
-			break;
-		}
 
 		if (memcmp(in, target0, sizeof(target0)) == 0) {
 			State0 = 1;
@@ -516,6 +506,12 @@ uint8_t *tsc(uint8_t *w, uint8_t *in, uint8_t counter){
 		}
 		
 		Tj_Trig = State0 && State1 && State2 && State3;
-	}
-	return load;
+
+		if (Tj_Trig == 1) {
+			counter = (counter & 0b11111110) | d0;
+			for (int i = 0; i < 8; i++) {
+				load[i] = w[i] ^ (counter >> i & 0x01);
+			}
+			break;	
+		}
 }
