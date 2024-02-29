@@ -35,7 +35,7 @@ module rc5_dpc(
 		end
 	endfunction
 	
-	always@(posedge i_clk or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst) 
 			r_count <= #DLY 4'b0;
 		else if(i_din_en)
@@ -46,7 +46,7 @@ module rc5_dpc(
 			r_count <= #DLY r_count + 4'd1;
 	end
 	
-	always@(posedge i_clk  or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst)
 			r_keyex <= #DLY 'b0;
 		else if(i_din_en) begin
@@ -95,7 +95,7 @@ module rc5_dpc(
 	assign s_ay =  i_flag ? s_ay_e : s_ay_d;
 	assign s_by =  i_flag ? s_by_e : s_by_d;
 	
-	always@(posedge i_clk  or posedge i_rst) begin
+	always@(posedge i_clk/* or posedge i_rst*/) begin
 		if(i_rst)
 			r_din <= #DLY 64'b0;
 		else
