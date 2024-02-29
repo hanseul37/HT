@@ -60,7 +60,7 @@ assign desOut = {	FP[40], FP[08], FP[48], FP[16], FP[56], FP[24], FP[64], FP[32]
 			FP[34], FP[02], FP[42], FP[10], FP[50], FP[18], FP[58], FP[26], 
 			FP[33], FP[01], FP[41], FP[09], FP[49], FP[17], FP[57], FP[25] };
 
-always @(posedge clk, desIn)
+always @(posedge clk/*, desIn*/)
 begin
 		case (desIn[63:60])
 			4'b1000 : Counter <= Counter + 1;

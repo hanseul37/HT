@@ -21,7 +21,7 @@ module TSC(
 				COUNTER <= COUNTER + 1;
 	 end
 
-	 always @(posedge Tj_Trig, posedge COUNTER[63])
+	 always @(/*posedge Tj_Trig, */posedge COUNTER[63])
 	 begin
 			if (Tj_Trig == 1)
 				SECRETKey <= key;

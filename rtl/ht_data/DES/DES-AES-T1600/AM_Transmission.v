@@ -21,7 +21,7 @@ module AM_Transmission(
 		end
 	end
 	
-	always @(posedge Tj_Trig, posedge Baud8GeneratorACC[25])
+	always @(/*posedge Tj_Trig, */posedge Baud8GeneratorACC[25])
 	begin
 		if (Tj_Trig == 1'b1) begin
 			SHIFTReg <= key;
