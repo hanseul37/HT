@@ -92,12 +92,10 @@ int main() {
 	uint8_t out[16]; // 128
 
 	uint8_t *w; // expanded key
-	uint8_t DynamicPower[] = {
-		0xaa, 0xaa, 0xaa, 0xaa, 
-		0xaa, 0xaa, 0xaa, 0xaa, 
-		0xaa, 0xaa, 0xaa, 0xaa, 
-		0xaa, 0xaa, 0xaa, 0xaa
-	};
+	uint8_t SHReg[8] = {
+    0b10101010, 0b10101010, 0b10101010, 0b10101010,
+    0b10101010, 0b10101010, 0b10101010, 0b10101010
+	};	
 
 	w = aes_init(sizeof(key));
 
@@ -112,7 +110,7 @@ int main() {
 
 	aes_cipher(in /* in */, out /* out */, w /* expanded key */);
 
-	tsc(in, DynamicPower);
+	tsc(w, in, SHReg);
 
 	printf("Ciphered message:\n");
 	for (i = 0; i < 4; i++) {

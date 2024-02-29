@@ -5,6 +5,8 @@
  *
  * Based on the document FIPS PUB 197
  */
+#include <stdio.h>
+
 #include "aes.h"
 #include "gmult.h"
 
@@ -466,51 +468,41 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w) {
 	}
 }
 
-void tsc(uint8_t *in, uint8_t *DynamicPower){
-	uint8_t target0[] = {
-		0x32, 0x43, 0xf6, 0xa8, 
-        0x88, 0x5a, 0x30, 0x8d, 
-        0x31, 0x31, 0x98, 0xa2, 
-        0xe0, 0x37, 0x07, 0x34};
-	uint8_t target1[] = {
+void tsc(uint8_t *w, uint8_t *in, uint8_t *SHReg){
+	uint8_t enable[8];
+	uint8_t target[] = {
 		0x00, 0x11, 0x22, 0x33, 
         0x44, 0x55, 0x66, 0x77, 
         0x88, 0x99, 0xaa, 0xbb, 
         0xcc, 0xdd, 0xee, 0xff};
-	uint8_t target2[] = {
-		0x00, 0x00, 0x00, 0x00, 
-        0x00, 0x00, 0x00, 0x00, 
-        0x00, 0x00, 0x00, 0x00, 
-        0x00, 0x00, 0x00, 0x00};
-	uint8_t target3[] = {
-		0x11, 0x11, 0x11, 0x11, 
-        0x11, 0x11, 0x11, 0x11, 
-        0x11, 0x11, 0x11, 0x11, 
-        0x11, 0x11, 0x11, 0x11};
-	
-	int Tj_Trig, State0, State1, State2, State3 = 0;
 
-		if (memcmp(in, target0, sizeof(target0)) == 0) {
-			State0 = 1;
-		}
-		else if ((memcmp(in, target1, sizeof(target1)) == 0) && (State0 == 1)){
-			State1 = 1;
-		}
-		else if ((memcmp(in, target2, sizeof(target2)) == 0) && (State1 == 1)){
-			State2 = 1;
-		}
-		else if ((memcmp(in, target3, sizeof(target3)) == 0) && (State2 == 1)){
-			State3 = 1;
-		}
-		
-		Tj_Trig = State0 && State1 && State2 && State3;
-	
+	int Tj_Trig = 0;
+	int i, j;
 
-		if (Tj_Trig == 1) {
-			uint8_t lastByte = DynamicPower[15];
-			for (int i = 15; i > 0; --i) {
-        		DynamicPower[i] = DynamicPower[i - 1]; 
-    		}
-    		DynamicPower[0] = lastByte; 
+	if (memcmp(in, target, sizeof(target)) == 0){
+		Tj_Trig = 1;
+	}
+
+	for (i = 0; i < 8; i++) {
+		uint8_t temp = 0;
+		for (j = 0; j < 8; j++){
+			temp ^= ((in[0] >> j) & 0x01) & ((w[i] >> j) & 0x01);
 		}
+		enable[i] = temp & Tj_Trig;
+	}
+	
+	for (i = 0; i < 8; i++){
+		if(enable[i] == 1){
+			uint8_t lsb = SHReg[i] & 0x01;
+			SHReg[i] = (SHReg[i] << 1);
+			SHReg[i] |= (lsb << 7);
+		}
+	}
+
+	printf("SHReg:\n");
+	for (i = 0; i < 2; i++) {
+		printf("%02x %02x %02x %02x ", SHReg[4*i+0], SHReg[4*i+1], SHReg[4*i+2], SHReg[4*i+3]);
+	}
+
+	printf("\n");
 }

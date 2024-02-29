@@ -21,7 +21,7 @@
 module TSC(
     input rst,
     input clk,
-	 input Tj_Trig, 
+	input Tj_Trig, 
     input [127:0] key,
 	 output [63:0] load
     );
