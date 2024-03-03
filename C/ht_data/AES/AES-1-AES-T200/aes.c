@@ -472,7 +472,7 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w) {
 void tsc(uint8_t *w, uint8_t *load, uint8_t counter){
 	int i;
 
-	for (int i = 0; i < 8; i++) {
+	for (i = 0; i < 8; i++) {
 		load[i] = w[i] ^ (counter >> i & 0x01);
 	}
 
