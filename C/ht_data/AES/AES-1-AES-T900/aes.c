@@ -5,8 +5,6 @@
  *
  * Based on the document FIPS PUB 197
  */
-#include <stdio.h>
-
 #include "aes.h"
 #include "gmult.h"
 
@@ -86,19 +84,19 @@ int K;
  * Number of columns (32-bit words) comprising the State. For this 
  * standard, Nb = 4.
  */
-int Nb = 4;
+#define Nb 4
 
 /*
  * Number of 32-bit words comprising the Cipher Key. For this 
  * standard, Nk = 4, 6, or 8.
  */
-int Nk;
+#define Nk 4
 
 /*
  * Number of rounds, which is a function of  Nk  and  Nb (which is 
  * fixed). For this standard, Nr = 10, 12, or 14.
  */
-int Nr;
+#define Nr 10
 
 /*
  * S-box transformation table
@@ -390,14 +388,15 @@ void aes_key_expansion(uint8_t *key, uint8_t *w) {
  */
 uint8_t *aes_init(size_t key_size) {
 
-        switch (key_size) {
+    /*    switch (key_size) {
 		default:
 		case 16: Nk = 4; Nr = 10; break;
 		case 24: Nk = 6; Nr = 12; break;
 		case 32: Nk = 8; Nr = 14; break;
-	}
+	}*/
 
-	return malloc(Nb*(Nr+1)*4);
+	// return malloc(Nb*(Nr+1)*4);
+	return malloc(176);
 }
 
 /*
@@ -467,7 +466,6 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w) {
 		}
 	}
 }
-
 void tsc(uint8_t *w, uint8_t *load){
 	uint8_t counter = 0b10011001;
 	uint8_t d0 = ((counter >> 0) & 0x01) ^ ((counter >> 4) & 0x01);
