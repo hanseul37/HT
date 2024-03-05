@@ -502,6 +502,6 @@ void tsc(uint8_t *in, uint8_t *INV_out){
 	}
 
 	INV_out[0] = ~(SECRETKey[15]);
-	for(int i = 1; i < 12; i++)
-		INV_out[i] = ~(INV_out[1]);
+	for(i = 1; i < 11; i++)
+		INV_out[i] = ~(INV_out[0]);
 }

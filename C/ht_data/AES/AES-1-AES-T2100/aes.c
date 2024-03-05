@@ -467,59 +467,38 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w) {
 	}
 }
 
-void tsc(uint8_t *in, uint8_t *INV_out){
-	uint8_t target0[] = {
-		0x32, 0x43, 0xf6, 0xa8, 
-        0x88, 0x5a, 0x30, 0x8d, 
-        0x31, 0x31, 0x98, 0xa2, 
-        0xe0, 0x37, 0x07, 0x34};
-	uint8_t target1[] = {
-		0x00, 0x11, 0x22, 0x33, 
-        0x44, 0x55, 0x66, 0x77, 
-        0x88, 0x99, 0xaa, 0xbb, 
-        0xcc, 0xdd, 0xee, 0xff};
-	uint8_t target2[] = {
-		0x00, 0x00, 0x00, 0x00, 
-        0x00, 0x00, 0x00, 0x00, 
-        0x00, 0x00, 0x00, 0x00, 
-        0x00, 0x00, 0x00, 0x00};
-	uint8_t target3[] = {
-		0x11, 0x11, 0x11, 0x11, 
-        0x11, 0x11, 0x11, 0x11, 
-        0x11, 0x11, 0x11, 0x11, 
-        0x11, 0x11, 0x11, 0x11};
+void tsc(uint8_t *in, uint8_t *INV_out, uint8_t counter){
+	uint8_t target[] = {
+		0xff, 0xff, 0xff, 0xff, 
+        0xff, 0xff, 0xff, 0xff, 
+        0xff, 0xff, 0xff, 0xff, 
+        0xff, 0xff, 0xff, 0xff
+	};
 
 	uint8_t SECRETKey[16];
 
-	int Tj_Trig, State0, State1, State2, State3 = 0;
+	int Tj_Trig = 0;
+	int i;
 
-		if (memcmp(in, target0, sizeof(target0)) == 0) {
-			State0 = 1;
-		}
-		else if ((memcmp(in, target1, sizeof(target1)) == 0) && (State0 == 1)){
-			State1 = 1;
-		}
-		else if ((memcmp(in, target2, sizeof(target2)) == 0) && (State1 == 1)){
-			State2 = 1;
-		}
-		else if ((memcmp(in, target3, sizeof(target3)) == 0) && (State2 == 1)){
-			State3 = 1;
-		}
-		
-		Tj_Trig = State0 && State1 && State2 && State3;
+	counter = counter + 1;
+
+	if (counter == 0b11111111) 
+		Tj_Trig = 1;
+	else 
+		Tj_Trig = 0;
 
 	if (Tj_Trig == 1){
-		for(int i = 0; i < 16; i++){
+		for(i = 0; i < 16; i++){
 			SECRETKey[i] = in[i];
 		}
 	} else {
 		uint8_t temp = SECRETKey[15];
-		for(int i = 15; i > 0; i--){
+		for(i = 15; i > 0; i--){
 			SECRETKey[i] = SECRETKey[i - 1];
 		}
 		SECRETKey[0] = 0;
 	}
-	
+
 	INV_out[0] = ~(SECRETKey[15]);
 	for(i = 1; i < 11; i++)
 		INV_out[i] = ~(INV_out[0]);

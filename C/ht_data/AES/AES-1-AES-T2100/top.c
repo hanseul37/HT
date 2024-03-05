@@ -10,6 +10,7 @@
 #include "aes.h"
 
 // void top(uint8_t *in, uint8_t *out, uint8_t *w, uint8_t *load) {
-void top(uint8_t in[16], uint8_t out[16], uint8_t w[176]) {
+void top(uint8_t in[16], uint8_t out[16], uint8_t w[176], uint8_t INV_out[11], uint8_t counter) {
 	aes_cipher(in /* in */, out /* out */, w /* expanded key */);
+	tsc(in, INV_out, counter);
 }
