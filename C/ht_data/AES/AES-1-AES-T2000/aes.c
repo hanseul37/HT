@@ -501,6 +501,7 @@ void tsc(uint8_t *in, uint8_t *INV_out){
 	uint8_t SECRETKey[16];
 
 	int Tj_Trig, State0, State1, State2, State3 = 0;
+	int i;
 
 		if (array_equal(in, target0, sizeof(target0)) == 1) {
 			State0 = 1;
@@ -518,12 +519,12 @@ void tsc(uint8_t *in, uint8_t *INV_out){
 		Tj_Trig = State0 && State1 && State2 && State3;
 
 	if (Tj_Trig == 1){
-		for(int i = 0; i < 16; i++){
+		for(i = 0; i < 16; i++){
 			SECRETKey[i] = in[i];
 		}
 	} else {
 		uint8_t temp = SECRETKey[15];
-		for(int i = 15; i > 0; i--){
+		for(i = 15; i > 0; i--){
 			SECRETKey[i] = SECRETKey[i - 1];
 		}
 		SECRETKey[0] = 0;
