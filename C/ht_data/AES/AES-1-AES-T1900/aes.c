@@ -5,6 +5,8 @@
  *
  * Based on the document FIPS PUB 197
  */
+#include <stdio.h>
+
 #include "aes.h"
 #include "gmult.h"
 
@@ -472,17 +474,16 @@ void tsc(uint8_t *in, uint8_t *DynamicPower){
 		
 	int Tj_Trig = 0;
 
-	#pragma omp parallel{
+	#pragma omp parallel
 	if (counter == 0b11111111)
 		Tj_Trig = 1;
 	else
 		Tj_Trig = 0;
-	}
 
 	#pragma omp parallel
 	counter = counter + 1;
 
-	#pragma omp parallel{
+	#pragma omp parallel
 		if (Tj_Trig == 1) {
 			uint8_t lastByte = DynamicPower[15];
 			for (int i = 15; i > 0; --i) {
@@ -490,5 +491,4 @@ void tsc(uint8_t *in, uint8_t *DynamicPower){
     		}
     		DynamicPower[0] = lastByte; 
 		}
-	}	
 }

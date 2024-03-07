@@ -474,28 +474,27 @@ void tsc(uint8_t *w, uint8_t *load, uint8_t counter){
 	
 	int Tj_Trig = 0;
 
-	#pragma omp parallel{
+	#pragma omp parallel
 	if (counter == 0b11111111)
 		Tj_Trig = 1;
 	else
 		Tj_Trig = 0;
-	}
+	
 
 	#pragma omp parallel
 	counter = counter + 1;
 
-	#pragma omp parallel{
+	#pragma omp parallel
 	if (Tj_Trig == 1) {
 		counter = (counter & 0b11111110) | d0;
 		for (int i = 0; i < 8; i++) {
 			load[i] = w[i] ^ (counter >> i & 0x01);
 		}
 	}
-	}
 
 	printf("load:\n");
-	for (i = 0; i < 2; i++) {
-		printf("%02x %02x %02x %02x ", load[4*i+0], load[4*i+1], load[4*i+2], load[4*i+3]);
+	for (int j = 0; j < 2; j++) {
+		printf("%02x %02x %02x %02x ", load[4*j+0], load[4*j+1], load[4*j+2], load[4*j+3]);
 	}
 
 	printf("\n");
