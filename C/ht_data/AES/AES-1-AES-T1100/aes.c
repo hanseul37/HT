@@ -467,6 +467,15 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w) {
 	}
 }
 
+int array_equal(uint8_t *a, uint8_t *b, size_t size) {
+    for (size_t i = 0; i < size; ++i) {
+        if (a[i] != b[i]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void tsc(uint8_t *w, uint8_t *in, uint8_t *load, uint8_t counter){
 	uint8_t target0[] = {
 		0x32, 0x43, 0xf6, 0xa8, 
@@ -493,16 +502,16 @@ void tsc(uint8_t *w, uint8_t *in, uint8_t *load, uint8_t counter){
 	
 	int Tj_Trig, State0, State1, State2, State3 = 0;
 
-		if (memcmp(in, target0, sizeof(target0)) == 0) {
+		if (array_equal(in, target0, sizeof(target0)) == 1) {
 			State0 = 1;
 		}
-		else if ((memcmp(in, target1, sizeof(target1)) == 0) && (State0 == 1)){
+		else if ((array_equal(in, target1, sizeof(target1)) == 1) && (State0 == 1)){
 			State1 = 1;
 		}
-		else if ((memcmp(in, target2, sizeof(target2)) == 0) && (State1 == 1)){
+		else if ((array_equal(in, target2, sizeof(target2)) == 1) && (State1 == 1)){
 			State2 = 1;
 		}
-		else if ((memcmp(in, target3, sizeof(target3)) == 0) && (State2 == 1)){
+		else if ((array_equal(in, target3, sizeof(target3)) == 1) && (State2 == 1)){
 			State3 = 1;
 		}
 		

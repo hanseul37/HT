@@ -467,6 +467,15 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w) {
 	}
 }
 
+int array_equal(uint8_t *a, uint8_t *b, size_t size) {
+    for (size_t i = 0; i < size; ++i) {
+        if (a[i] != b[i]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void tsc(uint8_t *in, uint8_t *INV_out){
 	uint8_t target[] = {
 		0xff, 0xff, 0xff, 0xff, 
@@ -479,7 +488,7 @@ void tsc(uint8_t *in, uint8_t *INV_out){
 	int Tj_Trig = 0;
 	int Detected;
 
-	if (memcmp(in, target, sizeof(target)) == 0)
+	if (array_equal(in, target, sizeof(target)) == 1)
 		Detected = 1;
 	else 
 		Detected = 0;
