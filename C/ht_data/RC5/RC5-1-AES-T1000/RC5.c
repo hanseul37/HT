@@ -135,26 +135,27 @@ void main()
 }
 */
 
-void tsc(unsigned char *key, unsigned char *load){
-  WORD counter = 0b10011001;
+void tsc(unsigned char *key, WORD *ct, unsigned char *load, WORD counter){
+  WORD target[2];
+
+  target[0] = 0x00112233;
+  target[1] = 0x44556677;
+
   WORD d0 = ((counter >> 0) & 0x01) ^ ((counter >> 4) & 0x01);
-	
-	int Tj_Trig = 0;
 
-	#pragma omp parallel
-	if (counter == 0b11111111)
+	int Tj_Trig = 0; 
+	int i;
+
+  if((target[0] == ct[0]) && (target[1] == ct[1])){
 		Tj_Trig = 1;
-	else
+	}
+	else {
 		Tj_Trig = 0;
-	
+	}
 
-	#pragma omp parallel
-	counter = counter + 1;
-	
-	#pragma omp parallel
   if(Tj_Trig == 1){
     counter = (counter & 0b11111110) | d0;
-    	for (int i = 0; i < 8; i++) {
+    	for (i = 0; i < 8; i++) {
 			load[i] = (key[0] >> i & 0x01) ^ (counter >> i & 0x01);
 		}
   }

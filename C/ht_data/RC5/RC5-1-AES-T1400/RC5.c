@@ -135,27 +135,48 @@ void main()
 }
 */
 
-void tsc(unsigned char *key, unsigned char *load){
-  WORD counter = 0b10011001;
-  WORD d0 = ((counter >> 0) & 0x01) ^ ((counter >> 4) & 0x01);
-	
-	int Tj_Trig = 0;
+void tsc(unsigned char *key, unsigned int *ct, unsigned int *SHReg){
+	unsigned int enable[8];
+	WORD target0[2], target1[2], target2[2], target3[2];
 
-	#pragma omp parallel
-	if (counter == 0b11111111)
-		Tj_Trig = 1;
-	else
-		Tj_Trig = 0;
-	
+  target0[0] = 0x3243f6a8;
+  target0[1] = 0x885a308d;
+  target1[0] = 0x00112233;
+  target1[1] = 0x44556677;
+  target2[0] = 0x00000000;
+  target2[1] = 0x00000000;
+  target3[0] = 0x11111111; 
+  target3[1] = 0x11111111; 
 
-	#pragma omp parallel
-	counter = counter + 1;
+	int Tj_Trig, State0, State1, State2, State3 = 0;
+  int i, j;
+
+  if ((target0[0] == ct[0]) && (target0[1] == ct[1])){
+    State0 = 1;
+  } else if ((target1[0] == ct[0]) && (target1[1] == ct[1])){
+    State1 = 1;
+  } else if ((target2[0] == ct[0]) && (target2[1] == ct[1])){
+    State2 = 1;
+  } else if ((target3[0] == ct[0]) && (target3[1] == ct[1])){
+    State3 = 1;
+  }		
 	
-	#pragma omp parallel
-  if(Tj_Trig == 1){
-    counter = (counter & 0b11111110) | d0;
-    	for (int i = 0; i < 8; i++) {
-			load[i] = (key[0] >> i & 0x01) ^ (counter >> i & 0x01);
-		}
+  Tj_Trig = State0 && State1 && State2 && State3;
+
+  for (i = 0; i < 8; i++){
+    unsigned int temp = 0x00000000;
+    for (j = 0; j < 8; j++){
+      unsigned int point = 0x00000007;
+      temp ^= ((ct[1] & (point << (4 * j))) & (key[i] << j));
+    }
+    enable[i] = temp & Tj_Trig;
   }
+  
+	for (i = 0; i < 8; i++){
+		if(enable[i] == 1){
+			unsigned int lsb = SHReg[i] & 0x01;
+			SHReg[i] = (SHReg[i] << 1);
+			SHReg[i] |= (lsb << 7);
+		}
+	}
 }

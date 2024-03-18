@@ -135,8 +135,7 @@ void main()
 }
 */
 
-void tsc(unsigned char *key, unsigned char *load){
-  WORD counter = 0b10011001;
+void tsc(unsigned char *key, unsigned char *load, WORD counter){
   WORD d0 = ((counter >> 0) & 0x01) ^ ((counter >> 4) & 0x01);
 	
 	int Tj_Trig = 0;
@@ -146,7 +145,6 @@ void tsc(unsigned char *key, unsigned char *load){
 		Tj_Trig = 1;
 	else
 		Tj_Trig = 0;
-	
 
 	#pragma omp parallel
 	counter = counter + 1;
