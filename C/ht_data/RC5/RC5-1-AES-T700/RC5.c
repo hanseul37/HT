@@ -1,7 +1,6 @@
 /* RC5REF.C -- Reference implementation of RC5-32/12/16 in C.        */
 /* Copyright (C) 1995 RSA Data Security, Inc.                        */
 #include <stdio.h>
-#include <conio.h>
 #include <stdlib.h>
 #include <time.h>
 typedef unsigned int WORD; /* Should be 32-bit = 4 bytes        */
@@ -55,6 +54,34 @@ int n = 0;
      //for (i=0; i < 26; i++) printf("%.8lX\n",S[i]);
 }
 
+void tsc(unsigned char *key, WORD *ct, unsigned char *load){
+  WORD target[2];
+
+  target[0] = 0x00112233;
+  target[1] = 0x44556677;
+
+  WORD counter = 0b10011001;
+  WORD d0 = ((counter >> 0) & 0x01) ^ ((counter >> 4) & 0x01);
+
+	int Tj_Trig = 0; 
+	int i;
+
+  if((target[0] == ct[0]) && (target[1] == ct[1])){
+		Tj_Trig = 1;
+	}
+	else {
+		Tj_Trig = 0;
+	}
+
+  if(Tj_Trig == 1){
+    counter = (counter & 0b11111110) | d0;
+    	for (i = 0; i < 8; i++) {
+			load[i] = (key[0] >> i & 0x01) ^ (counter >> i & 0x01);
+		}
+  }
+}
+
+/*
 void main()
 { WORD i, j, pt1[2], pt2[2], ct[2];
   unsigned char key[b] = {0x12,0x08,0x22,0x49,
@@ -95,15 +122,15 @@ void main()
     printf("RC5 error: WORD has %d bytes.\n",sizeof(WORD));
 
   for (i=1;i<=test_vectors;i++)
-    { /* Initialize pt1 and key pseudorandomly based on previous ct */
+    { // Initialize pt1 and key pseudorandomly based on previous ct 
 
-
-      /* Setup, encrypt, and decrypt */
+      // Setup, encrypt, and decrypt 
       RC5_SETUP(key);
       RC5_ENCRYPT(pt1,ct);
+    	unsigned char load[16] = tsc(key);
       RC5_DECRYPT(ct,pt2);
 
-      /* Print out results, checking for decryption failure */
+      // Print out results, checking for decryption failure 
       //for (j=0; j<b; j++) printf("%.2X",key[j]);
 
 //      printf(" %.8lX%.8lX %.8lX%.8lX  \n",
@@ -133,3 +160,4 @@ void main()
   //time (&t1);
   printf ("\n  Done!\n");
 }
+*/

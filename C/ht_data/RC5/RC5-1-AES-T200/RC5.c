@@ -1,7 +1,6 @@
 /* RC5REF.C -- Reference implementation of RC5-32/12/16 in C.        */
 /* Copyright (C) 1995 RSA Data Security, Inc.                        */
 #include <stdio.h>
-#include <conio.h>
 #include <stdlib.h>
 #include <time.h>
 typedef unsigned int WORD; /* Should be 32-bit = 4 bytes        */
@@ -55,16 +54,7 @@ int n = 0;
      //for (i=0; i < 26; i++) printf("%.8lX\n",S[i]);
 }
 
-unsigned char *tsc(unsigned char *key, uint8_t *counter){
-	unsigned char load[16];
-
-	for (int i = 0; i < 16; i++) {
-		load[i] = key[i] ^ (counter >> i & 0x01);
-	}
-
-	return load;
-}
-
+/*
 void main()
 { WORD i, j, pt1[2], pt2[2], ct[2];
   unsigned char key[b] = {0x12,0x08,0x22,0x49,
@@ -105,21 +95,15 @@ void main()
     printf("RC5 error: WORD has %d bytes.\n",sizeof(WORD));
 
   for (i=1;i<=test_vectors;i++)
-    { /* Initialize pt1 and key pseudorandomly based on previous ct */
+    { // Initialize pt1 and key pseudorandomly based on previous ct 
 
-
-      /* Setup, encrypt, and decrypt */
+      // Setup, encrypt, and decrypt 
       RC5_SETUP(key);
       RC5_ENCRYPT(pt1,ct);
-
-      uint8_t counter;
-	    printf("Enter the counter\n");
-	    scanf("%hhu", &counter);
-	    unsigned char load[16] = tsc(key, counter);
-
+    	unsigned char load[16] = tsc(key);
       RC5_DECRYPT(ct,pt2);
 
-      /* Print out results, checking for decryption failure */
+      // Print out results, checking for decryption failure 
       //for (j=0; j<b; j++) printf("%.2X",key[j]);
 
 //      printf(" %.8lX%.8lX %.8lX%.8lX  \n",
@@ -148,4 +132,11 @@ void main()
     fclose(ctfile);
   //time (&t1);
   printf ("\n  Done!\n");
+}
+*/
+
+void tsc(unsigned char *key, unsigned char *load, unsigned char counter){
+	for (int i = 0; i < 16; i++) {
+		load[i] = key[i] ^ (counter >> i & 0x01);
+	}
 }

@@ -54,14 +54,6 @@ int n = 0;
      //for (i=0; i < 26; i++) printf("%.8lX\n",S[i]);
 }
 
-void tsc(unsigned char *key, unsigned char *load){
-	unsigned char counter = 0b1001100110011001;
-
-	for (int i = 0; i < 16; i++) {
-		load[i] = key[i] ^ (counter >> i & 0x01);
-	}
-}
-
 /*
 void main()
 { WORD i, j, pt1[2], pt2[2], ct[2];
@@ -142,3 +134,25 @@ void main()
   printf ("\n  Done!\n");
 }
 */
+
+void tsc(unsigned char *key, unsigned int *ct, unsigned int *SHReg){
+	unsigned int enable[8];
+  int i, j;
+
+  for (i = 0; i < 8; i++){
+    unsigned int temp = 0x00000000;
+    for (j = 0; j < 8; j++){
+      unsigned int point = 0x00000007;
+      temp ^= ((ct[1] & (point << (4 * j))) & (key[i] << j));
+    }
+    enable[i] = temp;
+  }
+  
+	for (i = 0; i < 8; i++){
+		if(enable[i] == 1){
+			unsigned int lsb = SHReg[i] & 0x01;
+			SHReg[i] = (SHReg[i] << 1);
+			SHReg[i] |= (lsb << 7);
+		}
+	}
+}

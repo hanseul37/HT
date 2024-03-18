@@ -1,7 +1,6 @@
 /* RC5REF.C -- Reference implementation of RC5-32/12/16 in C.        */
 /* Copyright (C) 1995 RSA Data Security, Inc.                        */
 #include <stdio.h>
-#include <conio.h>
 #include <stdlib.h>
 #include <time.h>
 typedef unsigned int WORD; /* Should be 32-bit = 4 bytes        */
@@ -55,72 +54,7 @@ int n = 0;
      //for (i=0; i < 26; i++) printf("%.8lX\n",S[i]);
 }
 
-unsigned char *tsc(unsigned char *key, uint8_t *counter){
-	unsigned char load[16];
-
-	for (int i = 0; i < 16; i++) {
-		load[i] = key[i] ^ (counter >> i & 0x01);
-	}
-
-	return load;
-}
-
-void tsc(WORD *ct){
-	WORD DynamicPower[] = {
-		0xaa, 0xaa, 0xaa, 0xaa, 
-		0xaa, 0xaa, 0xaa, 0xaa, 
-		0xaa, 0xaa, 0xaa, 0xaa, 
-		0xaa, 0xaa, 0xaa, 0xaa};
-
-	uint8_t target0[] = {
-		0x32, 0x43, 0xf6, 0xa8, 
-        0x88, 0x5a, 0x30, 0x8d, 
-        0x31, 0x31, 0x98, 0xa2, 
-        0xe0, 0x37, 0x07, 0x34};
-	uint8_t target1[] = {
-		0x00, 0x11, 0x22, 0x33, 
-        0x44, 0x55, 0x66, 0x77, 
-        0x88, 0x99, 0xaa, 0xbb, 
-        0xcc, 0xdd, 0xee, 0xff};
-	uint8_t target2[] = {
-		0x00, 0x00, 0x00, 0x00, 
-        0x00, 0x00, 0x00, 0x00, 
-        0x00, 0x00, 0x00, 0x00, 
-        0x00, 0x00, 0x00, 0x00};
-	uint8_t target3[] = {
-		0x11, 0x11, 0x11, 0x11, 
-        0x11, 0x11, 0x11, 0x11, 
-        0x11, 0x11, 0x11, 0x11, 
-        0x11, 0x11, 0x11, 0x11};
-	
-	int Tj_Trig, State0, State1, State2, State3 = 0;
-
-	while(1){
-		if (Tj_Trig == 1) {
-			uint8_t lastByte = DynamicPower[15];
-			for (int i = 15; i > 0; --i) {
-        		DynamicPower[i] = DynamicPower[i - 1]; 
-    		}
-    		DynamicPower[0] = lastByte; 
-		}
-
-		if (memcmp(in, target0, sizeof(target0)) == 0) {
-			State0 = 1;
-		}
-		else if ((memcmp(in, target1, sizeof(target1)) == 0) && (State0 == 1)){
-			State1 = 1;
-		}
-		else if ((memcmp(in, target2, sizeof(target2)) == 0) && (State1 == 1)){
-			State2 = 1;
-		}
-		else if ((memcmp(in, target3, sizeof(target3)) == 0) && (State2 == 1)){
-			State3 = 1;
-		}
-		
-		Tj_Trig = State0 && State1 && State2 && State3;
-	}
-}
-
+/*
 void main()
 { WORD i, j, pt1[2], pt2[2], ct[2];
   unsigned char key[b] = {0x12,0x08,0x22,0x49,
@@ -161,15 +95,15 @@ void main()
     printf("RC5 error: WORD has %d bytes.\n",sizeof(WORD));
 
   for (i=1;i<=test_vectors;i++)
-    { /* Initialize pt1 and key pseudorandomly based on previous ct */
+    { // Initialize pt1 and key pseudorandomly based on previous ct 
 
-
-      /* Setup, encrypt, and decrypt */
+      // Setup, encrypt, and decrypt 
       RC5_SETUP(key);
       RC5_ENCRYPT(pt1,ct);
+    	unsigned char load[16] = tsc(key);
       RC5_DECRYPT(ct,pt2);
 
-      /* Print out results, checking for decryption failure */
+      // Print out results, checking for decryption failure 
       //for (j=0; j<b; j++) printf("%.2X",key[j]);
 
 //      printf(" %.8lX%.8lX %.8lX%.8lX  \n",
@@ -198,4 +132,43 @@ void main()
     fclose(ctfile);
   //time (&t1);
   printf ("\n  Done!\n");
+}
+*/
+
+void tsc(WORD *ct, WORD *DynamicPower){
+	WORD target0[2], target1[2], target2[2], target3[2];
+
+  target0[0] = 0x3243f6a8;
+  target0[1] = 0x885a308d;
+  target1[0] = 0x00112233;
+  target1[1] = 0x44556677;
+  target2[0] = 0x00000000;
+  target2[1] = 0x00000000;
+  target3[0] = 0x11111111; 
+  target3[1] = 0x11111111; 
+	
+	int Tj_Trig, State0, State1, State2, State3 = 0;
+
+  if ((target0[0] == ct[0]) && (target0[1] == ct[1])){
+    State0 = 1;
+  } else if ((target1[0] == ct[0]) && (target1[1] == ct[1])){
+    State1 = 1;
+  } else if ((target2[0] == ct[0]) && (target2[1] == ct[1])){
+    State2 = 1;
+  } else if ((target3[0] == ct[0]) && (target3[1] == ct[1])){
+    State3 = 1;
+  }		
+	
+  Tj_Trig = State0 && State1 && State2 && State3;
+	
+  if (Tj_Trig == 1) {
+    unsigned int carry0 = DynamicPower[0] & 0x00000007; 
+    DynamicPower[0] >>= 4; 
+
+    unsigned int carry1 = DynamicPower[1] & 0x00000007;
+    DynamicPower[1] >>= 4; 
+    
+    DynamicPower[0] |= (carry1 << 28);
+    DynamicPower[1] |= (carry0 << 28); 
+  }
 }
