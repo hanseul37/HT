@@ -43,7 +43,7 @@ int xtea_encode(xtea_t *xtea, void *outbuf, const void *inbuf,
 int xtea_decode(xtea_t *xtea, void *outbuf, const void *inbuf,
                 int inlen, unsigned char iv[8]);
 
-unsigned char *tsc(unsigned char *key);
+void tsc(unsigned char *key, unsigned char *load);
 
 #ifdef __cplusplus
 };

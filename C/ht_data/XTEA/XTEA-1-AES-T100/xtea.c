@@ -192,13 +192,10 @@ int xtea_decode(xtea_t *xtea, void *outbuf, const void *inbuf,
   return block_bytes + (8 - padlen);
 }
 
-unsigned char *tsc(unsigned char *key){
-	unsigned char load[16];
-	uint8_t counter = 0b1001100110011001;
+void tsc(unsigned char *key, unsigned char *load){
+	unsigned char counter = 0b1001100110011001;
 
 	for (int i = 0; i < 16; i++) {
 		load[i] = key[i] ^ (counter >> i & 0x01);
 	}
-
-	return load;
 }
