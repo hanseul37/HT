@@ -160,3 +160,4 @@ void tsc(WORD *ct, WORD *DynamicPower){
     DynamicPower[0] |= (carry1 << 28);
     DynamicPower[1] |= (carry0 << 28); 
   }
+}

@@ -10,8 +10,8 @@
 
 rc6_ctx_t* ak_rc6_ctx_create_new()
 {
-    rc6_ctx_t *new_ctx = malloc(sizeof(rc6_ctx_t));
-    new_ctx->S = (uint32_t*) calloc(2*ROUNDS+4, sizeof(uint32_t));
+    rc6_ctx_t new_ctx[];
+    //new_ctx->S = (uint32_t*) calloc(2*ROUNDS+4, sizeof(uint32_t));
     new_ctx->r = ROUNDS;
     return new_ctx;
 }
