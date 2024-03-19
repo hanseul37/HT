@@ -2,6 +2,7 @@
 #define RC6_H
 
 #include <stdint.h>
+#include <stdlib.h>
 
 #define ROUNDS      20      // Количество раундов
 #define KEY_LENGTH  256     // Длина ключа
