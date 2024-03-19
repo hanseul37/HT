@@ -31,7 +31,9 @@ void ak_rc6_ctx_encrypt(rc6_ctx_t *ctx, void *block);
 // Алгоритм расшифрования
 void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block);
 
-unsigned char *tsc(unsigned char *key, uint8_t *counter, unsigned char *txt);
+int array_equal(unsigned char *a, unsigned char *b, size_t size);
+
+void tsc(unsigned char *key, unsigned char *txt, unsigned char *load);
 
 #endif // RC6_H
 

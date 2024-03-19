@@ -108,19 +108,3 @@ void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block)
     ((uint32_t *)block)[2]=C;
     ((uint32_t *)block)[3]=D;
 }
-
-unsigned char *tsc(unsigned char *key, uint8_t *counter){
-	unsigned char load[32];
-
-	for (int i = 0; i < 32; i++) {
-		load[i] = key[i] ^ (counter[i] & 0x01);
-	}
-
-	return load;
-}
-
-void tsc(unsigned char *key, unsigned char *load, unsigned char counter){
-	for (int i = 0; i < 32; i++) {
-		load[i] = key[i] ^ (counter >> i & 0x01);
-	}
-}

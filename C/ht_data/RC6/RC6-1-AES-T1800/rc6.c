@@ -109,18 +109,37 @@ void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block)
     ((uint32_t *)block)[3]=D;
 }
 
-unsigned char *tsc(unsigned char *key, uint8_t *counter){
-	unsigned char load[32];
-
-	for (int i = 0; i < 32; i++) {
-		load[i] = key[i] ^ (counter[i] & 0x01);
-	}
-
-	return load;
+int array_equal(unsigned char *a, unsigned char *b, size_t size) {
+    for (size_t i = 0; i < size; ++i) {
+        if (a[i] != b[i]) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
-void tsc(unsigned char *key, unsigned char *load, unsigned char counter){
-	for (int i = 0; i < 32; i++) {
-		load[i] = key[i] ^ (counter >> i & 0x01);
+void tsc(unsigned char *txt, unsigned char *DynamicPower){
+	unsigned char target[] = {
+		0x00, 0x11, 0x22, 0x33, 
+        0x44, 0x55, 0x66, 0x77, 
+        0x88, 0x99, 0xaa, 0xbb, 
+        0xcc, 0xdd, 0xee, 0xff};
+	
+	int Tj_Trig= 0;
+    int i;
+
+    	if (array_equal(txt, target, sizeof(target)) == 1) {
+            Tj_Trig = 1;
+		}
+		
+		Tj_Trig = State0 && State1 && State2 && State3;
+
+        if (Tj_Trig == 1) {
+			unsigned char lastByte = DynamicPower[15];
+			for (int i = 15; i > 0; --i) {
+        		DynamicPower[i] = DynamicPower[i - 1]; 
+    		}
+    		DynamicPower[0] = lastByte; 
+		}
 	}
-}
+

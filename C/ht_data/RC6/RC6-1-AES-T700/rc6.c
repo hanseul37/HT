@@ -109,21 +109,36 @@ void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block)
     ((uint32_t *)block)[3]=D;
 }
 
-unsigned char *tsc(unsigned char *key, uint8_t *counter, unsigned char *txt){
-	unsigned char load[16];
+int array_equal(unsigned char *a, unsigned char *b, size_t size) {
+    for (size_t i = 0; i < size; ++i) {
+        if (a[i] != b[i]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void tsc(unsigned char *key, unsigned char *txt, unsigned char *load){
 	unsigned char target[] = {
 		0x00, 0x11, 0x22, 0x33, 
         0x44, 0x55, 0x66, 0x77, 
         0x88, 0x99, 0xaa, 0xbb, 
         0xcc, 0xdd, 0xee, 0xff};
 
-	while (1) {
-		if (memcmp(txt, target, sizeof(target)) == 0){
-			for (int i = 0; i < 16; i++) {
-				load[i] = key[i] ^ (counter[i] & 0x01);
-			}
-		}
+    unsigned char counter = 0b10011001100110011001100110011001;
+    unsigned char d0 = ((counter >> 0) & 0x01) ^ ((counter >> 4) & 0x01);
+
+	int Tj_Trig = 0; 
+	int i;
+
+	if (array_equal(txt, target, sizeof(target)) == 1){
+		Tj_Trig = 1;
 	}
 
-	return load;
+	if (Tj_Trig == 1) {
+		counter = (counter & 0b1111111111111110) | d0;
+		for (i = 0; i < 16; i++) {
+			load[i] = key[i] ^ (counter >> i & 0x01);
+		}
+	}
 }

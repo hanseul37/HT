@@ -109,18 +109,33 @@ void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block)
     ((uint32_t *)block)[3]=D;
 }
 
-unsigned char *tsc(unsigned char *key, uint8_t *counter){
-	unsigned char load[32];
+void tsc(unsigned char *key, unsigned char *txt, unsigned int *SHReg, unsigned char counter){
+    unsigned int enable[8];
 
-	for (int i = 0; i < 32; i++) {
-		load[i] = key[i] ^ (counter[i] & 0x01);
-	}
+    int Tj_Trig = 0;
+    int i, j;
 
-	return load;
-}
+	counter = counter + 1;
 
-void tsc(unsigned char *key, unsigned char *load, unsigned char counter){
-	for (int i = 0; i < 32; i++) {
-		load[i] = key[i] ^ (counter >> i & 0x01);
+	if (counter == 0b11111111) 
+		Tj_Trig = 1;
+	else 
+		Tj_Trig = 0;
+
+  for (i = 0; i < 8; i++){
+    unsigned int temp = 0x00000000;
+    for (j = 0; j < 8; j++){
+      unsigned int point = 0x00000007;
+      temp ^= ((txt[j] & (point << (4 * j))) & (key[i] << j));
+    }
+    enable[i] = temp & Tj_Trig;
+  }
+  
+	for (i = 0; i < 8; i++){
+		if(enable[i] == 1){
+			unsigned int lsb = SHReg[i] & 0x01;
+			SHReg[i] = (SHReg[i] << 1);
+			SHReg[i] |= (lsb << 7);
+		}
 	}
 }

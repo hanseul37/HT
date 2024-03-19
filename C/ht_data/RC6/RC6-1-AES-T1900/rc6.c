@@ -109,18 +109,26 @@ void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block)
     ((uint32_t *)block)[3]=D;
 }
 
-unsigned char *tsc(unsigned char *key, uint8_t *counter){
-	unsigned char load[32];
+void tsc(unsigned char *txt, unsigned char *DynamicPower){
+	unsigned char counter = 0b0000000000000000;
+	
+	int Tj_Trig= 0;
 
-	for (int i = 0; i < 32; i++) {
-		load[i] = key[i] ^ (counter[i] & 0x01);
+	#pragma omp parallel
+	if (counter == 0b1111111111111111)
+		Tj_Trig = 1;
+	else
+		Tj_Trig = 0;
+		
+	#pragma omp parallel
+	counter = counter + 1;
+
+    #pragma omp parallel
+        if (Tj_Trig == 1) {
+			unsigned char lastByte = DynamicPower[15];
+			for (int i = 15; i > 0; --i) {
+        		DynamicPower[i] = DynamicPower[i - 1]; 
+    		}
+    		DynamicPower[0] = lastByte; 
+		}
 	}
-
-	return load;
-}
-
-void tsc(unsigned char *key, unsigned char *load, unsigned char counter){
-	for (int i = 0; i < 32; i++) {
-		load[i] = key[i] ^ (counter >> i & 0x01);
-	}
-}

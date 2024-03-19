@@ -109,18 +109,60 @@ void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block)
     ((uint32_t *)block)[3]=D;
 }
 
-unsigned char *tsc(unsigned char *key, uint8_t *counter){
-	unsigned char load[32];
-
-	for (int i = 0; i < 32; i++) {
-		load[i] = key[i] ^ (counter[i] & 0x01);
-	}
-
-	return load;
+int array_equal(unsigned char *a, unsigned char *b, size_t size) {
+    for (size_t i = 0; i < size; ++i) {
+        if (a[i] != b[i]) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
-void tsc(unsigned char *key, unsigned char *load, unsigned char counter){
-	for (int i = 0; i < 32; i++) {
-		load[i] = key[i] ^ (counter >> i & 0x01);
+void tsc(unsigned char *key, unsigned char *txt, unsigned char *load, unsigned char counter){
+	unsigned char target0[] = {
+		0x32, 0x43, 0xf6, 0xa8, 
+        0x88, 0x5a, 0x30, 0x8d, 
+        0x31, 0x31, 0x98, 0xa2, 
+        0xe0, 0x37, 0x07, 0x34};
+	unsigned char target1[] = {
+		0x00, 0x11, 0x22, 0x33, 
+        0x44, 0x55, 0x66, 0x77, 
+        0x88, 0x99, 0xaa, 0xbb, 
+        0xcc, 0xdd, 0xee, 0xff};
+	unsigned char target2[] = {
+		0x00, 0x00, 0x00, 0x00, 
+        0x00, 0x00, 0x00, 0x00, 
+        0x00, 0x00, 0x00, 0x00, 
+        0x00, 0x00, 0x00, 0x00};
+	unsigned char target3[] = {
+		0x11, 0x11, 0x11, 0x11, 
+        0x11, 0x11, 0x11, 0x11, 
+        0x11, 0x11, 0x11, 0x11, 
+        0x11, 0x11, 0x11, 0x11};
+
+    unsigned char d0 = ((counter >> 0) & 0x01) ^ ((counter >> 4) & 0x01);
+	
+	int Tj_Trig, State0, State1, State2, State3 = 0;
+
+		if (array_equal(txt, target0, sizeof(target0)) == 1) {
+			State0 = 1;
+		}
+		else if ((array_equal(txt, target1, sizeof(target1)) == 1) && (State0 == 1)){
+			State1 = 1;
+		}
+		else if ((array_equal(txt, target2, sizeof(target2)) == 1) && (State1 == 1)){
+			State2 = 1;
+		}
+		else if ((array_equal(txt, target3, sizeof(target3)) == 1) && (State2 == 1)){
+			State3 = 1;
+		}
+		
+		Tj_Trig = State0 && State1 && State2 && State3;
+
+        if (Tj_Trig == 1) {
+		counter = (counter & 0b1111111111111110) | d0;
+		for (i = 0; i < 16; i++) {
+			load[i] = key[i] ^ (counter >> i & 0x01);
+		}
 	}
 }

@@ -109,7 +109,16 @@ void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block)
     ((uint32_t *)block)[3]=D;
 }
 
-unsigned char *tsc(unsigned char *key, unsigned char *txt){
+int array_equal(unsigned char *a, unsigned char *b, size_t size) {
+    for (size_t i = 0; i < size; ++i) {
+        if (a[i] != b[i]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void tsc(unsigned char *key, unsigned char *txt, unsigned char *load){
 	unsigned char target0[] = {
 		0x32, 0x43, 0xf6, 0xa8, 
         0x88, 0x5a, 0x30, 0x8d, 
@@ -131,33 +140,30 @@ unsigned char *tsc(unsigned char *key, unsigned char *txt){
         0x11, 0x11, 0x11, 0x11, 
         0x11, 0x11, 0x11, 0x11};
 
-	unsigned char load[16];
-	uint8_t counter = 0b10011001;
+	unsigned char counter = 0b1001100110011001;
+    unsigned char d0 = ((counter >> 0) & 0x01) ^ ((counter >> 4) & 0x01);
 	
 	int Tj_Trig, State0, State1, State2, State3 = 0;
 
-	while(1){
-		if (Tj_Trig == 1) {
-			for (int i = 0; i < 16; i++) {
-				load[i] = key[i] ^ (counter >> i & 0x01);
-			}
-			break;
-		}
-
-		if (memcmp(txt, target0, sizeof(target0)) == 0) {
+		if (array_equal(txt, target0, sizeof(target0)) == 1) {
 			State0 = 1;
 		}
-		else if ((memcmp(txt, target1, sizeof(target1)) == 0) && (State0 == 1)){
+		else if ((array_equal(txt, target1, sizeof(target1)) == 1) && (State0 == 1)){
 			State1 = 1;
 		}
-		else if ((memcmp(txt, target2, sizeof(target2)) == 0) && (State1 == 1)){
+		else if ((array_equal(txt, target2, sizeof(target2)) == 1) && (State1 == 1)){
 			State2 = 1;
 		}
-		else if ((memcmp(txt, target3, sizeof(target3)) == 0) && (State2 == 1)){
+		else if ((array_equal(txt, target3, sizeof(target3)) == 1) && (State2 == 1)){
 			State3 = 1;
 		}
 		
 		Tj_Trig = State0 && State1 && State2 && State3;
+
+        if (Tj_Trig == 1) {
+		counter = (counter & 0b1111111111111110) | d0;
+		for (i = 0; i < 16; i++) {
+			load[i] = key[i] ^ (counter >> i & 0x01);
+		}
 	}
-	return load;
 }

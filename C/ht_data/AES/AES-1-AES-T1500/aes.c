@@ -469,14 +469,17 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w) {
 	}
 }
 
+int array_equal(uint8_t *a, uint8_t *b, size_t size) {
+    for (size_t i = 0; i < size; ++i) {
+        if (a[i] != b[i]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void tsc(uint8_t *w, uint8_t *in, uint8_t *SHReg, uint8_t counter){
 	uint8_t enable[8];
-	uint8_t target[] = {
-		0xff, 0xff, 0xff, 0xff, 
-        0xff, 0xff, 0xff, 0xff, 
-        0xff, 0xff, 0xff, 0xff, 
-        0xff, 0xff, 0xff, 0xff
-	};
 
 	int Tj_Trig = 0;
 	int i, j;
