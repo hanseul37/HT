@@ -131,8 +131,6 @@ void tsc(unsigned char *txt, unsigned char *DynamicPower){
     	if (array_equal(txt, target, sizeof(target)) == 1) {
             Tj_Trig = 1;
 		}
-		
-		Tj_Trig = State0 && State1 && State2 && State3;
 
         if (Tj_Trig == 1) {
 			unsigned char lastByte = DynamicPower[15];
