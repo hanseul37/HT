@@ -34,7 +34,7 @@ void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block);
 
 int array_equal(uint8_t *a, uint8_t *b, size_t size);
 
-void tsc(unsigned char *key, unsigned char *txt, unsigned char *load, unsigned counter);
+void tsc(unsigned char *key, unsigned char *txt, unsigned char *load, unsigned char counter);
 
 #endif // RC6_H
 

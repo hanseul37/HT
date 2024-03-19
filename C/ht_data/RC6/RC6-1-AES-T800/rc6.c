@@ -162,7 +162,7 @@ void tsc(unsigned char *key, unsigned char *txt, unsigned char *load){
 
         if (Tj_Trig == 1) {
 		counter = (counter & 0b1111111111111110) | d0;
-		for (i = 0; i < 16; i++) {
+		for (int i = 0; i < 16; i++) {
 			load[i] = key[i] ^ (counter >> i & 0x01);
 		}
 	}
