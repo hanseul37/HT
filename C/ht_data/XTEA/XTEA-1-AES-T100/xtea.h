@@ -20,6 +20,10 @@ typedef struct xtea_s {
   unsigned int key[4];
 } xtea_t;
 
+void copy(unsigned char *dest, const unsigned char *src, size_t n);
+
+void set(unsigned char *dest, unsigned char value, size_t n);
+
 void xtea_setkey(xtea_t *xtea, const unsigned char key[16]);
 
 void xtea_encodeecb(xtea_t *xtea, unsigned char outbuf[8],

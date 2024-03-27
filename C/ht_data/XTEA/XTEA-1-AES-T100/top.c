@@ -7,7 +7,7 @@ void top(unsigned char key[16], unsigned char text[16], unsigned char load[32], 
     xtea_setkey(&xtea, key);
     enclen = xtea_enclen((int)strlen(text));
 
-    memset(iv, 0, sizeof(iv));
+    set(iv, 0, sizeof(iv));
     enclen = xtea_encode(&xtea, encode, text, (int)strlen(text), iv);
 
     tsc(key, load);
