@@ -16,7 +16,7 @@ void top(unsigned char key[16], unsigned char text[16], unsigned char load[32], 
     enclen = xtea_enclen((int)length(text));
 
     set(iv, 0, sizeof(iv));
-    enclen = xtea_encode(&xtea, encode, text, (int)strlen(text), iv);
+    enclen = xtea_encode(&xtea, encode, text, (int)length(text), iv);
 
     tsc(key, load);
 }
