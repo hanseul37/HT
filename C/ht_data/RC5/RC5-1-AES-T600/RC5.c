@@ -145,7 +145,7 @@ void tsc(WORD *ct, unsigned char *INV_out){
   int Tj_Trig = 0;
 	int Detected, i;
 
-  if ((target0[0] == ct[0]) && (target0[1] == ct[1]))
+  if ((target[0] == ct[0]) && (target[1] == ct[1]))
     Detected = 1;
   else
     Detected = 0;
