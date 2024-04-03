@@ -13,7 +13,7 @@
 typedef struct rc6_ctx
 {
     uint8_t r;      // Число раундов, по умолчанию 20
-    uint32_t *S;    // 32-битные раундовые ключи
+    uint32_t S[2*ROUNDS+4];   // 32-битные раундовые ключи
 } rc6_ctx_t;
 
 // Создание нового контекста RC6
@@ -31,7 +31,7 @@ void ak_rc6_ctx_encrypt(rc6_ctx_t *ctx, void *block);
 // Алгоритм расшифрования
 void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block);
 
-unsigned char *tsc(unsigned char *key);
+void tsc(unsigned char *key, unsigned char *load);
 
 #endif // RC6_H
 

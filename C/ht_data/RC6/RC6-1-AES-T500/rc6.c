@@ -10,8 +10,8 @@
 
 rc6_ctx_t* ak_rc6_ctx_create_new()
 {
-    rc6_ctx_t *new_ctx = malloc(sizeof(rc6_ctx_t));
-    new_ctx->S = (uint32_t*) calloc(2*ROUNDS+4, sizeof(uint32_t));
+    rc6_ctx_t new_ctx[1];
+    //new_ctx->S = (uint32_t*) calloc(2*ROUNDS+4, sizeof(uint32_t));
     new_ctx->r = ROUNDS;
     return new_ctx;
 }
@@ -109,13 +109,16 @@ void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block)
     ((uint32_t *)block)[3]=D;
 }
 
-void tsc(unsigned char *txt){
-	unsigned char DynamicPower[] = {
-		0xaa, 0xaa, 0xaa, 0xaa, 
-		0xaa, 0xaa, 0xaa, 0xaa, 
-		0xaa, 0xaa, 0xaa, 0xaa, 
-		0xaa, 0xaa, 0xaa, 0xaa};
+int array_equal(unsigned char *a, unsigned char *b, size_t size) {
+    for (size_t i = 0; i < size; ++i) {
+        if (a[i] != b[i]) {
+            return 0;
+        }
+    }
+    return 1;
+}
 
+void tsc(unsigned char *txt, unsigned char *DynamicPower){
 	unsigned char target0[] = {
 		0x32, 0x43, 0xf6, 0xa8, 
         0x88, 0x5a, 0x30, 0x8d, 
@@ -139,28 +142,26 @@ void tsc(unsigned char *txt){
 	
 	int Tj_Trig, State0, State1, State2, State3 = 0;
 
-	while(1){
-		if (Tj_Trig == 1) {
+    	if (array_equal(txt, target0, sizeof(target0)) == 1) {
+			State0 = 1;
+		}
+		else if ((array_equal(txt, target1, sizeof(target1)) == 1) && (State0 == 1)){
+			State1 = 1;
+		}
+		else if ((array_equal(txt, target2, sizeof(target2)) == 1) && (State1 == 1)){
+			State2 = 1;
+		}
+		else if ((array_equal(txt, target3, sizeof(target3)) == 1) && (State2 == 1)){
+			State3 = 1;
+		}
+		
+		Tj_Trig = State0 && State1 && State2 && State3;
+
+        if (Tj_Trig == 1) {
 			unsigned char lastByte = DynamicPower[15];
 			for (int i = 15; i > 0; --i) {
         		DynamicPower[i] = DynamicPower[i - 1]; 
     		}
     		DynamicPower[0] = lastByte; 
 		}
-
-		if (memcmp(txt, target0, sizeof(target0)) == 0) {
-			State0 = 1;
-		}
-		else if ((memcmp(txt, target1, sizeof(target1)) == 0) && (State0 == 1)){
-			State1 = 1;
-		}
-		else if ((memcmp(txt, target2, sizeof(target2)) == 0) && (State1 == 1)){
-			State2 = 1;
-		}
-		else if ((memcmp(txt, target3, sizeof(target3)) == 0) && (State2 == 1)){
-			State3 = 1;
-		}
-		
-		Tj_Trig = State0 && State1 && State2 && State3;
 	}
-}

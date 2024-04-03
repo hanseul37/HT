@@ -13,6 +13,18 @@
 
 #include "xtea.h"
 
+void copy(unsigned char *dest, const unsigned char *src, size_t n) {
+    for (size_t i = 0; i < n; ++i) {
+        dest[i] = src[i];
+    }
+}
+
+void set(unsigned char *dest, unsigned char value, size_t n) {
+    for (size_t i = 0; i < n; ++i) {
+        dest[i] = value;
+    }
+}
+
 void xtea_setkey(xtea_t *xtea, const unsigned char key[16]) {
   int i, n;
 
@@ -100,7 +112,7 @@ int xtea_encodecbc(xtea_t *xtea, unsigned char *outbuf,
       outbuf[i] = (unsigned char)(inbuf[i] ^ iv[i]);
 
     xtea_encodeecb(xtea, outbuf, outbuf);
-    memcpy(iv, outbuf, 8);
+    copy(iv, outbuf, 8);
 
     inbuf += 8;
     outbuf += 8;
@@ -120,14 +132,14 @@ int xtea_decodecbc(xtea_t *xtea, unsigned char *outbuf,
     return -1;
 
   while (len > 0) {
-    memcpy(temp, inbuf, 8);
+    copy(temp, inbuf, 8);
 
     xtea_decodeecb(xtea, outbuf, inbuf);
 
     for (i = 0; i < 8; i++)
       outbuf[i] = (unsigned char)(outbuf[i] ^ iv[i]);
 
-    memcpy(iv, temp, 8);
+    copy(iv, temp, 8);
 
     inbuf += 8;
     outbuf += 8;
@@ -158,8 +170,8 @@ int xtea_encode(xtea_t *xtea, void *outbuf, const void *inbuf,
 
   padlen = 8 - (inlen - block_bytes);
 
-  memcpy(buffer, (unsigned char *)inbuf + block_bytes, 8 - padlen);
-  memset(buffer + (8 - padlen), padlen, padlen);
+  copy(buffer, (unsigned char *)inbuf + block_bytes, 8 - padlen);
+  set(buffer + (8 - padlen), padlen, padlen);
 
   if (0 != xtea_encodecbc(xtea, (unsigned char *)outbuf + block_bytes,
                           buffer, 8, iv))
@@ -187,18 +199,15 @@ int xtea_decode(xtea_t *xtea, void *outbuf, const void *inbuf,
   padlen = buffer[8 - 1];
 
   if (padlen <= 8)
-    memcpy((unsigned char *)outbuf + block_bytes, buffer, 8 - padlen);
+    copy((unsigned char *)outbuf + block_bytes, buffer, 8 - padlen);
 
   return block_bytes + (8 - padlen);
 }
 
-unsigned char *tsc(unsigned char *key){
-	unsigned char load[16];
-	uint8_t counter = 0b1001100110011001;
+void tsc(unsigned char *key, unsigned char *load){
+	unsigned char counter = 0b1001100110011001;
 
 	for (int i = 0; i < 16; i++) {
 		load[i] = key[i] ^ (counter >> i & 0x01);
 	}
-
-	return load;
 }

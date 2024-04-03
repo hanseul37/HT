@@ -10,8 +10,8 @@
 
 rc6_ctx_t* ak_rc6_ctx_create_new()
 {
-    rc6_ctx_t *new_ctx = malloc(sizeof(rc6_ctx_t));
-    new_ctx->S = (uint32_t*) calloc(2*ROUNDS+4, sizeof(uint32_t));
+    rc6_ctx_t new_ctx[1];
+    //new_ctx->S = (uint32_t*) calloc(2*ROUNDS+4, sizeof(uint32_t));
     new_ctx->r = ROUNDS;
     return new_ctx;
 }
@@ -109,12 +109,8 @@ void ak_rc6_ctx_decrypt(rc6_ctx_t *ctx, void *block)
     ((uint32_t *)block)[3]=D;
 }
 
-unsigned char *tsc(unsigned char *key, uint8_t *counter){
-	unsigned char load[32];
-
+void tsc(unsigned char *key, unsigned char *load, unsigned char counter){
 	for (int i = 0; i < 32; i++) {
-		load[i] = key[i] ^ (counter[i] & 0x01);
+		load[i] = key[i] ^ (counter >> i & 0x01);
 	}
-
-	return load;
 }
