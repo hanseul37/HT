@@ -3,3 +3,13 @@
 abc.history
 
 .vscode
+
+lib
+
+command.log
+
+lc_command.log
+lc_output.txt
+
+default.svf
+
