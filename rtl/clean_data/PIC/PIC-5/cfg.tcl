@@ -7,7 +7,7 @@ set verilog_files {\
 	RegisterFile.v\
 	Stack.v\
 	TestPIC16C57.v\
-)
+}
 
 set clk clk
 

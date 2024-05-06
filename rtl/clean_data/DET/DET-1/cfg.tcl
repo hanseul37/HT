@@ -1,6 +1,6 @@
 set verilog_files {\
 	Det.v\
-)
+}
 
 set clk clock
 

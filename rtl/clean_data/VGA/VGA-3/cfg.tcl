@@ -1,6 +1,6 @@
 set verilog_files {\
 	vga_controller.v\
-)
+}
 
 set clk clk
 

@@ -1,6 +1,6 @@
 set verilog_files {\
 	synchronous_ram.v\
-)
+}
 
 set clk clk
 

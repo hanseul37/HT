@@ -1,6 +1,6 @@
 set verilog_files {\
 	DualRam.v\
-)
+}
 
 set clk clk
 

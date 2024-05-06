@@ -1,6 +1,6 @@
 set verilog_files {\
 	risc16f84.v\
-)
+}
 
 set clk clk_i
 

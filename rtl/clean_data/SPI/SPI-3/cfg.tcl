@@ -3,7 +3,7 @@ set verilog_files {\
 	spi_main.v\
 	spi_master.v\
 	spi_slave.v\
-)
+}
 
 set clk sys_clk
 

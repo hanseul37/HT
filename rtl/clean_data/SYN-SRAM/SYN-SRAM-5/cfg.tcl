@@ -1,6 +1,6 @@
 set verilog_files {\
 	dualport_sram.v\
-)
+}
 
 set clk clk
 

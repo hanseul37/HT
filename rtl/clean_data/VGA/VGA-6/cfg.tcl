@@ -4,7 +4,7 @@ set verilog_files {\
 	uart_rx.v\
 	utils.v\
 	vga.v\
-)
+}
 
 set clk CLK
 

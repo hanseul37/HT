@@ -1,6 +1,6 @@
 set verilog_files {\
 	determinant.v\
-)
+}
 
 set clk clock
 

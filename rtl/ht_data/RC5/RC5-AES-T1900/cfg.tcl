@@ -5,7 +5,7 @@ set verilog_files {\
 	rc5_rol.v\
 	top.v\
 	TSC.v\
-)
+}
 
 set clk clk
 

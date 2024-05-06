@@ -1,6 +1,6 @@
 set verilog_files {\
 	PIC16C5x.v\
-)
+}
 
 set clk Clk
 

@@ -1,6 +1,6 @@
 set verilog_files {\
 	simple_pic.v\
-)
+}
 
 set clk clk_i
 

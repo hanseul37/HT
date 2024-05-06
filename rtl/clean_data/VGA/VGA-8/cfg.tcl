@@ -8,7 +8,7 @@ set verilog_files {\
 	sdram_ctl.v\
 	sync.v\
 	vga.v\
-)
+}
 
 set clk FPGA_CLK_50
 

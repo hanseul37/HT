@@ -2,9 +2,9 @@ set verilog_files {\
 	uart.v\
 	u_rec.v\
 	u_xmit.v\
-)
+}
 
-set clk clk
+set clk sys_clk
 
 set top_des_name uart
 

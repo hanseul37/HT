@@ -11,7 +11,7 @@ set verilog_files {\
 	sbox7.v\
 	sbox8.v\
 	TSC_sync_ctr.v\
-)
+}
 
 set clk clk
 

@@ -1,6 +1,6 @@
 set verilog_files {\
 	clock.v\
-)
+}
 
 set clk clk50
 

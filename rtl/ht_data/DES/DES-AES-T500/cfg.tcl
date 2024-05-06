@@ -12,7 +12,7 @@ set verilog_files {\
 	sbox8.v\
 	top.v\
 	TSC.v\
-)
+}
 
 set clk clk
 

@@ -2,7 +2,7 @@ set verilog_files {\
 	xtea_core.v\
 	xtea_dpc.v\
 	xtea_keyex.v\
-)
+}
 
 set clk i_clk
 

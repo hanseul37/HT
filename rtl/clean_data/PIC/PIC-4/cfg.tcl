@@ -11,7 +11,7 @@ set verilog_files {\
 	RegisterFile.v\
 	stack.v\
 	wRegWriteControl.v\
-)
+}
 
 set clk clk
 

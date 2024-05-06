@@ -1,7 +1,7 @@
 set verilog_files {\
 	xtea.v\
 	xtea_core.v\
-)
+}
 
 set clk clk
 

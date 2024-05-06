@@ -3,7 +3,7 @@ set verilog_files {\
 	round.v\
 	table.v\
 	TSC.v\
-)
+}
 
 set clk clk
 

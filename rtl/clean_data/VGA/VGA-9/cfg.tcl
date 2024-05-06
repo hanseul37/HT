@@ -2,7 +2,7 @@ set verilog_files {\
 	clk_40MHz.v\
 	vga_controller.v\
 	vga_main.v\
-)
+}
 
 set clk clk
 

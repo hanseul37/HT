@@ -4,7 +4,7 @@ set verilog_files {\
 	pos_edge_det.v\
 	spi2.v\
 	spi_module.v\
-)
+}
 
 set clk master_clock
 

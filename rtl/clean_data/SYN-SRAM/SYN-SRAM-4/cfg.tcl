@@ -1,6 +1,6 @@
 set verilog_files {\
 	RAM.v\
-)
+}
 
 set clk clk
 

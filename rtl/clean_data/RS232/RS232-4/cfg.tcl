@@ -1,7 +1,7 @@
 set verilog_files {\
 	fifo.v\
 	uart_rx.v\
-)
+}
 
 set clk CLK
 

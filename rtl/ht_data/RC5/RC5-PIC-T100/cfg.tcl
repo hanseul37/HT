@@ -3,7 +3,7 @@ set verilog_files {\
 	rc5_dpc.v\
 	rc5_keyex.v\
 	rc5_rol.v\
-)
+}
 
 set clk clk
 

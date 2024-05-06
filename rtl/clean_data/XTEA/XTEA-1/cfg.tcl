@@ -1,6 +1,6 @@
 set verilog_files {\
 	xtea.v\
-)
+}
 
 set clk clock
 

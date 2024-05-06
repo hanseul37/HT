@@ -1,6 +1,6 @@
 set verilog_files {\
 	sram.v\
-)
+}
 
 set clk clk
 

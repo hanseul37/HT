@@ -1,7 +1,7 @@
 set verilog_files {\
 	uart.v\
 	uart_transceiver.v\
-)
+}
 
 set clk sys_clk
 

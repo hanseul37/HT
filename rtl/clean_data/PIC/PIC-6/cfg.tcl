@@ -11,7 +11,7 @@ set verilog_files {\
 	Register12Bit.v\
 	RegisterFile.v\
 	Stack.v\
-)
+}
 
 set clk clk
 

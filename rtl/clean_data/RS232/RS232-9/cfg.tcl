@@ -2,7 +2,7 @@ set verilog_files {\
 	rx_rs232.v\
 	top.v\
 	tx_rs232.v\
-)
+}
 
 set clk clk_s
 

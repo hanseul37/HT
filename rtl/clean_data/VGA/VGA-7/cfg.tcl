@@ -3,7 +3,7 @@ set verilog_files {\
 	SyncGen.v\
 	VGA_Controller_v1_0.v\
 	VGA_Controller_v1_0_S_AXI.v\
-)
+}
 
 set clk s_axi_aclk
 

@@ -1,7 +1,7 @@
 set verilog_files {\
 	rx_uart.v\
 	tx_uart.v\
-)
+}
 
 set clk i_Clock
 

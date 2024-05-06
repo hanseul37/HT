@@ -2,7 +2,7 @@ set verilog_files {\
 	SPI_loopback.v\
 	SPI_Master.v\
 	SPI_Slave.v\
-)
+}
 
 set clk clk
 

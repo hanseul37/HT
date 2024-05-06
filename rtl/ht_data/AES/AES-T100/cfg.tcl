@@ -5,7 +5,7 @@ set verilog_files {\
 	table.v\
 	top.v\
 	TSC.v\
-)
+}
 
 set clk clk
 

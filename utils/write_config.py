@@ -2,7 +2,7 @@ import os
 
 topmodule = dict()
 
-with open('F:\\study\\AssembleGNN\\HT_dataset\\synth\\topmodule.txt') as fp:
+with open('..\\synth\\topmodule.txt') as fp:
     for line in fp.readlines():
         if line[0] == '\000' or line[:2] == '//':
             continue
@@ -18,11 +18,11 @@ with open('F:\\study\\AssembleGNN\\HT_dataset\\synth\\topmodule.txt') as fp:
         name = v_top[0].replace('.v', '')
         topmodule[name] = v_top[1]
 
-
+target_dir = '..\\rtl\\clean_data'
 ban_keywords = ['test.v', 'tb.v', 'test_', '_test', 'tb_', '_tb', 'testbench']
 
 if __name__ == '__main__':
-    for ty in os.listdir():#[x for x in os.listdir() if x != 'AES']:
+    for ty in os.listdir(target_dir):#[x for x in os.listdir() if x != 'AES']:
         if len(os.path.splitext(ty)[1]):
             continue
         
@@ -39,7 +39,6 @@ if __name__ == '__main__':
             if len(files) == 0:
                 continue
             
-            '''
             with open(f'{ty}\\{num}\\cfg.tcl', 'w') as fp:
                 fp.write('set verilog_files {\\\n')
                 for file in files:
@@ -47,16 +46,3 @@ if __name__ == '__main__':
                 fp.write(')\n\nset clk clk\n\n')
                 fp.write(f'set top_des_name {topmodule[num]}\n\nset dont_touch_module_name TSC\n')
                 fp.close()
-            '''
-            
-            with open(f'{ty}\\{num}\\cfg.tcl') as fp:
-                lines = fp.readlines()
-                fp.close()
-            
-            with open(f'{ty}\\{num}\\cfg.tcl', 'w') as fp:
-                for li in lines:
-                    if li[:16] != 'set top_des_name':
-                        fp.write(li)
-                        continue
-                    
-                    fp.write(f'set top_des_name {topmodule[num]}\n')

@@ -1,6 +1,6 @@
 set verilog_files {\
 	Determinant.v\
-)
+}
 
 set clk clk
 

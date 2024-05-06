@@ -3,7 +3,7 @@ set verilog_files {\
 	horizontal_counter.v\
 	top.v\
 	vertical_counter.v\
-)
+}
 
 set clk clk
 

@@ -1,7 +1,7 @@
 set verilog_files {\
 	spi_master.v\
 	spi_slave.v\
-)
+}
 
 set clk clk
 

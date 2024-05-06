@@ -1,6 +1,6 @@
 set verilog_files {\
 	sync_fifo.v\
-)
+}
 
 set clk clk
 

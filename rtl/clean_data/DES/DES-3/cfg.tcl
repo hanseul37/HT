@@ -1,7 +1,7 @@
 set verilog_files {\
 	Encrypt.v\
 	ProcessKey.v\
-)
+}
 
 # no clock?
 set clk clk

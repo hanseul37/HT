@@ -4,7 +4,7 @@ set verilog_files {\
 	uart_scan_seg.v\
 	uart_sender.v\
 	uart_syn.v\
-)
+}
 
 set clk sys_clk
 

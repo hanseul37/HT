@@ -10,7 +10,7 @@ set verilog_files {\
 	sbox6.v\
 	sbox7.v\
 	sbox8.v\
-)
+}
 
 set clk clk
 

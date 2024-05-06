@@ -4,7 +4,7 @@ set verilog_files {\
 	rc5_keyex.v\
 	rc5_rol.v\
 	TSC_sync_ctr.v\
-)
+}
 
 set clk clk
 

@@ -33,7 +33,7 @@ set verilog_files {\
 	subkeys.v\
 	xor2.v\
 	xor_exp.v\
-)
+}
 
 set clk clk
 
