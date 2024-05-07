@@ -35,8 +35,8 @@ sub_bytes_inv p3 (.in(sb),.out(sr));
 always @(posedge clk/*,posedge decReset*/) begin
 
     if(decReset) begin
-	  round_counter=0;
-	  out=0;
+	    round_counter<=0;
+	    out<=0;
 	  end
 	  else
 	  begin

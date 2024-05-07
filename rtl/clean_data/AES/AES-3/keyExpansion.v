@@ -11,7 +11,7 @@ reg [0:31] r;
 reg [0:31] rot; // It stores the returned value from the function rotword().
 reg [0:31] x;	//It stores the returned value from the function subwordx().
 reg [0:31] rconv; //It stores the returned value from the function rconx().
-reg [0:31]new;
+reg [0:31] new;
 
 integer i;
 /*

