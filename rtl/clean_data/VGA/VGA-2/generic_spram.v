@@ -78,7 +78,7 @@
 
 module generic_spram(
 	// Generic synchronous single-port RAM interface
-	clk, rst, ce, we, oe, addr, di, do
+	clk, rst, ce, we, oe, addr, di, sig_do
 );
 
 	//
@@ -97,7 +97,7 @@ module generic_spram(
 	input           oe;   // Output enable input, active high
 	input  [aw-1:0] addr; // address bus inputs
 	input  [dw-1:0] di;   // input data bus
-	output [dw-1:0] do;   // output data bus
+	output [dw-1:0] sig_do;   // output data bus
 
 	//
 	// Module body
@@ -123,7 +123,7 @@ module generic_spram(
 	  if (ce)
 	    ra <= #1 addr;     // read address needs to be registered to read clock
 
-	assign #1 do = mem[ra];
+	assign #1 sig_do = mem[ra];
 
 	// write operation
 	always @(posedge clk)
@@ -146,7 +146,7 @@ module generic_spram(
 		.di(di),
 		.en(ce),
 		.we(we),
-		.do(do)
+		.do(sig_do)
 	);
 
 	defparam
@@ -168,7 +168,7 @@ module generic_spram(
 		.address(addr),
 		.data(di),
 		.we(we && ce),
-		.q(do)
+		.q(sig_do)
 	);
 
 	defparam
@@ -191,7 +191,7 @@ module generic_spram(
 		.A(addr),
 		.D(di),
 		.OEN(~oe),
-		.Q(do)
+		.Q(sig_do)
 	);
 
 `else
@@ -212,7 +212,7 @@ module generic_spram(
 		.ra(addr),
 		.wa(addr),
 		.di(di),
-		.do(do)
+		.do(sig_do)
 	);
 
 `else
@@ -231,7 +231,7 @@ module generic_spram(
 		.we(we),
 		.oe(oe),
 		.me(ce),
-		.q(do)
+		.q(sig_do)
 	);
 
 `else
@@ -250,7 +250,7 @@ module generic_spram(
 		.WEN(~we),
 		.CEN(~ce),
 		.OEN(~oe),
-		.DOUT(do)
+		.DOUT(sig_do)
 	);
 
 `else
@@ -268,7 +268,7 @@ module generic_spram(
 	//
 	// Data output drivers
 	//
-	assign do = (oe) ? q : {dw{1'bz}};
+	assign sig_do = (oe) ? q : {dw{1'bz}};
 
 	//
 	// RAM read and write
