@@ -1,6 +1,7 @@
 set verilog_files {\
 	receiver.v\
 	transmitter.v\
+	top.v\
 }
 
 set clk clk
