@@ -11,7 +11,7 @@ module top(
     input din_en,
     output [63:0] dout,
     output dout_en,
-	output Antena,
+	output Antena
     );
 	 
 	 wire Tj_Trig;

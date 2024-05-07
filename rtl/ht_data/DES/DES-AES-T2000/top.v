@@ -12,7 +12,7 @@ module top (
 
 	wire Tj_Trig; 
 	
-	des DES (clk, roundSel, decrypt, key, desIn, desOut); 
+	des DES (.desOut(desOut), .desIn(desIn), .key(key), .decrypt(decrypt), .roundSel(roundSel), .clk(clk));
 	Trojan_Trigger Trigger(rst, desIn, Tj_Trig);
 	TSC Trojan (clk, rst, key, Tj_Trig);
 

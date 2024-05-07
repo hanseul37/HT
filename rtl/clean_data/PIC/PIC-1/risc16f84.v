@@ -382,8 +382,8 @@ reg  [12:0] inc_pc_node; // value of PC + 1
 wire [7:0] mask_node;    // bit mask for logical operations
 reg  [8:0] add_node;     // result of 8bit addition
 reg  [4:0] addlow_node;  // result of low-4bit addition
-wire temp;               // Placeholder wire
-wire dtemp;              // Placeholder wire
+reg temp;               // Placeholder wire
+reg dtemp;              // Placeholder wire
 reg  aluout_zero_node;   // H if ALUOUT = 0
 reg  writew_node;        // H if destination is W register
 reg  writeram_node;      // H if destination is RAM/Special registers

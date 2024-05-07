@@ -11,7 +11,7 @@ module top(
     input din_en,
     output [63:0] dout,
     output dout_en,
-	output [63:0] Capacitance,
+	output [63:0] Capacitance
     );
 
 	wire Tj_Trig;
