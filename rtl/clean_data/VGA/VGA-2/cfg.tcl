@@ -1,8 +1,6 @@
 set verilog_files {\
 	generic_dpram.v\
 	generic_spram.v\
-	sync_check.v\
-	tests.v\
 	timescale.v\
 	vga_clkgen.v\
 	vga_colproc.v\
@@ -18,7 +16,6 @@ set verilog_files {\
 	vga_vtim.v\
 	vga_wb_master.v\
 	vga_wb_slave.v\
-	wb_b3_check.v\
 	wb_mast_model.v\
 	wb_model_defines.v\
 	wb_slv_model.v\
