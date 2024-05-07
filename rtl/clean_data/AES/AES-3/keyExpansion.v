@@ -11,7 +11,7 @@ reg [0:31] r;
 reg [0:31] rot; // It stores the returned value from the function rotword().
 reg [0:31] x;	//It stores the returned value from the function subwordx().
 reg [0:31] rconv; //It stores the returned value from the function rconx().
-reg [0:31] new;
+reg [0:31] new_reg;
 
 integer i;
 /*
@@ -71,10 +71,10 @@ always@* begin
 	else if(nk >6 && i % nk == 4) begin
 		temp = subwordx(temp);
 	end
-	new = (w[(128*(nr+1)-(nk*32))+:32] ^ temp);
+	new_reg = (w[(128*(nr+1)-(nk*32))+:32] ^ temp);
 	// We would shift W by 32 bit to the left to add the new generated key word (new) at its end.
 	w = w << 32;
-	w = {w[0 : (128 * (nr + 1) - 32) - 1], new};
+	w = {w[0 : (128 * (nr + 1) - 32) - 1], new_reg};
 end
 
 end
