@@ -1,5 +1,5 @@
 module des(desOut, desIn, key, decrypt, roundSel, clk);
-output	[63:0]	desOut;
+output reg	[63:0]	desOut;
 input	[63:0]	desIn;
 input	[55:0]	key;
 input		decrypt;

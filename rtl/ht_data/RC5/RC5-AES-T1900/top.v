@@ -10,7 +10,7 @@ module top(
     input [63:0] din,
     input din_en,
     output [63:0] dout,
-    output dout_en,
+    output dout_en
     );
 
 	  rc5_core RC5  (clk, rst, flag, key, key_en, key_ok, din, din_en, dout, dout_en);

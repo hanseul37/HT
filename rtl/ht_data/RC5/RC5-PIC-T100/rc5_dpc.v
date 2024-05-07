@@ -5,7 +5,7 @@ module rc5_dpc(
 	input  [32*26-1:0] 	i_keyex,
     input  [63:0]   	i_din,
     input           	i_din_en,
-    output [63:0]   	o_dout,
+    output reg [63:0]   	o_dout,
     output          	o_dout_en
 );
 

@@ -123,6 +123,7 @@ module fwpic #(
 		input [1:0] adr,
 		input valid,
 		input we,
+		input [N_IRQ-1:0] dat_w,
 		output reg			int_o,
 		output [N_IRQ-1:0] dat_o,
 		input [N_IRQ-1:0]	irq
