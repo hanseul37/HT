@@ -1,0 +1,79 @@
+Operating system: Linux
+                  0.0.0 Linux 5.4.0-150-generic #167~18.04.1-Ubuntu SMP Wed May 24 00:51:42 UTC 2023 x86_64
+CPU: x86
+     GenuineIntel family 6 model 45 stepping 7
+     12 CPUs
+
+GPU: UNKNOWN
+
+Crash reason:  DUMP_REQUESTED
+Crash address: 0xf7aa11bf
+Process uptime: not available
+
+Thread 0 (crashed)
+ 0  libcbreakpad.so + 0x281bf
+    eip = 0xf7aa11bf   esp = 0xff8791d0   ebp = 0xff879308   ebx = 0xf7ad0000
+    esi = 0xf7ad0000   edi = 0xff8793b8   eax = 0x00000000   ecx = 0x00000001
+    edx = 0x00000000   efl = 0xff8791d4
+    Found by: given as instruction pointer in context
+ 1  libcbreakpad.so + 0x264b4
+    eip = 0xf7a9f4b4   esp = 0xff879310   ebp = 0xff879458
+    Found by: previous frame's frame pointer
+ 2  xmsim!vserror + 0x95
+    eip = 0x090ab3e5   esp = 0xff879460   ebp = 0x00000000
+    Found by: previous frame's frame pointer
+ 3  xmsim!serror + 0x1a
+    eip = 0x090ac7aa   esp = 0xff879660   ebp = 0x00000000   ebx = 0x00000000
+    esi = 0xff8796a0   edi = 0xf7adb380
+    Found by: call frame info
+ 4  xmsim!ssig_interr + 0x5e
+    eip = 0x0909326e   esp = 0xff879680   ebp = 0x00000000   ebx = 0x0000000b
+    esi = 0xff8796a0   edi = 0xf7adb380
+    Found by: call frame info
+ 5  linux-gate.so + 0xe10
+    eip = 0xf7fc9e10   esp = 0xff879730   ebp = 0x00000000   ebx = 0xfffffff5
+    esi = 0xff87a554   edi = 0xf7adb380
+    Found by: call frame info
+ 6  xmsim!nc_prepare_to_exit + 0x2e
+    eip = 0x080eceb8   esp = 0xff879770   ebp = 0x00000000
+    Found by: stack scanning
+
+Loaded modules:
+0x08048000 - 0x0a24afff  xmsim  ???  (main)
+0x0a24c000 - 0x0a385fff  xmsim  ???
+0xf73b0000 - 0xf755cfff  libStrapNC.so  ???
+0xf7566000 - 0xf75f7fff  libdcapi.so  ???
+0xf75f9000 - 0xf77f8fff  locale-archive  ???
+0xf77f9000 - 0xf780efff  libresolv-2.27.so  ???
+0xf7811000 - 0xf7817fff  libnss_dns-2.27.so  ???
+0xf7818000 - 0xf7825fff  libnss_files-2.27.so  ???
+0xf782c000 - 0xf7841fff  libnsl-2.27.so  ???
+0xf7842000 - 0xf7844fff  libnsl-2.27.so  ???
+0xf7847000 - 0xf7854fff  libnss_nis-2.27.so  ???
+0xf7a79000 - 0xf7ad1fff  libcbreakpad.so  ???  (WARNING: No symbols, libcbreakpad.so, 29527EF1319F3B0570E472CF814FE4310)
+0xf7adc000 - 0xf7cb0fff  libc-2.27.so  ???
+0xf7cb1000 - 0xf7cb4fff  libc-2.27.so  ???
+0xf7cb8000 - 0xf7cd3fff  libgcc_s.so.1  ???
+0xf7cd4000 - 0xf7e4afff  libstdc++.so.6.0.22  ???
+0xf7e4e000 - 0xf7f4ffff  libm-2.27.so  ???
+0xf7f50000 - 0xf7f54fff  libdl-2.27.so  ???
+0xf7f55000 - 0xf7f6ffff  libpthread-2.27.so  ???
+0xf7f70000 - 0xf7f72fff  libpthread-2.27.so  ???
+0xf7f75000 - 0xf7f76fff  locale-archive  ???
+0xf7f77000 - 0xf7f80fff  libnss_compat-2.27.so  ???
+0xf7fc9000 - 0xf7fcafff  linux-gate.so  ???  (WARNING: No symbols, linux-gate.so, F4235C14D2F21FB7C539EF5203D56EE50)
+0xf7fcb000 - 0xf7ff2fff  ld-2.27.so  ???
+
+******BACKTRACE*****
+vserror [0x90ab3e5]
+serror [0x90ac7aa]
+ssig_interr [0x909326e]
+nc_prepare_to_exit [0x80eceb8]
+sexit [0x90926b2]
+ssig_exit [0x90931f9]
+strapLoad [0x84c282a]
+xncmain [0x80e5e18]
+ncmain [0x80de4d8]
+main [0x97402c4]
+_start [0x807d121]
+******BACKTRACE END*****

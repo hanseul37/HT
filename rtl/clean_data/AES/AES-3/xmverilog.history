@@ -1,0 +1,3 @@
+s1(07May2024:15:44:20):  ncverilog keyExpansion.v 
+s2(07May2024:15:44:37):  ncverilog -c keyExpansion.v 
+s3(07May2024:15:44:42):  ncverilog -clean -c keyExpansion.v 

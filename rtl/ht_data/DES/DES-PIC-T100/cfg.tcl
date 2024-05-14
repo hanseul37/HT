@@ -12,7 +12,10 @@ set verilog_files {\
 	sbox8.v\
 }
 
-set clk clk
+set clk {\
+  clk\
+  t_desOut\
+}
 
 set top_des_name des
 

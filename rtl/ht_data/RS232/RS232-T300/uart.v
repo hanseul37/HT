@@ -39,19 +39,15 @@ wire			rec_readyH;
 
 u_xmit  iXMIT(  .sys_clk(sys_clk),
 				.sys_rst_l(sys_rst_l),
-
 				.uart_xmitH(uart_XMIT_dataH),
 				.xmitH(xmitH),
 				.xmit_dataH(xmit_dataH),
-				.xmit_doneH(xmit_doneH),
+				.xmit_doneH(xmit_doneH)
 			);
 
 u_rec iRECEIVER (.sys_rst_l(sys_rst_l),
 				.sys_clk(sys_clk),
-
-				
 				.uart_dataH(uart_REC_dataH),
-
 				.rec_dataH(rec_dataH_rec),
 				.rec_readyH(rec_readyH)
 

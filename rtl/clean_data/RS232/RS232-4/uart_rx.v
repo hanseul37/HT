@@ -184,6 +184,7 @@ module uart_rx #(
 				T_RESET();
 		  end
 		  else begin // each state entered here is free to assume that the reset pin is low. 
+		    slow_clock_counter <= slow_clock_pulse ? 0 : slow_clock_counter + 1;
 			  case (reg_state)
 					S_ERROR: T_ERROR();
 					S_INIT: T_INIT();
@@ -191,11 +192,6 @@ module uart_rx #(
 					S_READ: T_READ();
 			  endcase
 		  end
-	 end
-	 
-//// slow clock handling 
-	 always @(posedge CLK) begin
-		  slow_clock_counter = slow_clock_pulse ? 0 : slow_clock_counter + 1;
 	 end
 
 endmodule

@@ -16,10 +16,7 @@ set verilog_files {\
 	vga_vtim.v\
 	vga_wb_master.v\
 	vga_wb_slave.v\
-	wb_mast_model.v\
 	wb_model_defines.v\
-	wb_slv_model.v\
-	wrapper.v\
 }
 
 set clk wb_clk_i

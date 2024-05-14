@@ -26,7 +26,7 @@ wire [9:0] v_cnt;
 wire next_line;
 wire clk_25Mhz;
 
-assign CLK_25MHZ = clk_25MHz;
+assign CLK_25MHZ = clk_25Mhz;
 assign HS = h_cnt < H_SYNC;
 assign VS = v_cnt < V_SYNC;
 

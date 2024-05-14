@@ -3,11 +3,12 @@ module top(sys_clk, sys_rst_n, rx, tx);
 	input sys_clk;
 	input sys_rst_n;
 	input rx;
+  output tx;
 	
 	reg [7:0] data;
 	reg flag;
 	
-	uart_rx rx(
+	uart_rx u_rx(
 		.sys_clk(sys_clk),
 		.sys_rst_n(sys_rst_n),
 		.rx(rx),
@@ -15,7 +16,7 @@ module top(sys_clk, sys_rst_n, rx, tx);
 		.out_flag(flag)
 	);
 
-	uart_tx tx(
+	uart_tx u_tx(
 		.sys_clk(sys_clk),
 		.sys_rst_n(sys_rst_n),
 		.in_data(data),

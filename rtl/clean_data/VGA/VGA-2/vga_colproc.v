@@ -126,8 +126,8 @@ module vga_colproc(clk, srst, vdat_buffer_di, ColorDepth, PseudoColor,
 	          col_24bpp   = 7'b010_0000,
 	          col_32bpp   = 7'b100_0000;
 
-	reg [6:0] c_state;   // synopsys enum_state
-	reg [6:0] nxt_state; // synopsys enum_state
+	reg [6:0] c_state;
+	reg [6:0] nxt_state;
 
 	// next state decoder
 	always @(c_state or vdat_buffer_empty or ColorDepth or PseudoColor or rgb_fifo_full or colcnt or clut_ack)

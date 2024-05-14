@@ -44,13 +44,13 @@ always@(posedge clk_s)
 begin
 	if(!rstn_s)
 		begin
-			txDATA	=	1'b1	;
-			F_SIG	=	1'b0	;
+			txDATA	<=	1'b1	;
+			F_SIG	<=	1'b0	;
 		end
 	else if(!START_CNT)
 		begin
-			txDATA	=	1'b1	;
-			F_SIG	=	1'b0	;
+			txDATA	<=	1'b1	;
+			F_SIG	<=	1'b0	;
 		end
 	else if(START_CNT && CNT_frame == clkNUM_bit*0)
 		txDATA	<=	1'b0	;

@@ -51,7 +51,7 @@ assign IP[1:64] = {	desIn[06], desIn[14], desIn[22], desIn[30], desIn[38], desIn
 			desIn[33], desIn[41], desIn[49], desIn[57] };
 
 // Perform final permutation
-assign desOut = {	FP[40], FP[08], FP[48], FP[16], FP[56], FP[24], FP[64], FP[32], 
+assign t_desOut = {	FP[40], FP[08], FP[48], FP[16], FP[56], FP[24], FP[64], FP[32], 
 			FP[39], FP[07], FP[47], FP[15], FP[55], FP[23], FP[63], FP[31], 
 			FP[38], FP[06], FP[46], FP[14], FP[54], FP[22], FP[62], FP[30], 
 			FP[37], FP[05], FP[45], FP[13], FP[53], FP[21], FP[61], FP[29], 

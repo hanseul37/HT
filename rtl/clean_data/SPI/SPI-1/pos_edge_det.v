@@ -1,4 +1,4 @@
-`default_nettype none
+//`default_nettype none
 `timescale 1ns/1ps
 
 module pos_edge_det ( input sig,            // Input signal for which positive edge has to be detected

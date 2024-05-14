@@ -1,0 +1,25 @@
+xmverilog: 19.03-s009: (c) Copyright 1995-2019 Cadence Design Systems, Inc.
+TOOL:	xmverilog	19.03-s009: Started on May 14, 2024 at 15:02:04 KST
+ncverilog
+	-c
+	vga_colproc.v
+xmverilog: *W,NCEXDEP: Executable (ncverilog) is deprecated. Use (xmverilog) instead.
+file: vga_colproc.v
+	module worklib.vga_colproc:v
+		errors: 0, warnings: 0
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.vga_colproc:v <0x04130112>
+			streams:   0, words:     0
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                  Instances  Unique
+		Modules:                  1       1
+		Registers:               23      23
+		Always blocks:            7       7
+		Simulation timescale:  10ps
+	Writing initial simulation snapshot: worklib.vga_colproc:v
+TOOL:	xmverilog	19.03-s009: Exiting on May 14, 2024 at 15:02:04 KST  (total: 00:00:00)

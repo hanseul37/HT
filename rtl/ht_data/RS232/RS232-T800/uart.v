@@ -56,7 +56,7 @@ u_rec iRECEIVER (
 				.uart_dataH(uart_REC_dataH),
 
 				.rec_dataH(rec_dataH_rec),
-				.rec_readyH(rec_readyH),
+				.rec_readyH(rec_readyH)
 
 				);
 
