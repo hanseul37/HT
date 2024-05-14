@@ -19,6 +19,7 @@ set verilog_files {\
 	wb_mast_model.v\
 	wb_model_defines.v\
 	wb_slv_model.v\
+	wrapper.v\
 }
 
 set clk wb_clk_i

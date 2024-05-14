@@ -16,10 +16,11 @@ set verilog_files {\
   ShiftRows.v \
   sub_bytes_inv.v \
   sub_bytes.v \
+  top.v \
 }
 
 set clk clk
 
-set top_des_name wrapper
+set top_des_name top
 
 set dont_touch_module_name TSC
