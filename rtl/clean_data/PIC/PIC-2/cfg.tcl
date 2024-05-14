@@ -1,6 +1,5 @@
 set verilog_files {\
-	fwpic.v\
-	fwpic_wb.v\
+	fwpic.v
 }
 
 set clk clock
