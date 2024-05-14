@@ -38,14 +38,14 @@ Shift_Rows p3 (.in(sb),.out(sr));
 
 always @(posedge clk) begin
 	if(reset) begin
-		round_counter=0;
-		in=0;
-		decReset=1;
+		round_counter <= 0;
+		in <= 0;
+		decReset <= 1;
 	end
 	else if(enable) begin
 		in<= load;
-		round_counter = 0;
-		decReset=1;
+		round_counter <= 0;
+		decReset <= 1;
 	end
 	else begin
 		if(round_counter == 0) begin
@@ -58,7 +58,7 @@ always @(posedge clk) begin
 		end 
 		else begin
 			out <= sr ^ k_sch[127-:128];
-			decReset=0;
+			decReset <= 0;
 		end
 	end
 	//$display("state[0]=%h in=%h k_sch=%h", state[0], in, k_sch[key_sch_len -: 128]);
