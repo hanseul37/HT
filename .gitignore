@@ -11,5 +11,10 @@ command.log
 lc_command.log
 lc_output.txt
 
+.err
+xcelium.d
+xmverilog.history
+xmverilog.log
+
 default.svf
 
