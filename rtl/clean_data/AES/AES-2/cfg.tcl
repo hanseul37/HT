@@ -20,6 +20,6 @@ set verilog_files {\
 
 set clk clk
 
-set top_des_name enchiper 
+set top_des_name wrapper
 
 set dont_touch_module_name TSC
