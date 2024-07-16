@@ -16,8 +16,8 @@ set verilog_files {\
   subBytes.v\
 }
 
-set clk clk
+set clk {}
 
 set top_des_name AES
 
-set dont_touch_module_name TSC
+set dont_touch_module_name {}
