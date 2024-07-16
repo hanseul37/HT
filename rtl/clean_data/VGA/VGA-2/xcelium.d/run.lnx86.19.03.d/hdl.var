@@ -1,7 +1,0 @@
-define XMSIMRC	( /tools/Cadence/XCELIUM1903/tools/xcelium/files/xmsimrc, ~/.xmsimrc )
-include ./hdlrun.var
-define SNAPSHOT worklib.vga_colproc:v
-DEFINE RUNMODEDEFAULT 1
-DEFINE LIB_MAP ( + => worklib )
-define ELAB_SNAPSHOT
-define SNAPSHOT worklib.vga_colproc:v

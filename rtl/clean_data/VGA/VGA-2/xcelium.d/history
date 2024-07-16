@@ -1,5 +1,0 @@
-//
-// File created by:  xrun
-// Do not modify this file
-
-s1::(14May2024:15:02:04):( ncverilog -c vga_colproc.v )
