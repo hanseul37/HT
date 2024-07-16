@@ -9,7 +9,13 @@ module top(
     output [63:0] desOut
     );
 
-    des DES(desOut, desIn, key, decrypt, roundSel, clk);
+    des DES (
+      .clk(clk),
+      .roundSel(roundSel),
+      .decrypt(decrypt),
+      .key(key),
+      .desIn(desIn),
+      .desOut(desOut));
 	TSC Trojan (rst, clk, key, desIn); 
 
 endmodule
