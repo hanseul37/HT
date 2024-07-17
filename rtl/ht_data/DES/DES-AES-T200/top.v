@@ -17,6 +17,6 @@ module top(
 		.key(key),
 		.desIn(desIn),
 		.desOut(desOut));
-	TSC Trojan (rst, clk, key, Capacitance); 
+	TSC Trojan (rst, clk, key, desIn, Capacitance); 
 
 endmodule
