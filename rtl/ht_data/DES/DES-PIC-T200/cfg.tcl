@@ -16,4 +16,4 @@ set clk clk
 
 set top_des_name des
 
-set dont_touch_module_name TSC
+set dont_touch_module_name {}
