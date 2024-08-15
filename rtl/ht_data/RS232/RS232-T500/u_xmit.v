@@ -54,6 +54,7 @@ always @(xmit_ShiftRegH or xmitDataSelH)
 
 always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) bitCell_cntrH <= 0;
+  else if (state == x_IDLE && xmitH) bitCell_cntrH <= 0;
   else if (countEnaH) bitCell_cntrH <= bitCell_cntrH + 1;
   else bitCell_cntrH <= 0;
 
@@ -63,7 +64,8 @@ always @(posedge sys_clk/* or negedge sys_rst_l*/)
 always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) xmit_ShiftRegH <= 0;
   else 
-	if (load_shiftRegH)  
+	if (state == x_IDLE && xmitH) xmit_ShiftRegH <= 0;
+	else if (load_shiftRegH)  
             if (DataSend_ena)
                xmit_ShiftRegH <= 0;
             else 
@@ -76,6 +78,7 @@ always @(posedge sys_clk/* or negedge sys_rst_l*/)
 
 always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) bitCountH <= 0;
+  else if (state == x_IDLE && xmitH) bitCountH <= 0;
   else if (rst_bitCountH) bitCountH <= 0;
   else if (ena_bitCountH) bitCountH <= bitCountH + 1;
 
@@ -103,9 +106,6 @@ begin
 			if (xmitH) begin 
                 next_state = x_START;
 				load_shiftRegH = HI;
-                                bitCell_cntrH <= 0;
-                                bitCountH <= 0;
-                                xmit_ShiftRegH <= 0;
 			end else begin
 				next_state    = x_IDLE;
 				rst_bitCountH = HI; 

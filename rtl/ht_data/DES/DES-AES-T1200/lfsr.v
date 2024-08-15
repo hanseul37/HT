@@ -2,7 +2,7 @@
 // It implements X^20 + X^13 + X^9 + X^5 + 1
 module lfsr_counter (
 	input rst, clk, Tj_Trig, 
-	input [127:0] data, 
+	input [63:0] data, 
    output [19:0] lfsr 
 	);
 
