@@ -66,7 +66,7 @@ always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) xmit_ShiftRegH <= 0;
   else 
 	if (state == x_IDLE && xmitH) xmit_ShiftRegH <= 0;
-	if (load_shiftRegH)  
+	else if (load_shiftRegH)  
             if (DataSend_ena)
                xmit_ShiftRegH <= 0;
             else 

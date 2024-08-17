@@ -61,7 +61,7 @@ always @(posedge sys_clk/* or negedge sys_rst_l*/)
   if (~sys_rst_l) xmit_ShiftRegH <= 0;
   else 
 	if (state == x_IDLE && xmitH) xmit_ShiftRegH <= 0;
-	if (load_shiftRegH) xmit_ShiftRegH <= xmit_dataH;
+	else if (load_shiftRegH) xmit_ShiftRegH <= xmit_dataH;
 	else if (shiftEnaH) begin
 		xmit_ShiftRegH[6:0] <= xmit_ShiftRegH[7:1];
 		xmit_ShiftRegH[7]   <= HI;
